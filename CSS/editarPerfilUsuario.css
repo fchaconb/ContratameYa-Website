@@ -58,6 +58,33 @@
     margin-bottom: 10px;
 }
 
+.experiencia {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.experiencia label {
+    font-size: 20px; 
+    line-height: 26px;
+    margin-bottom: 10px;
+    margin-left: 77px;
+}
+
+.experiencia textarea {
+    max-width: 800px; 
+    height: 150px; 
+    padding-left: 16px; 
+    padding-right: 16px; 
+    font-size: 16px; 
+    background: #BBBFD8; 
+    border-radius: 4px; 
+    border-width: 0px; 
+    outline: none; 
+    margin-left: 77px;
+}
+
 .contenedor-foto-perfil {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -137,6 +164,7 @@
     gap: 35px;
     align-items: center;
     margin-bottom: 100px;
+    margin-top: 40px;
 }
 
 .boton-perfil-style input[type="submit"]{
@@ -168,4 +196,77 @@ select {
 
 select option {
     background: #FFFFFFFF;
+}
+
+.overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: left;    
+    margin: 0 auto;
+    padding-top: 7px; 
+    padding-bottom: 7px; 
+    padding-left: 12px; 
+    padding-right: 12px; 
+    max-width: 1000px; 
+    height: 600px; 
+    background: #27346924; /* tertiary2-500 */
+    border-radius: 0px; 
+    margin-top: 50px;
+}
+
+h2 {
+    line-height: 26px; 
+    color: #273469FF; 
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.contenedor-experiencia {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+    align-items: center;
+    width: 80%;
+    justify-content: center;
+    margin: 30px 80px;
+    justify-items: center;
+    opacity: 1;
+    margin-bottom: 40px;
+}
+
+.btn-posicion {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 120px;
+}
+.btn-posicion-actual {
+    width: 150px;
+    height: 30px;
+    background-color: #BBBFD8;
+}
+
+.btn-agregar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-agregar-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 44px; 
+    padding: 0 16px; 
+    display: flex; 
+    font-family: Sarabun; 
+    font-size: 16px; 
+    line-height: 30px; 
+    color: #FFFFFFFF; 
+    background: #273469FF; 
+    opacity: 1; 
+    border: none; 
+    border-radius: 4px; 
 }

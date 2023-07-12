@@ -83,106 +83,255 @@
       </section>
       <section>
         <form>
-          <div class="contenedor-foto-perfil">
-            <div class="foto-perfil">
-              <label for="fotoPerfil">Foto de Perfil *</label>
-              <input
-                type="file"
-                name="fotoPerfil"
-                id="fotoPerfil"
-                required
-                onchange="validateImg(event)"
-              />
-              <p class="perfil-req">
-                Formato puede ser JPG, JPEG o PNG. Tamaño máximo 3MB.
-              </p>
-              <div>
-                <img
-                  id="imagePreview"
-                  src="#"
-                  alt="Preview imagen foto de perfil"
+          <section>
+            <div class="contenedor-foto-perfil">
+              <div class="foto-perfil">
+                <label for="fotoPerfil">Foto de Perfil</label>
+                <input
+                  type="file"
+                  name="fotoPerfil"
+                  id="fotoPerfil"
+                  required
+                  onchange="validateImg(event)"
+                />
+                <p class="perfil-req">
+                  Formato puede ser JPG, JPEG o PNG. Tamaño máximo 3MB.
+                </p>
+                <div>
+                  <img
+                    id="imagePreview"
+                    src="#"
+                    alt="Preview imagen foto de perfil"
+                  />
+                </div>
+              </div>
+              <div class="foto-perfil">
+                <label for="curriculum">Curriculum</label>
+                <input
+                  type="file"
+                  name="curriculum"
+                  id="curriculum"
+                  required
+                  onchange="validateCV(event)"
+                />
+                <p class="perfil-req">Formato PDF. Tamaño maxímo 3MB.</p>
+                <div>
+                  <embed id="CVPreview" src="" type="application/pdf" />
+                </div>
+              </div>
+            </div>
+            <div class="contenedor-perfil">
+              <div class="perfil">
+                <label for="nombre"> Nombre</label>
+                <input
+                  type="text"
+                  name="nombre"
+                  id="nombre"
+                  value="John"
+                  required
+                />
+              </div>
+              <div class="perfil">
+                <label for="password1">Contraseña</label>
+                <input
+                  type="password"
+                  name="password1"
+                  id="password1"
+                  required
+                />
+              </div>
+
+              <div class="perfil">
+                <label for="apellidos"> Apellidos</label>
+                <input
+                  type="text"
+                  name="apellidos"
+                  id="apellidos"
+                  value="Doe Doe"
+                  required
+                />
+              </div>
+
+              <div class="perfil">
+                <label for="password2">Confirmar Contraseña</label>
+                <input
+                  type="password"
+                  name="password2"
+                  id="password2"
+                  required
+                />
+              </div>
+
+              <div class="perfil">
+                <label for="correo">Correo</label>
+                <input
+                  type="email"
+                  name="correo"
+                  id="correo"
+                  value="jdoe@example.com"
+                  readonly
+                />
+              </div>
+
+              <div class="perfil">
+                <label for="genero">Genero</label>
+                <select name="genero" id="genero" required>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="no-especifica">Prefiero no especificar</option>
+                </select>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="overlay">
+              <h2>Experiencia</h2>
+              <div class="contenedor-experiencia">
+                <div class="perfil">
+                  <label for="tituloExperiencia">Título</label>
+                  <input
+                    type="text"
+                    name="tituloExperiencia"
+                    id="tituloExperiencia"
+                    required
+                  />
+                </div>
+                <div class="perfil">
+                  <label for="fechaInicio">Fecha de Inicio</label>
+                  <input
+                    type="date"
+                    name="fechaInicio"
+                    id="fechaInicio"
+                    required
+                  />
+                </div>
+                <div class="perfil">
+                  <label for="empresa">Empresa</label>
+                  <input type="text" name="empresa" id="empresa" required />
+                </div>
+                <div class="perfil">
+                  <label for="fechaFinal">Fecha de Finalización</label>
+                  <input
+                    type="date"
+                    name="fechaFinal"
+                    id="fechaFinal"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="btn-posicion">
+                <button
+                  id="posicionActual"
+                  class="btn-posicion-actual"
+                  type="button"
+                >
+                  Posición Actual
+                </button>
+              </div>
+
+              <div class="experiencia">
+                <label for="descripcion">Descripción</label>
+                <textarea
+                  name="descripcion"
+                  id="descripcion"
+                  cols="30"
+                  rows="10"
+                  required
+                  overflow="auto"
+                ></textarea>
+              </div>
+
+              <div class="btn-agregar">
+                <button class="btn-agregar-style" id="agregarExperiencia">
+                  Agregar Experiencia
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="overlay">
+              <h2>Educación</h2>
+              <div class="contenedor-experiencia">
+                <div class="perfil">
+                  <label for="gradoAcademico">Grado Académico</label>
+                  <input
+                    type="text"
+                    name="gradoAcademico"
+                    id="gradoAcademico"
+                    required
+                  />
+                </div>
+                <div class="perfil">
+                  <label for="fechaInicio">Fecha de Inicio</label>
+                  <input
+                    type="date"
+                    name="fechaInicio"
+                    id="fechaInicio"
+                    required
+                  />
+                </div>
+                <div class="perfil">
+                  <label for="institucion">Institución</label>
+                  <input
+                    type="text"
+                    name="institucion"
+                    id="institucion"
+                    required
+                  />
+                </div>
+                <div class="perfil">
+                  <label for="fechaFinal">Fecha de Finalización</label>
+                  <input
+                    type="date"
+                    name="fechaFinal"
+                    id="fechaFinal"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="btn-posicion">
+                <button
+                  id="estudioActual"
+                  class="btn-posicion-actual"
+                  type="button"
+                >
+                  Estudio Actual
+                </button>
+              </div>
+
+              <div class="experiencia">
+                <label for="descripcion">Descripción</label>
+                <textarea
+                  name="descripcion"
+                  id="descripcion"
+                  cols="30"
+                  rows="10"
+                  required
+                  overflow="auto"
+                ></textarea>
+              </div>
+
+              <div class="btn-agregar">
+                <button class="btn-agregar-style" id="agregarEducacion">
+                  Agregar Educación
+                </button>
+              </div>
+            </div>
+
+            <div class="botones-perfil">
+              <div class="boton-perfil-style">
+                <input id="guardarPefil" type="submit" value="Guardar Perfil" />
+              </div>
+              <div class="boton-perfil-style">
+                <input
+                  id="desactivarPerfil"
+                  type="submit"
+                  value="Desactivar Perfil"
                 />
               </div>
             </div>
-            <div class="foto-perfil">
-              <label for="curriculum">Curriculum *</label>
-              <input
-                type="file"
-                name="curriculum"
-                id="curriculum"
-                required
-                onchange="validateCV(event)"
-              />
-              <p class="perfil-req">Formato PDF. Tamaño maxímo 3MB.</p>
-              <div>
-                <embed id="CVPreview" src="" type="application/pdf" />
-              </div>
-            </div>
-          </div>
-          <div class="contenedor-perfil">
-            <div class="perfil">
-              <label for="nombre"> Nombre *</label>
-              <input
-                type="text"
-                name="nombre"
-                id="nombre"
-                value="John"
-                required
-              />
-            </div>
-            <div class="perfil">
-              <label for="password1">Contraseña *</label>
-              <input type="password" name="password1" id="password1" required />
-            </div>
-
-            <div class="perfil">
-              <label for="apellidos"> Apellidos *</label>
-              <input
-                type="text"
-                name="apellidos"
-                id="apellidos"
-                value="Doe Doe"
-                required
-              />
-            </div>
-
-            <div class="perfil">
-              <label for="password2">Confirmar Contraseña *</label>
-              <input type="password" name="password2" id="password2" required />
-            </div>
-
-            <div class="perfil">
-              <label for="correo">Correo</label>
-              <input
-                type="email"
-                name="correo"
-                id="correo"
-                value="jdoe@example.com"
-                readonly
-              />
-            </div>
-
-            <div class="perfil">
-              <label for="genero">Genero *</label>
-              <select name="genero" id="genero" required>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="no-especifica">Prefiero no especificar</option>
-              </select>
-            </div>
-          </div>
-          <div class="botones-perfil">
-            <div class="boton-perfil-style">
-              <input id="guardarPefil" type="submit" value="Guardar Perfil" />
-            </div>
-            <div class="boton-perfil-style">
-              <input
-                id="desactivarPerfil"
-                type="submit"
-                value="Desactivar Perfil"
-              />
-            </div>
-          </div>
+          </section>
         </form>
       </section>
     </main>
