@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crear Puesto</title>
+    <title>Editar Puesto</title>
 
     <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
-    <link rel="stylesheet" type="text/css" href="/CSS/crearPuestoTrabajo.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/CSS/editarPuestoTrabajo.css"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -92,7 +96,7 @@
               <label for="requisitosMinimos">Requisitos Mínimos</label>
               <textarea
                 name="requisitosMinimos"
-                id=""
+                id="requisitosMinimos"
                 cols="30"
                 rows="10"
                 ovwerflow="auto"
@@ -104,7 +108,7 @@
               <label for="requisitosDeseados">Requisitos Deseados</label>
               <textarea
                 name="requisitosDeseados"
-                id=""
+                id="requisitosDeseados"
                 cols="30"
                 rows="10"
                 ovwerflow="auto"
@@ -115,7 +119,7 @@
 
           <div class="botones-perfil">
             <div class="boton-perfil-style">
-              <input id="crearPuesto" type="submit" value="Crear Puesto" />
+              <input id="editarPuesto" type="submit" value="Editar Puesto" />
             </div>
           </div>
         </form>
@@ -127,5 +131,23 @@
         alt="Logo de la empresa Script Elite"
       />
     </footer>
+    <script src="/JS/editarPuestoTrabajo.js"></script>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const nombrePuesto = urlParams.get("nombre");
+      const rangoSalarial = urlParams.get("rangoSalarial");
+      const requisitosMinimos = urlParams.get("requisitosMinimos");
+      const requisitosDeseados = urlParams.get("requisitosDeseados");
+
+      // Fill the fields with the retrieved values
+      document.getElementById("nombre").value =
+        decodeURIComponent(nombrePuesto);
+      document.getElementById("rangoSalarial").value =
+        decodeURIComponent(rangoSalarial);
+      document.getElementById("requisitosMinimos").value =
+        decodeURIComponent(requisitosMinimos);
+      document.getElementById("requisitosDeseados").value =
+        decodeURIComponent(requisitosDeseados);
+    </script>
   </body>
 </html>

@@ -13,6 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
+
+    <script src="/JS/editarPuestoTrabajo.js"></script>
   </head>
   <body>
     <header>
@@ -70,123 +72,150 @@
       </section>
       <section class="seccion-puestos">
         <div>
-          <h3 class="h3">Nombre puesto: Staffing Coordinator</h3>
-          <h4 class="h">Rango Salarial: ₡1,000,000 - ₡2,000,000</h4>
-          <h4 class="h">Empresa: Amazon</h4>
+          <div>
+            <h3 class="h3">Staffing Coordinator</h3>
+            <h4 class="h">₡1,000,000 - ₡2,000,000</h4>
+            <h4 class="h">Amazon</h4>
+          </div>
           <div class="informacion-puesto">
-            <h4 class="h">Requisitos Básicos</h4>
-            <ul>
-              <li>
-                Bachelor's degree, or 2+ years of Amazon (blue badge/FTE)
-                experience.
-              </li>
-              <li>
-                A completed Bachelor’s degree or equivalent professional or
-                military experience (or 2+ years of internal Amazon experience
-                in lieu of degree).
-              </li>
-              <li>
-                2+ years’ experience in a fast paced, customer-oriented
-                environment, such as operations, administrative support,
-                customer service, retail, hospitality, staffing, recruiting,
-                human resources or another related field. - Intermediate to
-                advanced level proficiency with Microsoft Office (Word, Excel,
-                PowerPoint) required as well as tech understanding of other
-                platforms.
-              </li>
-            </ul>
-            <h4 class="h">Requisitos Deseados</h4>
-            <ul>
-              <li>2+ years of human resources functions experience.</li>
-              <li>
-                3+ years of experience in a fast paced, customer-oriented
-                environment, such as operations, administrative support,
-                customer service, retail, hospitality, staffing, recruiting,
-                human resources or another related field, with a minimum of
-                one-year experience in HR/staffing.
-              </li>
-              <li>
-                Experience with Applicant Tracking Systems or other tracking and
-                reporting systems.
-              </li>
-              <li>Exceptionally strong interpersonal verbal/written skills.</li>
-            </ul>
+            <div>
+              <h4 class="h">Requisitos Básicos</h4>
+              <ul>
+                <li>
+                  Bachelor's degree, or 2+ years of Amazon (blue badge/FTE)
+                  experience.
+                </li>
+                <li>
+                  A completed Bachelor’s degree or equivalent professional or
+                  military experience (or 2+ years of internal Amazon experience
+                  in lieu of degree).
+                </li>
+                <li>
+                  2+ years’ experience in a fast paced, customer-oriented
+                  environment, such as operations, administrative support,
+                  customer service, retail, hospitality, staffing, recruiting,
+                  human resources or another related field. - Intermediate to
+                  advanced level proficiency with Microsoft Office (Word, Excel,
+                  PowerPoint) required as well as tech understanding of other
+                  platforms.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="h">Requisitos Deseados</h4>
+              <ul>
+                <li>2+ years of human resources functions experience.</li>
+                <li>
+                  3+ years of experience in a fast paced, customer-oriented
+                  environment, such as operations, administrative support,
+                  customer service, retail, hospitality, staffing, recruiting,
+                  human resources or another related field, with a minimum of
+                  one-year experience in HR/staffing.
+                </li>
+                <li>
+                  Experience with Applicant Tracking Systems or other tracking
+                  and reporting systems.
+                </li>
+                <li>
+                  Exceptionally strong interpersonal verbal/written skills.
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="container-botones-admin">
-            <button class="btn-admin-puesto">Editar</button>
+            <button class="btn-admin-puesto" onclick="redirectToEdit(event)">
+              Editar
+            </button>
             <button class="btn-admin-puesto">Eliminar</button>
           </div>
         </div>
       </section>
       <section class="seccion-puestos">
         <div>
-          <h3 class="h3">Nombre puesto: Quality Assurance Engineer II</h3>
-          <h4 class="h">Rango Salarial: ₡1,500,000 - ₡2,500,000</h4>
-          <h4 class="h">Empresa: Amazon</h4>
+          <div>
+            <h3 class="h3">Quality Assurance Engineer II</h3>
+            <h4 class="h">₡1,500,000 - ₡2,500,000</h4>
+            <h4 class="h">Amazon</h4>
+          </div>
           <div class="informacion-puesto">
-            <h4 class="h">Requisitos Básicos</h4>
-            <ul>
-              <li>4+ years of quality assurance engineering experience.</li>
-              <li>Experience in manual testing.</li>
-              <li>Experience in automation testing.</li>
-              <li>Experience scripting or coding.</li>
-            </ul>
-            <h4 class="h">Requisitos Deseados.</h4>
-            <ul>
-              <li>Bachelor's degree</li>
-            </ul>
+            <div>
+              <h4 class="h">Requisitos Básicos</h4>
+              <ul>
+                <li>4+ years of quality assurance engineering experience.</li>
+                <li>Experience in manual testing.</li>
+                <li>Experience in automation testing.</li>
+                <li>Experience scripting or coding.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="h">Requisitos Deseados.</h4>
+              <ul>
+                <li>Bachelor's degree</li>
+              </ul>
+            </div>
           </div>
           <div class="container-botones-admin">
-            <button class="btn-admin-puesto">Editar</button>
+            <button class="btn-admin-puesto" onclick="redirectToEdit()">
+              Editar
+            </button>
             <button class="btn-admin-puesto">Eliminar</button>
           </div>
         </div>
       </section>
       <section class="seccion-puestos">
         <div>
-          <h3 class="h3">Nombre puesto: Finance Manager, FinOps</h3>
-          <h4 class="h">Rango Salarial: ₡500,000 - ₡1,000,000</h4>
-          <h4 class="h">Empresa: Amazon</h4>
+          <div>
+            <h3 class="h3">Finance Manager, FinOps</h3>
+            <h4 class="h">₡500,000 - ₡1,000,000</h4>
+            <h4 class="h">Amazon</h4>
+          </div>
           <div class="informacion-puesto">
-            <h4 class="h">Requisitos Básicos</h4>
-            <ul>
-              <li>
-                CA, CPA, CWA or MBA, with 8+ years of post-qualification
-                experience in Shared Services in Accounts Receivable or Accounts
-                Payables domain Or Foreign equivalent qualification - e.g. CPA,
-                CIMA, ACCA.
-              </li>
-              <li>Strong Customer focus (both Internal / External).</li>
-              <li>
-                Strong interpersonal skills — including written and oral
-                communication skills.
-              </li>
-            </ul>
-            <h4 class="h">Requisitos Deseados</h4>
-            <ul>
-              <li>
-                Experience in managing GST/VAT Compliance support function (e.g.
-                input credit reconciliation, filing GST/VAT returns) in
-                different geos like APAC, EMEA or US.
-              </li>
-              <li>
-                3+ years of experience in a fast paced, customer-oriented
-                environment, such as operations, administrative support,
-                customer service, retail, hospitality, staffing, recruiting,
-                human resources or another related field, with a minimum of
-                one-year experience in HR/staffing.
-              </li>
-              <li>
-                Expertise in Six Sigma defect reduction techniques (DMAIC etc.).
-              </li>
-              <li>
-                Experience in implementation of SOX 404 or performing internal
-                control reviews.
-              </li>
-            </ul>
+            <div>
+              <h4 class="h">Requisitos Básicos</h4>
+              <ul>
+                <li>
+                  CA, CPA, CWA or MBA, with 8+ years of post-qualification
+                  experience in Shared Services in Accounts Receivable or
+                  Accounts Payables domain Or Foreign equivalent qualification -
+                  e.g. CPA, CIMA, ACCA.
+                </li>
+                <li>Strong Customer focus (both Internal / External).</li>
+                <li>
+                  Strong interpersonal skills — including written and oral
+                  communication skills.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="h">Requisitos Deseados</h4>
+              <ul>
+                <li>
+                  Experience in managing GST/VAT Compliance support function
+                  (e.g. input credit reconciliation, filing GST/VAT returns) in
+                  different geos like APAC, EMEA or US.
+                </li>
+                <li>
+                  3+ years of experience in a fast paced, customer-oriented
+                  environment, such as operations, administrative support,
+                  customer service, retail, hospitality, staffing, recruiting,
+                  human resources or another related field, with a minimum of
+                  one-year experience in HR/staffing.
+                </li>
+                <li>
+                  Expertise in Six Sigma defect reduction techniques (DMAIC
+                  etc.).
+                </li>
+                <li>
+                  Experience in implementation of SOX 404 or performing internal
+                  control reviews.
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="container-botones-admin">
-            <button class="btn-admin-puesto">Editar</button>
+            <button class="btn-admin-puesto" onclick="redirectToEdit()">
+              Editar
+            </button>
             <button class="btn-admin-puesto">Eliminar</button>
           </div>
         </div>
