@@ -300,3 +300,32 @@ body {
 html {
     font-family: 'Sarabun', sans-serif;
 }
+
+.buttones-header {
+    padding: 10px 16px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-family: Sarabun; /* Body */
+    font-size: 16px; 
+    line-height: 26px; 
+    color: #FFFFFFFF; /* white */
+    background: #30343FFF; /* primary-500 */
+    opacity: 1; 
+    border: none; 
+    border-radius: 4px; /* border-m */
+}
+  /* Hover */
+.buttones-header:hover {
+    color: #FFFFFFFF; /* white */
+    background: #24272FFF; /* primary-700 */
+}
+  /* Pressed */
+.buttones-header:hover:active {
+    color: #FFFFFFFF; /* white */
+    background: #17191FFF; /* primary-900 */
+}
+  /* Disabled */
+.buttones-header:disabled {
+    opacity: 0.4; 
+}
