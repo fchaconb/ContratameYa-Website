@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
     <link rel="stylesheet" type="text/css" href="/CSS/login.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,30 +15,55 @@
   </head>
 
   <body>
-    <div class="contenedor">
-      <p class="texto-inicio-sesion">Iniciar sesión</p>
-      <form>
-        <input
-          type="email"
-          class="textbox"
-          placeholder="Correo electrónico"
-          required
-        />
-        <input type="text" class="textbox" placeholder="Clave" required />
-        <a class="recuperar-clave" href="/HTML/recuperar-clave.html"
-          >Recuperar clave</a
-        >
-        <div class="btn-form">
-          <button type="submit" class="button-iniciar-sesion">
-            Iniciar sesión
-          </button>
+    <header>
+      <nav>
+        <a href="/HTML/landingPageInicial.html">
+          <img
+            src="/Media/Fotos/logo-script-elite.png"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+        <div class="navegacion-derecha">
+          <a href="/HTML/login.html">
+            <button class="buttones-header">Iniciar Sesión</button>
+          </a>
+          <a href="/HTML/elegir-cuenta.html">
+            <button class="buttones-header">Crear Cuenta</button>
+          </a>
         </div>
-        <hr class="linea-horizontal" />
-      </form>
-      <p class="text-sin-cuenta">¿No tienes cuenta?</p>
-      <a class="text-crear-cuenta" href="/HTML/elegir-cuenta.html"
-        >Crear cuenta</a
-      >
-    </div>
+      </nav>
+    </header>
+    <section>
+      <div class="contenedor">
+        <p class="texto-inicio-sesion">Iniciar sesión</p>
+        <form>
+          <input
+            type="email"
+            class="textbox"
+            placeholder="Correo electrónico"
+            required
+          />
+          <input type="text" class="textbox" placeholder="Clave" required />
+          <a class="recuperar-clave" href="/HTML/recuperar-clave.html"
+            >Recuperar clave</a
+          >
+          <div class="btn-form">
+            <button
+              type="submit"
+              class="button-iniciar-sesion"
+              onclick="redirigirCuentaUsuarioGeneral()"
+            >
+              Iniciar sesión
+            </button>
+          </div>
+          <hr class="linea-horizontal" />
+        </form>
+        <p class="text-sin-cuenta">¿No tienes cuenta?</p>
+        <a class="text-crear-cuenta" href="/HTML/elegir-cuenta.html"
+          >Crear cuenta</a
+        >
+      </div>
+    </section>
   </body>
 </html>
