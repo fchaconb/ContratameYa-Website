@@ -55,12 +55,15 @@ li {
 .container {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 50px 0px;
 }
 
 .container-left {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 50px 0px;
 }
 
@@ -77,6 +80,8 @@ li {
 
 .text-right {
     margin-right: 35px;
+    width: 800px;
+    height: 200px;
 }
 
 .imagePeople {
