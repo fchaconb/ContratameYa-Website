@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/elegir-cuenta.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="contenedor">
+      <p class="texto-tipo-cuenta">Tipo de Cuenta</p>
+      <form class="radio">
+        <label>
+          <input
+            type="radio"
+            name="opcion"
+            value="Para Empresa"
+            class="radio-item"
+          />
+          Para Empresa
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="opcion"
+            value="Para Colaborador de Empresa"
+            class="radio-item"
+          />
+          Colaborador de Empresa
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="opcion"
+            value="Para Usuario normal"
+            class="radio-item"
+          />
+          Para Usuario normal
+        </label>
+      </form>
+      <hr class="linea-horizontal" />
+      <div class="btn-form">
+        <button
+          type="submit"
+          class="button-siguiente-tipo-cuenta"
+          onclick="redireccionar()"
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
+    <script src="/JS/elegirCuenta.js"></script>
+  </body>
+</html>

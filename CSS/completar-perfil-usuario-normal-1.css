@@ -1,0 +1,163 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 722px;
+    height: 766px;
+    background: #273469FF;
+    border-radius: 8px;
+    box-shadow: 0px 17px 35px #171a1f,
+        0px 0px 2px #171a1f;
+
+}
+
+
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 110px;
+
+}
+
+.texto-cuenta-empresa {
+    grid-column: 1 / span 2;
+    margin-top: 10px;
+    color: #FAFAFFFF;
+    font-family: 'Sarabun', sans-serif;
+
+
+}
+
+
+.textbox {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    height: 36px;
+    opacity: 1;
+    margin: 4px 0px 22px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #9095A1FF;
+    outline: none;
+
+}
+
+.texto-instrucciones {
+
+    color: #FAFAFFFF;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 11px;
+    margin-right: 130px;
+    text-align: center;
+
+
+}
+
+.form-text-instrucciones {
+
+
+    text-align: center;
+    padding-left: 15px;
+    /*background-color: pink;*/
+    align-self: flex-start;
+}
+
+.color-texto-formulario {
+    color: #FAFAFFFF;
+    font-family: 'Sarabun', sans-serif;
+    align-self: flex-start;
+}
+
+
+.color-texto-foto-perfil {
+
+    color: #FAFAFFFF;
+    font-family: 'Sarabun', sans-serif;
+    margin-bottom: 1px;
+}
+
+.estilo-titulo {
+    font-size: 32px;
+    line-height: 48px;
+    color: #FAFAFFFF;
+    margin: 16px 0px 13px;
+    margin-bottom: 0px 0px 36px;
+}
+
+div {
+    display: grid;
+}
+
+
+.formato-y-color-texto-columna-derecha {
+    color: #FAFAFFFF;
+    font-family: 'Sarabun', sans-serif;
+    align-self: flex-start;
+    margin-left: 70px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.dropdown {
+    width: 220px;
+    height: 36px;
+    font-family: 'Sarabun', sans-serif;
+    opacity: 1;
+    margin: 4px 0px 22px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #9095A1FF;
+    outline: none;
+}
+
+
+
+
+
+.button-completar {
+    align-self: flex-start;
+    cursor: pointer;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFFFF;
+    background: #30343F;
+    opacity: 1;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 10px;
+    width: 143px;
+    height: 45px;
+    box-shadow: 0px 0px 5px #FAFAFF, 0px 0px 1px #171a1f;
+}
+
+
+.btn-form {
+    grid-column: 1 / span 2;
+    margin-top: 16px;
+    margin-left: 280px;
+    align-self: flex-start;
+}
+
+
+
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+html {
+    font-family: 'Sarabun', sans-serif;
+}

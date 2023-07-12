@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/completar-perfil-usuario-normal-1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
+        rel="stylesheet" />
+    <script src="/JS/completarPerfilFaseUnoUsuarioNormal.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+        integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="texto-cuenta-empresa">
+            <p class="estilo-titulo">Completar perfil</p>
+        </div>
+        <div class="column">
+            <form class="form" id="formularioDatosCompletarPerfil">
+                <p class="color-texto-formulario">Agregar educación</p>
+                <label for="centroEducativo" class="color-texto-formulario">Centro educativo*</label>
+                <input type="text" class="textbox " id="centroEducativo" required>
+                <label for="gradoAcademico" class="color-texto-formulario">Grado académico*</label>
+                <input type="text" class="textbox" id="gradoAcademico" required>
+                <label for="disciplinaAcademica" class="color-texto-formulario">Disciplina académica*</label>
+                <input type="text" class="textbox" id="disciplinaAcademica" required>
+                <label for="fechaInicio" class="color-texto-formulario">Fecha de inicio*</label>
+                <input type="date" class="textbox" id="fechaInicio" required>
+                <label for="fechaFinal" class="color-texto-formulario">Fecha de finalizacion (o fecha prevista)*</label>
+                <input type="date" class="textbox" id="fechaFinal" required>
+                <div class="form-text-instrucciones">
+                    <p class="texto-instrucciones">TENGA EN CUENTA QUE PARA AGREGAR MÁS DE 1 APARTADO DE EDUCACIÓN, DEBE REALIZARLO DESDE EDITAR PERFIL UNA VEZ CREADA SU CUENTA.</p>
+                    <p class="texto-instrucciones">CAMPOS CON * SON OBLIGATORIOS*</p>    
+                </div> 
+
+        </div>
+
+        <div class="btn-form">
+            <button type="submit" class="button-completar">Siguiente</button>
+        </div>
+    </div>
+    </form>
+    <p id="mensaje-error"></p>
+    </div>
+</body>
+
+</html>
