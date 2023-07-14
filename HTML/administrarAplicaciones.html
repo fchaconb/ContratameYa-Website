@@ -70,7 +70,7 @@
           <form>
             <div class="invitaciones">
               <label for="correo">Correo Usuario</label>
-              <input type="email" name="correo" id="correo" />
+              <input type="email" name="correo" id="correo" required />
               <label for="puesto">Puesto de Trabajo</label>
               <select name="puesto" id="puesto">
                 <option value="puesto1">C# Developer</option>
@@ -105,7 +105,12 @@
               <form>
                 <div class="aplicacion-info-filters">
                   <label for="estado">Estado</label>
-                  <select name="estado" id="estado" class="select-info">
+                  <select
+                    name="estado"
+                    id="estado"
+                    class="select-info"
+                    required
+                  >
                     <option value="enviada">Enviada</option>
                     <option value="en-revision">En Revisión</option>
                     <option value="aceptada">Aceptada</option>
@@ -116,9 +121,15 @@
                     type="number"
                     id="anhos-experiencia"
                     name="anhos-experiencia"
+                    required
                   />
                   <label for="palabra-clave">Búsqueda por Palabra Clave</label>
-                  <input type="text" name="palabra-clave" id="palabra-clave" />
+                  <input
+                    type="text"
+                    name="palabra-clave"
+                    id="palabra-clave"
+                    required
+                  />
                   <div class="boton-filtrar">
                     <input
                       id="filtrar"
@@ -239,7 +250,12 @@
               <form>
                 <div class="aplicacion-info-filters">
                   <label for="estado">Estado</label>
-                  <select name="estado" id="estado" class="select-info">
+                  <select
+                    name="estado"
+                    id="estado"
+                    class="select-info"
+                    required
+                  >
                     <option value="enviada">Enviada</option>
                     <option value="en-revision">En Revisión</option>
                     <option value="aceptada">Aceptada</option>
@@ -250,9 +266,15 @@
                     type="number"
                     id="anhos-experiencia"
                     name="anhos-experiencia"
+                    required
                   />
                   <label for="palabra-clave">Búsqueda por Palabra Clave</label>
-                  <input type="text" name="palabra-clave" id="palabra-clave" />
+                  <input
+                    type="text"
+                    name="palabra-clave"
+                    id="palabra-clave"
+                    required
+                  />
                   <div class="boton-filtrar">
                     <input
                       id="filtrar"
