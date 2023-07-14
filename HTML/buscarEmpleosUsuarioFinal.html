@@ -6,6 +6,11 @@
     <title>Buscar Empleos</title>
 
     <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/CSS/buscarEmpleosUsuarioFinal.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -63,6 +68,118 @@
           class="imagen-busca-trabajo"
         />
       </section>
+      <section class="seccion-titulos">
+        <div class="titulo-link">
+          <img
+            src="/Media/Fotos/job-seeker.png"
+            alt="Icono de buscar empleos"
+            class="seccion-iconos"
+          />
+          <h1>Buscar Empleos</h1>
+        </div>
+      </section>
+      <section>
+        <form>
+          <div class="contenedor-filtros">
+            <div class="filtros">
+              <label for="nombre">Nombre Empresa</label>
+              <input type="text" name="nombre" id="nombre" />
+            </div>
+            <div class="filtros">
+              <label for="requisitos">Requisitos Mínimos</label>
+              <input type="text" name="requisitos" id="requisitos" />
+            </div>
+            <div class="filtros">
+              <label for="salario-minimo">Salario Mínimo</label>
+              <input type="number" name="salario-minimo" id="salario-minimo" />
+            </div>
+            <div class="filtros">
+              <label for="salario-maximo">Salario Máximo</label>
+              <input type="number" name="salario-maximo" id="salario-maximo" />
+            </div>
+            <div class="filtros">
+              <button name="filtrar" id="filtrar">Filtrar</button>
+            </div>
+          </div>
+        </form>
+      </section>
+      <section class="orden-puestos">
+        <section>
+          <div class="seccion-puestos">
+            <div>
+              <img src="/Media/Fotos/apple.png" alt="Logo de Apple" />
+            </div>
+            <div>
+              <h2>Apple</h2>
+              <h3>Senior Software Engineer</h3>
+              <h3>Rango Salarial: $45,000 - $65,000</h3>
+            </div>
+          </div>
+          <div class="seccion-puestos">
+            <div>
+              <img src="/Media/Fotos/instagram.png" alt="Logo de Apple" />
+            </div>
+            <div>
+              <h2>Acme Corporation</h2>
+              <h3>Gerente de Proyectos</h3>
+              <h3>Rango Salarial: $70,000 - $90,000</h3>
+            </div>
+          </div>
+          <div class="seccion-puestos">
+            <div>
+              <img src="/Media/Fotos/slack.png" alt="Logo de Apple" />
+            </div>
+            <div>
+              <h2>Global Solutions</h2>
+              <h3>Analista de Datos</h3>
+              <h3>Rango Salarial: $45,000 - $65,000</h3>
+            </div>
+          </div>
+          <div class="seccion-puestos">
+            <div>
+              <img src="/Media/Fotos/opera.png" alt="Logo de Apple" />
+            </div>
+            <div>
+              <h2>Tech Innovators</h2>
+              <h3>Especialista en Marketing Digital</h3>
+              <h3>Rango Salarial: $80,000 - $100,000</h3>
+            </div>
+          </div>
+        </section>
+        <section class="seccion-puesto-info">
+          <h3>Requisitos mínimos</h3>
+          <ul>
+            <li>
+              Bachelor’s Degree required or equivalent combination of education
+              and experience.
+            </li>
+            <li>
+              High-level leadership and decision-making skills with solid data
+              justification
+            </li>
+            <li>
+              Proven track record implementing programs with spirit of
+              continuous improvement.
+            </li>
+            <li>
+              Good vision, analytical, process oriented and strong problem
+              solving skills.
+            </li>
+          </ul>
+          <h3>Requisitos deseados:</h3>
+          <ul>
+            <li>Product development experience in CE industry.</li>
+            <li>Engineering degree or background preferred.</li>
+            <li>Proficiency in Vietnamese and Mandarin preferred</li>
+          </ul>
+        </section>
+      </section>
     </main>
+    <footer>
+      <img
+        src="/Media/Fotos/logo-script-elite.png"
+        alt="Logo de la empresa Script Elite"
+      />
+    </footer>
   </body>
 </html>
