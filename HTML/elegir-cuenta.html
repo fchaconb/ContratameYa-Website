@@ -33,49 +33,39 @@
         </div>
       </nav>
     </header>
-
-    <div class="contenedor">
-      <p class="texto-tipo-cuenta">Tipo de Cuenta</p>
-      <form class="radio">
-        <label>
-          <input
-            type="radio"
-            name="opcion"
-            value="Para Empresa"
-            class="radio-item"
-          />
-          Para Empresa
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="opcion"
-            value="Para Colaborador de Empresa"
-            class="radio-item"
-          />
-          Colaborador de Empresa
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="opcion"
-            value="Para Usuario normal"
-            class="radio-item"
-          />
-          Para Usuario normal
-        </label>
-      </form>
-      <hr class="linea-horizontal" />
-      <div class="btn-form">
-        <button
-          type="submit"
-          class="button-siguiente-tipo-cuenta"
-          onclick="redireccionar()"
-        >
-          Siguiente
-        </button>
+    <main>
+      <div class="contenedor">
+        <p class="texto-tipo-cuenta">Tipo de Cuenta</p>
+        <div class="seccion-tipo-cuenta">
+          <div class="contenedor-tipo-cuenta">
+            <a href="/HTML/cuenta-para-usuario-normal.html">
+              <img
+                src="/Media/Fotos/cuentaUsuario.png"
+                alt="Icono cuenta de usuario final"
+              />
+              <p>Usuario</p>
+            </a>
+          </div>
+          <div class="contenedor-tipo-cuenta">
+            <a href="/HTML/cuenta-para-colaborador-empresa.html">
+              <img
+                src="/Media/Fotos/cuentaColaborador.png"
+                alt="Icono cuenta de colaborador"
+              />
+              <p>Colaborador</p>
+            </a>
+          </div>
+          <div class="contenedor-tipo-cuenta">
+            <a href="/HTML/cuenta-para-empresa.html">
+              <img
+                src="/Media/Fotos/cuentaEmpresa.png"
+                alt="Icono cuenta de empresa"
+              />
+              <p>Empresa</p>
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-    <script src="/JS/elegirCuenta.js"></script>
+    </main>
   </body>
 </html>

@@ -38,14 +38,11 @@
     <section>
       <div class="contenedor">
         <p class="texto-inicio-sesion">Iniciar sesión</p>
-        <form>
-          <input
-            type="email"
-            class="textbox"
-            placeholder="Correo electrónico"
-            required
-          />
-          <input type="password" class="textbox" placeholder="Clave" required />
+        <form id="formularioInicioSesion">
+          <label class="label-class" for="correo">Correo electrónico</label>
+          <input id="correo" type="email" class="textbox" required />
+          <label class="label-class" for="contrasena">Clave</label>
+          <input id="contrasena" type="password" class="textbox" required />
           <a class="recuperar-clave" href="/HTML/recuperar-clave.html"
             >Recuperar clave</a
           >
@@ -53,7 +50,7 @@
             <button
               type="submit"
               class="button-iniciar-sesion"
-              onclick="redirigirCuentaUsuarioGeneral()"
+              onclick="validarDatos()"
             >
               Iniciar sesión
             </button>

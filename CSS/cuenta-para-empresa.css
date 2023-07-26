@@ -28,6 +28,7 @@
 
 /* Textbox 1334 */
 .textbox {
+    padding-left: 10px;
     display: flex;
     flex-direction: row;
     width: 220px;
@@ -119,6 +120,7 @@
 }
 
 .photo {
+    padding: 15px;
     width: 200px;
     height: 200px;
     background-color: white;

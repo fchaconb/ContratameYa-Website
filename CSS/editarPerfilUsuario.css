@@ -50,6 +50,7 @@
     border-radius: 4px; 
     border-width: 0px; 
     outline: none; 
+    font-family: Sarabun; 
 }
 
 .perfil label {
@@ -69,20 +70,18 @@
     font-size: 20px; 
     line-height: 26px;
     margin-bottom: 10px;
-    margin-left: 77px;
 }
 
 .experiencia textarea {
     max-width: 800px; 
     height: 150px; 
-    padding-left: 16px; 
-    padding-right: 16px; 
+    padding: 16px; 
     font-size: 16px; 
     background: #BBBFD8; 
     border-radius: 4px; 
     border-width: 0px; 
     outline: none; 
-    margin-left: 77px;
+    font-family: Sarabun; 
 }
 
 .contenedor-foto-perfil {
@@ -144,7 +143,7 @@
 #imagePreview {
     width: 150px; 
     height: 150px; 
-    border-radius: 50%; 
+    padding: 20px;
     margin-bottom: 20px;
     margin-top: 20px;
     display: none;
@@ -168,6 +167,22 @@
 }
 
 .boton-perfil-style input[type="submit"]{
+    align-items: center; 
+    justify-content: center; 
+    height: 44px; 
+    padding: 0 16px; 
+    display: flex; 
+    font-family: Sarabun; 
+    font-size: 20px; 
+    line-height: 30px; 
+    color: #FFFFFFFF; 
+    background: #273469FF; 
+    opacity: 1; 
+    border: none; 
+    border-radius: 4px; 
+}
+
+.boton-perfil-style input[type="button"]{
     align-items: center; 
     justify-content: center; 
     height: 44px; 
@@ -207,8 +222,8 @@ select option {
     padding-bottom: 7px; 
     padding-left: 12px; 
     padding-right: 12px; 
-    max-width: 1000px; 
-    height: 600px; 
+    max-width: 800px; 
+    height: 650px; 
     background: #27346924; /* tertiary2-500 */
     border-radius: 0px; 
     margin-top: 50px;

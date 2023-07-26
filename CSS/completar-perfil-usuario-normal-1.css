@@ -11,7 +11,12 @@
 
 }
 
-
+h2 {
+    font-size: 22px;
+    line-height: 48px;
+    color: #FAFAFFFF;  
+    margin-bottom: 15px;  /* secondary-500 */
+}
 
 .column {
     display: flex;
@@ -33,6 +38,7 @@
 
 
 .textbox {
+    padding-left: 10px;
     display: flex;
     flex-direction: row;
     width: 500px;
@@ -43,16 +49,17 @@
     border-width: 1px;
     border-color: #9095A1FF;
     outline: none;
-
+    font-family: 'Sarabun';
 }
 
 .texto-instrucciones {
 
     color: #FAFAFFFF;
     font-family: 'Sarabun', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     margin-right: 130px;
     text-align: center;
+    margin-bottom: 10px;
 
 
 }

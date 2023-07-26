@@ -100,13 +100,13 @@
                 <div>
                   <img
                     id="imagePreview"
-                    src="#"
+                    src="/Media/Fotos/man.png"
                     alt="Preview imagen foto de perfil"
                   />
                 </div>
               </div>
               <div class="foto-perfil">
-                <label for="curriculum">Curriculum</label>
+                <label for="curriculum">Currículum</label>
                 <input
                   type="file"
                   name="curriculum"
@@ -114,7 +114,7 @@
                   required
                   onchange="validateCV(event)"
                 />
-                <p class="perfil-req">Formato PDF. Tamaño maxímo 3MB.</p>
+                <p class="perfil-req">Formato PDF. Tamaño máximo 3MB.</p>
                 <div>
                   <embed id="CVPreview" src="" type="application/pdf" />
                 </div>
@@ -174,7 +174,7 @@
               </div>
 
               <div class="perfil">
-                <label for="genero">Genero</label>
+                <label for="genero">Género</label>
                 <select name="genero" id="genero" required>
                   <option value="masculino">Masculino</option>
                   <option value="femenino">Femenino</option>
@@ -200,8 +200,8 @@
                   <label for="fechaInicio">Fecha de Inicio</label>
                   <input
                     type="date"
-                    name="fechaInicio"
-                    id="fechaInicio"
+                    name="fechaInicioExperiencia"
+                    id="fechaInicioExperiencia"
                     required
                   />
                 </div>
@@ -213,8 +213,8 @@
                   <label for="fechaFinal">Fecha de Finalización</label>
                   <input
                     type="date"
-                    name="fechaFinal"
-                    id="fechaFinal"
+                    name="fechaFinExperiencia"
+                    id="fechaFinExperiencia"
                     required
                   />
                 </div>
@@ -254,20 +254,25 @@
               <h2>Educación</h2>
               <div class="contenedor-experiencia">
                 <div class="perfil">
-                  <label for="gradoAcademico">Grado Académico</label>
-                  <input
-                    type="text"
-                    name="gradoAcademico"
-                    id="gradoAcademico"
-                    required
-                  />
+                  <label for="education">Nivel educativo:</label>
+                  <select id="education" name="education" required>
+                    <option value="" selected disabled>
+                      Seleccionar nivel educativo
+                    </option>
+                    <option value="primaria">Educación primaria</option>
+                    <option value="secundaria">Educación secundaria</option>
+                    <option value="bachillerato">Bachillerato</option>
+                    <option value="licenciatura">Licenciatura</option>
+                    <option value="maestria">Maestría</option>
+                    <option value="doctorado">Doctorado</option>
+                  </select>
                 </div>
                 <div class="perfil">
                   <label for="fechaInicio">Fecha de Inicio</label>
                   <input
                     type="date"
-                    name="fechaInicio"
-                    id="fechaInicio"
+                    name="fechaInicioEducacion"
+                    id="fechaInicioEducacion"
                     required
                   />
                 </div>
@@ -284,8 +289,8 @@
                   <label for="fechaFinal">Fecha de Finalización</label>
                   <input
                     type="date"
-                    name="fechaFinal"
-                    id="fechaFinal"
+                    name="fechaFinalEducacion"
+                    id="fechaFinalEducacion"
                     required
                   />
                 </div>
@@ -321,13 +326,18 @@
 
             <div class="botones-perfil">
               <div class="boton-perfil-style">
-                <input id="guardarPefil" type="submit" value="Guardar Perfil" />
+                <input
+                  id="guardarPerfilBtn"
+                  type="submit"
+                  value="Guardar Perfil"
+                />
               </div>
               <div class="boton-perfil-style">
                 <input
-                  id="desactivarPerfil"
-                  type="submit"
+                  id="desactivarPerfilBtn"
+                  type="button"
                   value="Desactivar Perfil"
+                  onclick="desactivarPerfil()"
                 />
               </div>
             </div>

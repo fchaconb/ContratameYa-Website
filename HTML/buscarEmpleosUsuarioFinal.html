@@ -85,19 +85,28 @@
           <div class="contenedor-filtros">
             <div class="filtros">
               <label for="nombre">Nombre Empresa</label>
-              <input type="text" name="nombre" id="nombre" />
+              <select name="nombre" id="nombre">
+                <option value="empresa" selected disabled>Empresa</option>
+                <option value="apple">Apple</option>
+                <option value="acme">Acme Corporation</option>
+                <option value="global">Global Solutions</option>
+                <option value="tech">Tech Innovators</option>
+              </select>
             </div>
             <div class="filtros">
               <label for="requisitos">Requisitos Mínimos</label>
               <input type="text" name="requisitos" id="requisitos" />
             </div>
             <div class="filtros">
-              <label for="salario-minimo">Salario Mínimo</label>
-              <input type="number" name="salario-minimo" id="salario-minimo" />
-            </div>
-            <div class="filtros">
-              <label for="salario-maximo">Salario Máximo</label>
-              <input type="number" name="salario-maximo" id="salario-maximo" />
+              <label for="rango-salarial">Rango Salarial</label>
+              <select name="rango-salarial" id="rango-salarial">
+                <option value="opcion" disabled selected>
+                  Seleccionar Rango
+                </option>
+                <option value="45-65">45,000 - 65,000</option>
+                <option value="70-90">70,000 - 90,000</option>
+                <option value="80-100">80,000 - 100,000</option>
+              </select>
             </div>
             <div class="filtros">
               <button name="filtrar" id="filtrar">Filtrar</button>

@@ -1,3 +1,20 @@
+// Wrap the JavaScript code in an event listener for DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function () {
+  var defaultImageURL = '/Media/Fotos/man.png';
+
+  // Function to display the default image on page load
+  function displayDefaultImage() {
+    var imagePreview = document.getElementById('imagePreview');
+    imagePreview.src = defaultImageURL;
+    imagePreview.style.display = 'block';
+  }
+
+  // Call the function to display the default image on page load
+  displayDefaultImage();
+
+});
+
+
 function validateImg(event) {
   var fileInput = event.target;
   var file = fileInput.files[0];
@@ -14,6 +31,9 @@ function validateImg(event) {
 
     // Proceed with validating the file size
     validateImgSize(file);
+  } else {
+    // If no file selected (user canceled), display the default image again
+    displayDefaultImage();
   }
 }
 
@@ -41,6 +61,7 @@ function previewImage(file) {
 
   reader.readAsDataURL(file);
 }
+
 
 function validateCV(event) {
   var fileInput = event.target;
@@ -85,3 +106,4 @@ function previewCV(file) {
 
   reader.readAsDataURL(file);
 }
+
