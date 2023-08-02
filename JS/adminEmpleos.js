@@ -19,7 +19,7 @@ app.get("/rangosSalariales", async function (req, res) {
     console.log("Atendiendo solicitud GET /rangosSalariales");
     try {
         console.log ("Consultando rangos salariales en la base de datos");
-        const rangosSalariales = await RangosSalarialesModel.find({});
+        const rangosSalariales = await RangosSalarialesModel.find({}).limit(8);
         console.log ("Rangos salariales:", rangosSalariales);
 
         res.status(200).send(rangosSalariales);
@@ -57,7 +57,7 @@ app.get("/empleos", async function (req, res) {
     console.log("Atendiendo solicitud GET /empleos");
     try {
         console.log ("Consultando empleos en la base de datos");
-        const empleos = await EmpleosModel.find({}.limit(8));
+        const empleos = await EmpleosModel.find({});
         console.log ("Empleos:", empleos);
         res.status(200).send(empleos);
 

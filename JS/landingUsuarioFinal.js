@@ -1,11 +1,12 @@
 // HTML
 window.onload = async function () {
     try {
-        const respuestaEmpleos = await fetch("http://localhost:3000/empleos?limit=8");
+        const respuestaEmpleos = await fetch("http://localhost:3000/empleos");
         const empleos = await respuestaEmpleos.json();
-        console.log("Empleos:", empleos);
+        console.log(empleos);
 
-        const empleosHTML = document.getElementById("lista-mepleos"); 
+        const empleosHTML = document.getElementById("lista-empleos"); 
+
         empleos.forEach(function (empleo) {
             const div = 
             `
