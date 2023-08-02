@@ -53,11 +53,11 @@ app.post("/rangosSalariales", async function (req, res) {
     }
 });
 
-app.get("/empleos", async function (req, res) {
-    console.log("Atendiendo solicitud GET /empleos");
+app.get("/empleosLanding", async function (req, res) {
+    console.log("Atendiendo solicitud GET /empleosLanding");
     try {
         console.log ("Consultando empleos en la base de datos");
-        const empleos = await EmpleosModel.find({});
+        const empleos = (await EmpleosModel.find({}).limit(8));
         console.log ("Empleos:", empleos);
         res.status(200).send(empleos);
 

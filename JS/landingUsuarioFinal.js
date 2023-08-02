@@ -1,7 +1,7 @@
 // HTML
 window.onload = async function () {
     try {
-        const respuestaEmpleos = await fetch("http://localhost:3000/empleos");
+        const respuestaEmpleos = await fetch("http://localhost:3000/empleosLanding");
         const empleos = await respuestaEmpleos.json();
         console.log(empleos);
 
@@ -23,3 +23,4 @@ window.onload = async function () {
         alert("Error al cargar los empleos");
     }
 };
+

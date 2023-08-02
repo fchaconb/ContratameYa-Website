@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon adminEmpleos.js"
+    "start": "nodemon administrarEmpleos.js"
   },
   "keywords": [],
   "author": "",
