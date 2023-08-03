@@ -41,7 +41,7 @@
 }
 
 .filtros select {
-    width: 204px; 
+    width: 220px; 
     height: 42px; 
     padding-left: 16px; 
     padding-right: 16px; 
@@ -80,12 +80,23 @@
     margin-top: 15px;
 }
 
+.seccion-puestos-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 60px;
+    width: 450px;
+    height: 865px;
+    overflow: auto;
+}
+
 .seccion-puestos {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 60px;
-    width: 300px; 
+    width: 380px; 
     height: 130px; 
     padding: 20px;
     background: #DEE1E6FF; /* neutral-300 */

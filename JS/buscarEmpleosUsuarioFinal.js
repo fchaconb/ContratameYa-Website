@@ -1,56 +1,65 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Get the job position containers
-  const jobContainers = document.querySelectorAll('.seccion-puestos');
+async function rangosSalarialesDropdown() {
+  try {
+    const respuestaRangosSalariales = await fetch("http://localhost:3000/rangosSalariales");
+    const rangosSalariales = await respuestaRangosSalariales.json();
+    console.log(rangosSalariales);
 
-  // Update the information section content based on the first job position by default
-  const defaultJobTitle = jobContainers[0].querySelector('h2').textContent;
-  const defaultJobInfoSection = jobContainers[0].id;
+    const rangosSalarialesHTML = document.getElementById("rango-salarial");
 
-  displayJobInfo(defaultJobTitle, defaultJobInfoSection);
-
-  // Add click event listeners to each job container
-  jobContainers.forEach(container => {
-    container.addEventListener('click', () => {
-      // Clear the previously selected job container's active class
-      const activeContainer = document.querySelector('.seccion-puestos.active');
-      if (activeContainer) {
-        activeContainer.classList.remove('active');
-      }
-
-      // Add active class to the clicked job container
-      container.classList.add('active');
-
-      // Get the job title and info section ID from the clicked job container
-      const jobTitle = container.querySelector('h2').textContent;
-      const infoSectionId = container.id;
-
-      displayJobInfo(jobTitle, infoSectionId);
+    rangosSalariales.forEach(function (rangoSalarial) {
+      const option = `<option value="${rangoSalarial.id}">${rangoSalarial.rangoSalarial}</option>`;
+      rangosSalarialesHTML.innerHTML += option;
     });
-  });
-
-  // Function to display the job information
-  function displayJobInfo(jobTitle, infoSectionId) {
-    // Find the corresponding info section based on the ID
-    const infoSection = document.querySelector(`#${infoSectionId}`);
-
-    // Hide all info sections
-    const infoSectionContainer = document.querySelector('.seccion-puesto-info');
-    const allInfoSections = infoSectionContainer.querySelectorAll('section');
-    allInfoSections.forEach(section => {
-      section.style.display = 'none';
-    });
-
-    // Show the selected info section
-    infoSection.style.display = 'block';
-
-    // Update the information section content based on the selected job container
-    const jobRequirements = infoSection.innerHTML;
-
-    infoSectionContainer.innerHTML = `
-      <section id="${infoSectionId}">
-        <h3>${jobTitle}</h3>
-        ${jobRequirements}
-      </section>
-    `;
+  } catch (error) {
+    console.log("Error:", error);
+    alert("Error al cargar los rangos salariales");
   }
-});
+};
+
+async function empresasDropdown() {
+  try {
+    const respuestaEmpresas = await fetch("http://localhost:3000/nombreEmpresasBuscarEmpleos");
+    const empresas = await respuestaEmpresas.json();
+    console.log(empresas);
+
+    const empresasHTML = document.getElementById("nombre");
+    empresas.forEach(function (empresa) {
+      const option = `<option value="${empresa._id}">${empresa.nombre}</option>`;
+      empresasHTML.innerHTML += option;
+    });
+  } catch (error) {
+    console.log("Error:", error);
+    alert("Error al cargar las empresas");
+  }
+};
+
+async function empleosOverview() {
+  try {
+    const respuestaEmpleos = await fetch("http://localhost:3000/empleosOverview");
+    const empleos = await respuestaEmpleos.json();
+    console.log(empleos);
+
+    const empleosHTML = document.getElementById("puestos-overview");
+    let i = 0;
+    empleos.forEach(function (empleo) {
+      const div = `
+            <div class="seccion-puestos" id="puesto${i}">
+                <h2>${empleo.titulo}</h2>
+                <h3>Rango Salarial: ${empleo.rangoSalarial}</h3>
+                <h3>Empresa: ${empleo.empresa}</h3>
+            </div>
+            `;
+      empleosHTML.innerHTML += div;
+      i += 1;
+    });
+  } catch (error) {
+    console.log("Error:", error);
+    alert("Error al cargar los empleos");
+  }
+};
+
+window.onload = function () {
+  rangosSalarialesDropdown();
+  empresasDropdown();
+  empleosOverview();
+};

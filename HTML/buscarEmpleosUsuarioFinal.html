@@ -18,7 +18,7 @@
       rel="stylesheet"
     />
 
-    <!--<script src="/JS/buscarEmpleosUsuarioFinal.js"></script> -->
+    <script src="/JS/buscarEmpleosUsuarioFinal.js"></script>
   </head>
   <body>
     <header>
@@ -87,10 +87,6 @@
               <label for="nombre">Nombre Empresa</label>
               <select name="nombre" id="nombre">
                 <option value="empresa" selected disabled>Empresa</option>
-                <option value="apple">Apple</option>
-                <option value="acme">Acme Corporation</option>
-                <option value="global">Global Solutions</option>
-                <option value="tech">Tech Innovators</option>
               </select>
             </div>
             <div class="filtros">
@@ -103,9 +99,6 @@
                 <option value="opcion" disabled selected>
                   Seleccionar Rango
                 </option>
-                <option value="45-65">45,000 - 65,000</option>
-                <option value="70-90">70,000 - 90,000</option>
-                <option value="80-100">80,000 - 100,000</option>
               </select>
             </div>
             <div class="filtros">
@@ -115,48 +108,10 @@
         </form>
       </section>
       <section class="orden-puestos">
-        <section>
-          <div class="seccion-puestos" id="job1">
-            <div>
-              <img src="/Media/Fotos/apple.png" alt="Logo de Apple" />
-            </div>
-            <div>
-              <h2>Apple</h2>
-              <h3>Senior Software Engineer</h3>
-              <h3>Rango Salarial: $45,000 - $65,000</h3>
-            </div>
-          </div>
-          <div class="seccion-puestos" id="job2">
-            <div>
-              <img src="/Media/Fotos/instagram.png" alt="Logo de Apple" />
-            </div>
-            <div>
-              <h2>Acme Corporation</h2>
-              <h3>Gerente de Proyectos</h3>
-              <h3>Rango Salarial: $70,000 - $90,000</h3>
-            </div>
-          </div>
-          <div class="seccion-puestos" id="job3">
-            <div>
-              <img src="/Media/Fotos/slack.png" alt="Logo de Apple" />
-            </div>
-            <div>
-              <h2>Global Solutions</h2>
-              <h3>Analista de Datos</h3>
-              <h3>Rango Salarial: $45,000 - $65,000</h3>
-            </div>
-          </div>
-          <div class="seccion-puestos" id="job4">
-            <div>
-              <img src="/Media/Fotos/opera.png" alt="Logo de Apple" />
-            </div>
-            <div>
-              <h2>Tech Innovators</h2>
-              <h3>Especialista en Marketing Digital</h3>
-              <h3>Rango Salarial: $80,000 - $100,000</h3>
-            </div>
-          </div>
-        </section>
+        <section
+          class="seccion-puestos-container"
+          id="puestos-overview"
+        ></section>
         <section class="seccion-puesto-info">
           <section id="job-info1">
             <h3>Requisitos Mínimos:</h3>
