@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reporte Invitaciones a Colaboradores</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/CSS/reporteInvitacionesEmpleados.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <script src="/JS/redirigirAReporteriaAdministrador.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a href="/HTML/landingAdministrador.html">
+          <img
+            src="/Media/Fotos/logo-script-elite.png"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+        <div class="navegacion-derecha">
+          <a href="/HTML/notificacionesAdministrador.html">
+            <img
+              src="/Media/Fotos/alert.png"
+              alt="Icono de notification"
+              class="notificacion-nav"
+            />
+          </a>
+          <a href="/HTML/editarPerfilAdministrador.html">
+            <img
+              src="/Media/Fotos/man.png"
+              alt="Foto de perfil usuario final"
+              class="perfil-nav"
+            />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="seccion-empresa-img">
+        <img
+          src="/Media/Fotos/empresa-landing.jpg"
+          alt="Imagen landing page para empresas de un edificio con computadores"
+          class="imagen-empresa-landing"
+        />
+      </section>
+      <section class="seccion-titulos">
+        <div class="titulo-link">
+          <img
+            src="/Media/Fotos/edit-user-icon.png"
+            alt="Icono de editar usuario"
+            class="seccion-iconos"
+          />
+          <h1>Reporte de Invitaciones</h1>
+        </div>
+      </section>
+      <section class="seccion-principal-acomodo">
+        <div class="contenedor-general">
+          <div class="contenedor">
+            <p>Invitaciones enviadas: 8</p>
+            <div class="legend">
+              <div class="legend-item">
+                <span class="color-circle black"></span>
+                <span>Invitados: 8</span>
+              </div>
+              <div class="legend-item">
+                <span class="color-circle white"></span>
+                <span>Invitaciones aceptadas: 4</span>
+              </div>
+              <div class="legend-item">
+                <span class="color-circle purple"></span>
+                <span>Invitaciones rechazadas: 4</span>
+              </div>
+            </div>
+            <div class="graph">
+              <section id="chart">
+                <div></div>
+              </section>
+            </div>
+            <label for="estado"
+              >Estado
+              <input
+                type="search"
+                class="input-empleado"
+                id="estado"
+                placeholder="Buscar empleado"
+              />
+            </label>
+            <textarea name="" id="" cols="30" rows="8">
+        John Doe | correo@gmail.com | Aceptó la invitación | Información
+
+        Jane Doe | correo@gmail.com | Aceptó la invitación | Información
+
+        Taylor Swift | correo@gmail.com | Aceptó la invitación | Información
+
+        Lionel Messi | correo@gmail.com | Aceptó la invitación | Información
+
+        Meredith Grey | correo@gmail.com | Pendiente            | Información
+
+        Sammy Rivera | correo@gmail.com | Pendiente            | Información
+      </textarea
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <img
+        src="/Media/Fotos/logo-script-elite.png"
+        alt="Logo de la empresa Script Elite"
+      />
+    </footer>
+  </body>
+</html>
