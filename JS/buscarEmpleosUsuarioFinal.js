@@ -33,6 +33,7 @@ async function empresasDropdown() {
   }
 };
 
+// Cambio HTML para que se muestren los empleos con ejemplo de DIV
 async function empleosOverview() {
   try {
     const respuestaEmpleos = await fetch("http://localhost:3000/empleosOverview");

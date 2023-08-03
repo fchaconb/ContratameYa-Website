@@ -107,3 +107,26 @@ function previewCV(file) {
   reader.readAsDataURL(file);
 }
 
+async function generosDropdown() {
+  try {
+    const respuestaGeneros = await fetch("http://localhost:3000/generosEditarPerfil");
+    const generos = await respuestaGeneros.json();
+    console.log(generos);
+
+    const generosHTML = document.getElementById("genero");
+    generos.forEach(function (genero) {
+      const option = 
+      `
+      <option value="${genero.id}">${genero.genero}</option>
+      `;
+      generosHTML.innerHTML += option;
+    });
+  } catch (error) {
+    console.log("Error:", error);
+    alert("Error al cargar los generos");
+  }
+}
+
+window.onload = function () {
+  generosDropdown();
+}

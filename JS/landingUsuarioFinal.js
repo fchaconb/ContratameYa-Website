@@ -11,9 +11,9 @@ async function puestosRecientes() {
             const div = 
             `
             <div class="puesto">
+                <p>${empleo.empresa}</p>
                 <p>${empleo.titulo}</p>
                 <p>${empleo.rangoSalarial}</p>
-                <p>${empleo.empresa}</p>
             </div>
             `;
             empleosHTML.innerHTML += div;

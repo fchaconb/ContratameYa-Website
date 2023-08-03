@@ -6,6 +6,7 @@ const cors = require("cors");
 const RangosSalarialesModel = require("./models/rangosSalariales");
 const EmpleosModel = require("./models/empleos");
 const AdminsModel = require("./models/usuarioAdmin");
+const GenerosModel = require("./models/genero");
 
 // Configuración
 const app = express();
@@ -168,7 +169,43 @@ app.get("/empleosOverview", async function (req, res) {
 
 });
 
+app.post("/generos", async function (req, res) {
+    console.log("Atendiendo solicitud POST /generos");
 
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const genero = GenerosModel({
+        id: req.body.id,
+        genero: req.body.genero
+    });
+
+    try {
+        console.log("Guardando genero en la base de datos");
+        const generoGuardado = await genero.save();
+        console.log("Genero guardado:", generoGuardado);
+        res.status(201).send(generoGuardado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.get("/generosEditarPerfil", async function (req, res) {
+    console.log("Atendiendo solicitud GET /generosEditarPerfil");
+    try {
+        console.log ("Consultando generos en la base de datos");
+        const generos = await GenerosModel.find({});
+        console.log ("Generos:", generos);
+        res.status(200).send(generos);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+
+});
 
 // Iniciar servidor
 
