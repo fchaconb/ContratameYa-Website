@@ -9,5 +9,6 @@ const ReporteInvitacionesSchema = new mongoose.Schema(
 
     }
 );
+
 const Invitaciones = mongoose.model('Invitaciones', ReporteInvitacionesSchema);
 module.exports = Invitaciones;
