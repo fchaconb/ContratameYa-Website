@@ -7,6 +7,7 @@ const RangosSalarialesModel = require("./models/rangosSalariales");
 const EmpleosModel = require("./models/empleos");
 const AdminsModel = require("./models/usuarioAdmin");
 const GenerosModel = require("./models/genero");
+const EstadoAplicaciones = require("./models/estadoAplicaciones");
 
 // Configuración
 const app = express();
@@ -205,6 +206,18 @@ app.get("/generosEditarPerfil", async function (req, res) {
         res.status(500).send(error);
     }
 
+});
+
+app.get("/aplicacionesUsuarioFinal", async function (req, res) {
+    console.log("Atendiendo solicitud GET /aplicacionesUsuario");
+    try {
+        const aplicaciones = await EstadoAplicaciones.find({});
+        console.log ("Aplicaciones:", aplicaciones);
+        res.status(200).send(aplicaciones);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
 });
 
 // Iniciar servidor
