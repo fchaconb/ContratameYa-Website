@@ -7,6 +7,7 @@ const RangosSalarialesModel = require("./models/rangosSalariales");
 const EmpleosModel = require("./models/empleos");
 const AdminsModel = require("./models/usuarioAdmin");
 const GenerosModel = require("./models/genero");
+const UsuarioColaboradorModel = require("./models/usuarioColaborador");
 const EstadoAplicaciones = require("./models/estadoAplicaciones");
 
 // Configuración
@@ -206,6 +207,71 @@ app.get("/generosEditarPerfil", async function (req, res) {
         res.status(500).send(error);
     }
 
+});
+
+app.post("/login", async function (req, res) {
+    console.log("Atendiendo solicitud POST /login");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const login = {
+        correo: req.body.correo,
+        contrasena: req.body.contrasena,
+    };
+
+    try {
+        console.log("Consultando login en la base de datos");
+        const adminLogin  = await AdminsModel.findOne({ correo: login.correo, contrasena: login.contrasena });
+        const colaboradorLogin = await UsuarioColaboradorModel.findOne({ correo: login.correo, contrasena: login.contrasena });
+
+        if (adminLogin) {
+            console.log("Login de admin:", adminLogin);
+            res.status(200).send({ perfil: "admin" });
+        } else if (colaboradorLogin) {
+            console.log("Login de colaborador:", colaboradorLogin);
+            res.status(200).send({ perfil: "colaborador" });
+        } else {
+            console.log("Login incorrecto");
+            res.status(401).send({ error: "Correo o contraseña incorrectos" });
+        }
+
+
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.post("/registrarUsuarioColaborador", async function (req, res) {
+    console.log("Atendiendo solicitud POST /registrarUsuarioColaborador");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const usuarioColaborador = UsuarioColaboradorModel({
+        empresa: req.body.empresa,
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        correo: req.body.correo,
+        contrasena: req.body.contrasena,
+        genero: req.body.genero,
+        rol: req.body.rol
+    });
+
+    try {
+        console.log("Guardando usuario colaborador en la base de datos");
+        const usuarioColaboradorGuardado = await usuarioColaborador.save();
+        console.log("Usuario colaborador guardado:", usuarioColaboradorGuardado);
+        res.status(201).send(usuarioColaboradorGuardado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
 });
 
 app.get("/aplicacionesUsuarioFinal", async function (req, res) {

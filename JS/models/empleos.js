@@ -6,7 +6,7 @@ const EmpleosSchema = new mongoose.Schema(
         visibilidad: { type: String, required: true },
         rangoSalarial: { type: String, required: true },
         requisitosMinimos: { type: String, required: true },
-        requisitosDeseados: { type: String, required: true }
+        requisitosDeseados: { type: String, required: true },
     },
     { 
         timestamps: true, 
