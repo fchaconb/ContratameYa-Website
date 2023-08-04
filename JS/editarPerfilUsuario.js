@@ -127,6 +127,33 @@ async function generosDropdown() {
   }
 }
 
+/*function validarDatos(evento) {
+  evento.preventDefault();
+  var clave = document.getElementById('password1').value;
+  var confirmarClave = document.getElementById('password2').value;
+  var formularioValido = true;
+
+  if (clave !== confirmarClave) {
+      alert('La clave y la confirmación de clave no coinciden.');
+      formularioValido = false;
+  }
+
+  if (clave.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres");
+      formularioValido = false;
+  }
+
+  if (formularioValido === true) {
+
+      //debe dejar guardar perfil, y preguntar que sucede cuando se le da click a guardar perfil para ponerlo dentro de este condicional
+
+  }
+
+}*/
+
+
 window.onload = function () {
   generosDropdown();
+  /*let formulario = document.getElementById('formularioEditarUsuarioFinal');
+  formulario.addEventListener('submit', validarDatos);*/
 }
