@@ -328,6 +328,37 @@ app.get("/aplicacionesUsuarioFinal", async function (req, res) {
     }
 });
 
+app.post("/aplicacionesUsuarioFinal", async function (req, res) {
+    console.log("Atendiendo solicitud POST /aplicacionesUsuarioFinal");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const aplicacion = EstadoAplicaciones({
+        id: req.body.id,
+        nombrePuesto: req.body.nombrePuesto,
+        nombreAplicante: req.body.nombreAplicante,
+        correoAplicante: req.body.correoAplicante,
+        estadoAplicacion: req.body.estadoAplicacion,
+        fechaPostulacion: req.body.fechaPostulacion,
+        requisitosMinimos: req.body.requisitosMinimos,
+        requisitosDeseados: req.body.requisitosDeseados
+    });
+
+    try {
+        console.log("Guardando aplicacion en la base de datos");
+        const aplicacionGuardada = await aplicacion.save();
+        console.log("Aplicacion guardada:", aplicacionGuardada);
+        res.status(201).send(aplicacionGuardada);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);   
+    }
+});
+
+
 // Iniciar servidor
 
 app.listen(3000, function proyecto() {
