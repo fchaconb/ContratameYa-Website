@@ -8,6 +8,7 @@ const EmpleosModel = require("./models/empleos");
 const AdminsModel = require("./models/usuarioAdmin");
 const GenerosModel = require("./models/genero");
 const UsuarioColaboradorModel = require("./models/usuarioColaborador");
+const UsuarioFinalModel = require("./models/usuarioFinal");
 
 // Configuración
 const app = express();
@@ -267,6 +268,47 @@ app.post("/registrarUsuarioColaborador", async function (req, res) {
         const usuarioColaboradorGuardado = await usuarioColaborador.save();
         console.log("Usuario colaborador guardado:", usuarioColaboradorGuardado);
         res.status(201).send(usuarioColaboradorGuardado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.post("/registrarUsuarioFinal", async function (req, res) {
+    console.log("Atendiendo solicitud POST /registrarUsuarioFinal");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const usuarioFinal = UsuarioFinalModel({
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        clave: req.body.clave,
+        correo: req.body.correo,
+        genero: req.body.genero,
+        experiencia: {
+            empresa: req.body.experiencia.empresa,
+            titulo: req.body.experiencia.titulo,
+            fechaInicio: req.body.experiencia.fechaInicio,
+            fechaFin: req.body.experiencia.fechaFin,
+            descripcion: req.body.experiencia.descripcion
+        },
+        educacion: {
+            nivelEducativo: req.body.educacion.nivelEducativo,
+            institucion: req.body.educacion.institucion,
+            fechaInicioEducacion: req.body.educacion.fechaInicioEducacion,
+            fechaFinEducacion: req.body.educacion.fechaFinEducacion,
+            descripcionEducacion: req.body.educacion.descripcionEducacion
+        },
+    });
+
+    try { 
+        console.log("Guardando usuario final en la base de datos");
+        const usuarioFinalGuardado = await usuarioFinal.save();
+        console.log("Usuario final guardado:", usuarioFinalGuardado);
+        res.status(201).send(usuarioFinalGuardado);
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
