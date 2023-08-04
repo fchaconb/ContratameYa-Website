@@ -6,6 +6,7 @@ const usuarioFinalSchema = new mongoose.Schema(
         apellidos : { type: String, required: true },
         clave : { type: String, required: true },
         correo : { type: String, required: true },
+        genero: { type: String, required: true },
         experiencia : {
             empresa : { type: String, required: true },
             titulo : { type: String, required: true },
