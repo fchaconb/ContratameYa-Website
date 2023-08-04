@@ -63,8 +63,10 @@ function redirigirCuentaEmpresa() {
     window.location.href = "login.html";
 }
 
-function validarDatos(evento) {
+async function registrarEmpresa(evento) {
     evento.preventDefault();
+    var nombre = document.getElementById('nombre').value;
+    var correo = document.getElementById('email').value;
     var clave = document.getElementById('clave').value;
     var confirmarClave = document.getElementById('confirmarClave').value;
     var formularioValido = true;
@@ -81,14 +83,36 @@ function validarDatos(evento) {
 
     if (formularioValido === true) {
 
-        redirigirCuentaEmpresa()
+        const empresa = {
+            nombre: nombre,
+            correo: correo,
+            contrasena: clave,
+        };
+
+        try {
+            const respuesta = await fetch("http://localhost:3000/registrarEmpresas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(empresa),
+            });
+
+            const empresaGuardada = await respuesta.json();
+            console.log(empresaGuardada);
+            alert("Empresa registrada exitosamente");
+            redirigirCuentaEmpresa();
+
+        } catch (error) {
+            console.log("Error:", error);
+            alert("Error al registrar la empresa");
+        }
 
     }
-
 }
 
 window.onload = function () {
     let formulario = document.getElementById('formularioDatosEmpresa');
-    formulario.addEventListener('submit', validarDatos);
+    formulario.addEventListener('submit', registrarEmpresa);
 
 }
