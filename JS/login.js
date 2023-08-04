@@ -38,6 +38,8 @@ async function login(evento) {
                 }
                 else if (loginConsultado.perfil === "colaborador") {
                     redirigirCuentaColaborador();
+                } else if (loginConsultado.perfil === "usuarioFinal") {
+                    redirigirCuentaUsuarioFinal();
                 }
             } else {
                 alert("Correo o contraseña incorrectos");
@@ -57,6 +59,10 @@ function redirigirCuentaAdmin() {
 
 function redirigirCuentaColaborador() {
     window.location.href = "./landingGerente.html";
+}
+
+function redirigirCuentaUsuarioFinal() {
+    window.location.href = "./landingUsuarioFinal.html";
 }
 
 window.onload = function () {

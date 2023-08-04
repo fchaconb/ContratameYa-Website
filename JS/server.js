@@ -227,6 +227,7 @@ app.post("/login", async function (req, res) {
         console.log("Consultando login en la base de datos");
         const adminLogin  = await AdminsModel.findOne({ correo: login.correo, contrasena: login.contrasena });
         const colaboradorLogin = await UsuarioColaboradorModel.findOne({ correo: login.correo, contrasena: login.contrasena });
+        const usuarioFinalLogin = await UsuarioFinalModel.findOne({ correo: login.correo, clave: login.contrasena });
 
         if (adminLogin) {
             console.log("Login de admin:", adminLogin);
@@ -234,6 +235,9 @@ app.post("/login", async function (req, res) {
         } else if (colaboradorLogin) {
             console.log("Login de colaborador:", colaboradorLogin);
             res.status(200).send({ perfil: "colaborador" });
+        } else if (usuarioFinalLogin) {
+            console.log("Login de usuario final:", usuarioFinalLogin);
+            res.status(200).send({ perfil: "usuarioFinal" });
         } else {
             console.log("Login incorrecto");
             res.status(401).send({ error: "Correo o contraseña incorrectos" });
