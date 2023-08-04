@@ -8,6 +8,7 @@ const EmpleosModel = require("./models/empleos");
 const AdminsModel = require("./models/usuarioAdmin");
 const GenerosModel = require("./models/genero");
 const UsuarioColaboradorModel = require("./models/usuarioColaborador");
+const EstadoAplicaciones = require("./models/estadoAplicaciones");
 const UsuarioFinalModel = require("./models/usuarioFinal");
 
 // Configuración
@@ -309,6 +310,18 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
         const usuarioFinalGuardado = await usuarioFinal.save();
         console.log("Usuario final guardado:", usuarioFinalGuardado);
         res.status(201).send(usuarioFinalGuardado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.get("/aplicacionesUsuarioFinal", async function (req, res) {
+    console.log("Atendiendo solicitud GET /aplicacionesUsuario");
+    try {
+        const aplicaciones = await EstadoAplicaciones.find({});
+        console.log ("Aplicaciones:", aplicaciones);
+        res.status(200).send(aplicaciones);
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
