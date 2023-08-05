@@ -98,7 +98,6 @@ async function actualizarDatosEmpresa() {
       alert("Datos actualizados exitosamente");
     } catch (error) {
       console.log("Error:", error);
-      alert("Error al actualizar los datos");
     }
   }
 }
