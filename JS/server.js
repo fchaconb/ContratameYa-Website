@@ -243,6 +243,7 @@ app.post("/login", async function (req, res) {
                 empresa: colaboradorLogin.empresa,
                 nombre: colaboradorLogin.nombre,
                 correo: colaboradorLogin.correo, 
+                rol: colaboradorLogin.rol,
             });
         } else if (usuarioFinalLogin) {
             console.log("Login de usuario final:", usuarioFinalLogin);

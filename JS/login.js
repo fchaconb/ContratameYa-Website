@@ -35,12 +35,16 @@ async function login(evento) {
                 localStorage.setItem('userName', loginConsultado.nombre);
                 localStorage.setItem('userEmail', loginConsultado.correo);
                 localStorage.setItem('empresa', loginConsultado.empresa);
+                localStorage.setItem('rol', loginConsultado.rol);
 
                 if (loginConsultado.perfil === "admin") {
                     redirigirCuentaAdmin();
-                }
-                else if (loginConsultado.perfil === "colaborador") {
-                    redirigirCuentaColaborador();
+                } else if (loginConsultado.perfil === "colaborador") {
+                    if (loginConsultado.rol === "Gerente") {
+                        redirigirCuentaGerente();
+                    } else if (loginConsultado.rol === "Reclutador") {    
+                        redirigirCuentaReclutador();
+                    }
                 } else if (loginConsultado.perfil === "usuarioFinal") {
                     redirigirCuentaUsuarioFinal();
                 }
@@ -60,8 +64,12 @@ function redirigirCuentaAdmin() {
     window.location.href = "./landingAdministrador.html";
 }
 
-function redirigirCuentaColaborador() {
+function redirigirCuentaGerente() {
     window.location.href = "./landingGerente.html";
+}
+
+function redirigirCuentaReclutador() {
+    window.location.href = "./AdministrarAplicaciones.html";
 }
 
 function redirigirCuentaUsuarioFinal() {
