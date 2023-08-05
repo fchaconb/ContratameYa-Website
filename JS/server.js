@@ -375,17 +375,44 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
     }
 });
 
-app.get('/editarPerfilAdministrador', async (req, res) => {
-    try {
-      // Obtener el nombre y el correo de la empresa desde la base de datos
-    const empresas = await AdminsModel.find({} , {nombre: 1, correo: 1});
-    
+app.get('/datosPerfilEmpresa', async function (req, res){
+    console.log("Atendiendo solicitud GET /datosPerfilEmpresa");
 
-      // Responder con los datos de las empresas
-    res.json(empresas);
+    try {
+        const userEmail = req.query.correo;
+        console.log('Consultando informacion de la empresa ' + userEmail + 'en la base de datos');
+        const empresas = await AdminsModel.findOne({ correo: userEmail }, { nombre: 1, correo: 1, descripcion: 1 });
+        console.log('Empresas:', empresas);
+        res.status(200).send(empresas);
     } catch (error) {
-    console.error('Error al obtener el nombre y el correo de la empresa:', error);
-    res.status(500).json({ error: 'Error al obtener el nombre y el correo de la empresa' });
+        console.log('Error:', error);
+        res.status(500).send(error);
+    }
+});
+
+app.put('/editarPerfilEmpresa', async function (req, res){
+    console.log("Atendiendo solicitud PUT /editarPerfilEmpresa");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido"); 
+    }
+
+    const empresa = {
+        nombre: req.body.nombre,
+        correo: req.body.correo,
+        contrasena: req.body.contrasena,
+        descripcion: req.body.descripcion
+    };
+
+    try {
+        console.log("Actualizando empresa en la base de datos");
+        const empresaActualizada = await AdminsModel.findOneAndUpdate({ correo: empresa.correo }, empresa, { new: true });
+        console.log("Empresa actualizada:", empresaActualizada);
+        res.status(201).send(empresaActualizada);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
     }
 });
 

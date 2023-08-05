@@ -68,7 +68,7 @@
         </div>
       </section>
       <section>
-        <form>
+        <form id="editarPerfilEmpresa">
           <div class="contenedor-foto-perfil">
             <div class="foto-perfil">
               <label for="fotoPerfil">Foto de Perfil</label>
@@ -93,12 +93,7 @@
           <div class="contenedor-perfil">
             <div class="perfil">
               <label for="nombre"> Nombre de la Empresa</label>
-              <input
-                type="text"
-                name="nombre"
-                id="nombreEmpresa"
-                required
-              />
+              <input type="text" name="nombre" id="nombreEmpresa" required />
             </div>
             <div class="perfil">
               <label for="password1">Contraseña</label>
@@ -106,12 +101,7 @@
             </div>
             <div class="perfil">
               <label for="correo">Correo</label>
-              <input
-                type="email"
-                name="correo"
-                id="correoEmpresa"
-                readonly
-              />
+              <input type="email" name="correo" id="correoEmpresa" readonly />
             </div>
 
             <div class="perfil">
@@ -134,13 +124,6 @@
           <div class="botones-perfil">
             <div class="boton-perfil-style">
               <input id="guardarPefil" type="submit" value="Guardar Perfil" />
-            </div>
-            <div class="boton-perfil-style">
-              <input
-                id="desactivarPerfil"
-                type="submit"
-                value="Desactivar Perfil"
-              />
             </div>
           </div>
         </form>
