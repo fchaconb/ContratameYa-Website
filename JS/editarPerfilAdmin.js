@@ -93,14 +93,12 @@ async function actualizarDatosEmpresa() {
         body: JSON.stringify(datosEmpresa),
       });
 
-      if (respuesta.status === 201) {
-        alert("Datos actualizados correctamente");
-      } else {
-        alert("Error al actualizar los datos");
-      }
+      const datosEmpresaActualizados = await respuesta.json();
+      console.log(datosEmpresaActualizados);
+      alert("Datos actualizados exitosamente");
     } catch (error) {
       console.log("Error:", error);
-      alert(error);
+      alert("Error al actualizar los datos");
     }
   }
 }
