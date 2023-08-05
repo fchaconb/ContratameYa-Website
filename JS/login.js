@@ -32,6 +32,9 @@ async function login(evento) {
             if (respuesta.ok) {
                 const loginConsultado = await respuesta.json();
                 console.log(loginConsultado);
+                localStorage.setItem('userName', loginConsultado.nombre);
+                localStorage.setItem('userEmail', loginConsultado.correo);
+                localStorage.setItem('empresa', loginConsultado.empresa);
 
                 if (loginConsultado.perfil === "admin") {
                     redirigirCuentaAdmin();

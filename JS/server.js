@@ -231,13 +231,26 @@ app.post("/login", async function (req, res) {
 
         if (adminLogin) {
             console.log("Login de admin:", adminLogin);
-            res.status(200).send({ perfil: "admin" });
+            res.status(200).send({ 
+                perfil: "admin", 
+                nombre: adminLogin.nombre,
+                correo: adminLogin.correo,
+            });
         } else if (colaboradorLogin) {
             console.log("Login de colaborador:", colaboradorLogin);
-            res.status(200).send({ perfil: "colaborador" });
+            res.status(200).send({ 
+                perfil: "colaborador",
+                empresa: colaboradorLogin.empresa,
+                nombre: colaboradorLogin.nombre,
+                correo: colaboradorLogin.correo, 
+            });
         } else if (usuarioFinalLogin) {
             console.log("Login de usuario final:", usuarioFinalLogin);
-            res.status(200).send({ perfil: "usuarioFinal" });
+            res.status(200).send({ 
+                perfil: "usuarioFinal",
+                nombre: usuarioFinalLogin.nombre,
+                correo: usuarioFinalLogin.correo, 
+            });
         } else {
             console.log("Login incorrecto");
             res.status(401).send({ error: "Correo o contraseña incorrectos" });
