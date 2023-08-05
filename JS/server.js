@@ -362,6 +362,20 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
     }
 });
 
+app.get('/editarPerfilAdministrador', async (req, res) => {
+    try {
+      // Obtener el nombre y el correo de la empresa desde la base de datos
+    const empresas = await AdminsModel.find({} , {nombre: 1, correo: 1});
+    
+
+      // Responder con los datos de las empresas
+    res.json(empresas);
+    } catch (error) {
+    console.error('Error al obtener el nombre y el correo de la empresa:', error);
+    res.status(500).json({ error: 'Error al obtener el nombre y el correo de la empresa' });
+    }
+});
+
 
 // Iniciar servidor
 
