@@ -41,3 +41,20 @@ function previewImage(file) {
 
   reader.readAsDataURL(file);
 }
+
+async function actualizarDatosEmpresa() {
+  try {
+    const respuestaDatosPerfil = await fetch("http://localhost:3000/editarPerfilAdministrador");
+    const datosPerfil = await respuestaDatosPerfil.json();
+    console.log(datosPerfil);
+
+
+    document.getElementById("nombre").value = datosPerfil.nombre;
+    document.getElementById("correo").value = datosPerfil.correo;
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+  }
+}
+
+// Ejecutar la función al cargar la página
+window.onload = actualizarDatosEmpresa;
