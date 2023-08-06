@@ -36,7 +36,7 @@ async function empresasDropdown() {
 let infoEmpleoArray;
 
 // Cambio HTML para que se muestren los empleos con ejemplo de DIV
-async function empleosOverview(nombreEmpresa, rangoSalarialID, requisitosMinimos) {
+async function empleosOverview(nombreEmpresa, rangoSalarialID) {
   try {
 
     let url = "http://localhost:3000/empleosOverview?";
@@ -46,10 +46,6 @@ async function empleosOverview(nombreEmpresa, rangoSalarialID, requisitosMinimos
     }
     if (rangoSalarialID) {
       url += `rangoSalarialID=${rangoSalarialID}&`;
-      console.log(url);
-    }
-    if (requisitosMinimos) {
-      url += `requisitosMinimos=${requisitosMinimos}&`;
       console.log(url);
     }
 
@@ -150,14 +146,13 @@ window.onload = function () {
     
     const nombreEmpresa = document.getElementById("nombre").value;
     const rangoSalarialID = document.getElementById("rango-salarial").value;
-    const requisitosMinimos = document.getElementById("requisitos").value;
 
     const empleosHTML = document.getElementById("puestos-overview");
     empleosHTML.innerHTML = "";
 
     empleosHTML.removeEventListener("click", botonAplicar);
 
-    empleosOverview(nombreEmpresa, rangoSalarialID, requisitosMinimos);
+    empleosOverview(nombreEmpresa, rangoSalarialID);
   });
 
 };

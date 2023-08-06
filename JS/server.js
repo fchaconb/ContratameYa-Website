@@ -174,11 +174,6 @@ app.get("/empleosOverview", async function (req, res) {
             query.rangoSalarialID = req.query.rangoSalarialID;
             console.log("Query:", query);
         }
-
-        if (req.query.requisitosMinimos) {
-            query.requisitosMinimos = req.query.requisitosMinimos;
-            console.log("Query:", query);
-        }
         
         const empleos = await EmpleosModel.find(query);
         console.log ("Empleos:", empleos);
