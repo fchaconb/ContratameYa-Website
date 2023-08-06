@@ -43,6 +43,7 @@
     overflow: auto;
     margin-bottom: 30px;
     margin-top: 20px;
+    border-radius: 9px;
 }  
   
   
@@ -66,17 +67,18 @@
     height: 380px; 
     background: #DEE1E6FF; /* neutral-300 */
     border-color: rgb(0, 0, 0); /* neutral-200 */
+    border-radius: 9px;
   }
   
 
   
-  .boton2 {
+  .boton2 button{
     margin-top: 20px;
     top: 350px; 
     height: 44px; 
     padding: 0 16px; 
     display: flex; 
-    align-items: left; 
+    align-items: center; 
     justify-content: center; 
     font-family: Sarabun; /* Body */
     font-size: 20px; 
@@ -144,6 +146,15 @@
   border-radius: 4px; /* border-m */
   border-width: 1px; 
   border-color: #9095A1FF; /* neutral-500 */
+}
+
+h1 {
+    font-family: Sarabun; /* Body */
+    font-size: 24px; 
+    line-height: 36px; 
+    color: #273469FF; /* neutral-900 */
+    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 h3 {

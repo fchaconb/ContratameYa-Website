@@ -1,140 +1,3 @@
-function validarDatos(evento) {
-    evento.preventDefault();
-    var clave = document.getElementById('clave').value;
-    var confirmarClave = document.getElementById('confirmarClave').value;
-    var fechaInicioAcademica = document.getElementById("fechaInicioAcademica").value;
-    var fechaFinalAcademica = document.getElementById("fechaFinalAcademica").value;
-    var fechaActual = new Date();
-    var fechaInicioElegidaAcademica = new Date(fechaInicioAcademica);
-    var empresa = document.getElementById("empresa").value;
-    var tituloEmpresa = document.getElementById("tituloEmpresa").value;
-    var fechaInicioLaboral = document.getElementById("fechaInicioLaboral").value;
-    var descripcionRol = document.getElementById("descripcionRol").value;
-    var fechaFinalizacionLaboral = document.getElementById("fechaFinalizacionLaboral").value;
-    var fechaInicioElegidaLaboral = new Date(fechaInicioLaboral);
-    var fechaFinalizacionElegidaLaboral = new Date(fechaFinalizacionLaboral);
-    var archivoCurriculum = document.getElementById("archivoCurriculum3").value;
-    var archivoFoto = document.getElementById("archivoFoto").value;
-    var formularioValido = true;
-
-
-    if (clave !== confirmarClave) {
-        alert('La clave y la confirmación de clave no coinciden.');
-        formularioValido = false;
-    }
-
-    if (clave.length < 6) {
-        console.log("Entro a validacion de longitud de clave")
-        alert("La contraseña debe tener al menos 6 caracteres");
-        formularioValido = false;
-    }
-
-
-    if (fechaInicioElegidaAcademica > fechaActual) {
-        alert("La fecha de inicio no puede ser mayor a la fecha actual en la sección de educación");
-        formularioValido = false;
-    }
-    
-    if (fechaFinalAcademica < fechaInicioAcademica) {
-        alert("La fecha final no puede ser menor a la fecha de inicio en la sección de educación");
-        formularioValido = false;
-    }
-
-    if (!document.getElementById("sinExperiencia").checked) {
-        if (
-            empresa === "" ||
-            tituloEmpresa === "" ||
-            fechaInicioLaboral === "" ||
-            descripcionRol === "" 
-        ) {
-            alert("Debe llenar todos los campos");
-            formularioValido = false;
-        }
-    }
-
-    if (fechaInicioElegidaLaboral > fechaActual) {
-        alert("La fecha de inicio no puede ser mayor a la fecha actual en la sección de experiencia laboral");
-        formularioValido = false;
-    }
-
-    if (fechaFinalizacionElegidaLaboral > fechaActual) {
-        alert("La fecha de finalización no puede ser mayor a la fecha actual en la sección de experiencia laboral");
-        formularioValido = false;
-    }
-
-    if (archivoCurriculum === '' || archivoFoto === '') {
-        alert("Debe llenar todos los campos");
-        formularioValido = false;
-    }
-
-
-    if (formularioValido === true) {
-        redirigirCuentaUsuarioNormalSiguiente()
-    }
-
-
-}
-
-function redirigirCuentaUsuarioNormalSiguiente() {
-    window.location.href = "./login.html";
-}
-
-
-window.onload = function () {
-    let formulario = document.getElementById('formularioGeneralUsuario');
-    formulario.addEventListener('submit', validarDatos);
-    let fechaFinalizacionLaboral = document.getElementById("fechaFinalizacionLaboral");
-    let actualmenteTrabaja = document.getElementById("actualmenteTrabaja");
-    /*let sinExperiencia = document.getElementById("sinExperiencia");*/
-
-    fechaFinalizacionLaboral.addEventListener('input', function () {
-        if (fechaFinalizacionLaboral.value !== '') {
-            actualmenteTrabaja.disabled = true;
-            actualmenteTrabaja.checked = false;
-        } else {
-            actualmenteTrabaja.disabled = false;
-        }
-    });
-
-    actualmenteTrabaja.addEventListener('change', function () {
-        if (actualmenteTrabaja.checked) {
-            fechaFinalizacionLaboral.disabled = true;
-            fechaFinalizacionLaboral.value = '';
-        } else {
-            fechaFinalizacionLaboral.disabled = false;
-        }
-    });
-
-    /*sinExperiencia.addEventListener('change', function () {
-        if (sinExperiencia.checked) {
-            empresa.disabled = true;
-            empresa.value = '';
-            tituloEmpresa.disabled = true;
-            tituloEmpresa.value = '';
-            fechaInicioLaboral.disabled = true;
-            fechaInicioLaboral.value = '';
-            fechaFinalizacionLaboral.disabled = true;
-            fechaFinalizacionLaboral.value = '';
-            descripcionRol.disabled = true;
-            descripcionRol.value = '';
-            actualmenteTrabaja.disabled = true;
-            actualmenteTrabaja.checked = false;
-
-        } else {
-            empresa.disabled = false;
-            tituloEmpresa.disabled = false;
-            fechaInicioLaboral.disabled = false;
-            fechaFinalizacionLaboral.disabled = false;
-            descripcionRol.disabled = false;
-            actualmenteTrabaja.disabled = false;
-        }
-    });*/
-
-
-
-}
-
-
 /*Inicio seccion 3*/
 
 function validateImg(event) {
@@ -250,10 +113,140 @@ function mostrarCurriculum(file) {
     }
 }
 
+/*Fin seccion 3 */ 
 
 
-function redirigirCuentaUsuarioNormalSiguiente() {
-    window.location.href = "./login.html";
+async function crearCuentaUsuarioFinal(evento) {
+    evento.preventDefault();
+
+    var nombre = document.getElementById('nombre').value;
+    var apellidos = document.getElementById('apellido').value;
+    var genero = document.getElementById('opcionesGenero').value;
+    var correo = document.getElementById('email').value;
+    var clave = document.getElementById('clave').value;
+    var confirmarClave = document.getElementById('confirmarClave').value;
+
+    var centroEducativo = document.getElementById("centroEducativo").value;
+    var nivelEducativo = document.getElementById("gradoAcademico").value;
+    var fechaInicioAcademica = document.getElementById("fechaInicioAcademica").value;
+    var fechaFinalAcademica = document.getElementById("fechaFinalAcademica").value;
+
+    var empresa = document.getElementById("empresa").value;
+    var tituloEmpresa = document.getElementById("tituloEmpresa").value;
+    var fechaInicioLaboral = document.getElementById("fechaInicioLaboral").value;
+    var fechaFinalizacionLaboral = document.getElementById("fechaFinalizacionLaboral").value;
+    var descripcionRol = document.getElementById("descripcionRol").value;
+
+
+    var fechaActual = new Date();
+    var fechaInicioElegidaAcademica = new Date(fechaInicioAcademica);
+    var fechaInicioElegidaLaboral = new Date(fechaInicioLaboral);
+    var fechaFinalizacionElegidaLaboral = new Date(fechaFinalizacionLaboral);
+    var formularioValido = true;
+
+    if (clave !== confirmarClave) {
+        alert('La clave y la confirmación de clave no coinciden.');
+        formularioValido = false;
+    }
+
+    if (clave.length < 6) {
+        console.log("Entro a validacion de longitud de clave")
+        alert("La contraseña debe tener al menos 6 caracteres");
+        formularioValido = false;
+    }
+
+    if (fechaInicioElegidaAcademica > fechaActual) {
+        alert("La fecha de inicio no puede ser mayor a la fecha actual en la sección de educación");
+        formularioValido = false;
+    }
+
+    if (fechaFinalAcademica < fechaInicioAcademica) {
+        alert("La fecha final no puede ser menor a la fecha de inicio en la sección de educación");
+        formularioValido = false;
+    }
+
+    if (fechaInicioElegidaLaboral > fechaActual) {
+        alert("La fecha de inicio no puede ser mayor a la fecha actual en la sección de experiencia laboral");
+        formularioValido = false;
+    }
+
+    if (fechaFinalizacionElegidaLaboral > fechaActual) {
+        alert("La fecha de finalización no puede ser mayor a la fecha actual en la sección de experiencia laboral");
+        formularioValido = false;
+    }
+
+    if (formularioValido === true) {
+
+        const usuarioFinal = {
+            nombre: nombre,
+            apellidos: apellidos,
+            correo: correo,
+            clave: clave,
+            genero: genero,
+            experiencia: {
+                empresa: empresa,
+                titulo: tituloEmpresa,
+                fechaInicio: fechaInicioLaboral,
+                fechaFin: fechaFinalizacionLaboral,
+                descripcion: descripcionRol
+            },
+            educacion: {
+                nivelEducativo: nivelEducativo,
+                institucion: centroEducativo,
+                fechaInicioEducacion: fechaInicioAcademica,
+                fechaFinEducacion: fechaFinalAcademica,
+            },
+        };
+
+        try {
+            const respuesta = await fetch('http://localhost:3000/registrarUsuarioFinal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(usuarioFinal)
+            });
+
+            const exitoso = await respuesta.json();
+            if (exitoso) {
+                alert('Usuario creado exitosamente');
+                window.location.href = "./login.html";
+            } else {
+                alert('Error al crear usuario');
+            }
+        }
+        catch (error) {
+            console.log('Error:', error);
+            alert('Error al crear usuario');
+        }
+    }
 }
 
-/*Fin seccion 3 */ 
+window.onload = function () {
+    let formulario = document.getElementById('formularioGeneralUsuario');
+    formulario.addEventListener('submit', crearCuentaUsuarioFinal);
+
+    
+    let fechaFinalizacionLaboral = document.getElementById("fechaFinalizacionLaboral");
+    let actualmenteTrabaja = document.getElementById("actualmenteTrabaja");
+    /*let sinExperiencia = document.getElementById("sinExperiencia");*/
+
+    fechaFinalizacionLaboral.addEventListener('input', function () {
+        if (fechaFinalizacionLaboral.value !== '') {
+            actualmenteTrabaja.disabled = true;
+            actualmenteTrabaja.checked = false;
+        } else {
+            actualmenteTrabaja.disabled = false;
+        }
+    });
+
+    actualmenteTrabaja.addEventListener('change', function () {
+        if (actualmenteTrabaja.checked) {
+            fechaFinalizacionLaboral.disabled = true;
+            fechaFinalizacionLaboral.value = '';
+        } else {
+            fechaFinalizacionLaboral.disabled = false;
+        }
+    });
+
+}

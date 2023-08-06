@@ -353,10 +353,24 @@ app.get("/aplicacionesUsuarioFinal", async function (req, res) {
     console.log("Atendiendo solicitud GET /aplicacionesUsuario");
     
     try {
-        const userEmail = req.query.correo;
-        const aplicaciones = await Aplicaciones.find({ correoAplicante: userEmail });   
+        console.log ("Consultando aplicaciones en la base de datos");
+        const aplicaciones = await Aplicaciones.find({ correoAplicante: req.query.correoAplicante });
         console.log ("Aplicaciones:", aplicaciones);
         res.status(200).send(aplicaciones);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.delete("/aplicacionesUsuarioFinal/:id", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /aplicacionesUsuarioFinal/:id");
+
+    try {
+        console.log("Eliminando aplicacion de la base de datos");
+        const aplicacionEliminada = await Aplicaciones.findByIdAndDelete(req.params.id);
+        console.log("Aplicacion eliminada:", aplicacionEliminada);
+        res.status(200).send(aplicacionEliminada);
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);

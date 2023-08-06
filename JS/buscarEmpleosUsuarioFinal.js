@@ -111,51 +111,60 @@ async function botonAplicar(evento) {
       requisitosDeseados: infoEmpleo.requisitosDeseados,
     };
 
-    try {
-      const respuesta = await fetch("http://localhost:3000/aplicacionesUsuarioFinal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datosAplicacion),
-      });
+    // Display a confirmation dialog before sending the application
+    const confirmApply = confirm("¿Estás seguro de que deseas aplicar para este trabajo?");
 
-      if (respuesta.ok) {
-        const aplicacionGuardada = await respuesta.json();
-        console.log(aplicacionGuardada);
-        alert("Aplicación enviada exitosamente");
-
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
-            user: 'rrodriguezmo@ucenfotec.ac.cr',
-            pass: 'tuajxtjtqzihazvw'
-          }
+    if (confirmApply) {
+      try {
+        const respuesta = await fetch("http://localhost:3000/aplicacionesUsuarioFinal", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datosAplicacion),
         });
 
-        const mailOptions = {
-          from: 'rrodriguezmo@ucenfotec.ac.cr',
-          to: 'rrodriguezmo@ucenfotec.ac.cr',
-          subject: 'Notificación de aplicación',
-          text: `Hola ${datosAplicacion.nombreAplicante},\n\nHas aplicado al puesto "${datosAplicacion.nombrePuesto}" exitosamente.`
-        };
+        if (respuesta.ok) {
+          const aplicacionGuardada = await respuesta.json();
+          console.log(aplicacionGuardada);
+          alert("Aplicación enviada exitosamente");
 
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            console.log('Error al enviar el correo de notificación:', error);
-          } else {
-            console.log('Correo de notificación enviado:', info.response);
-          }
-        }); 
-      } else {
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'rrodriguezmo@ucenfotec.ac.cr',
+              pass: 'tuajxtjtqzihazvw'
+            }
+          });
+
+          const mailOptions = {
+            from: 'rrodriguezmo@ucenfotec.ac.cr',
+            to: 'rrodriguezmo@ucenfotec.ac.cr',
+            subject: 'Notificación de aplicación',
+            text: `Hola ${datosAplicacion.nombreAplicante},\n\nHas aplicado al puesto "${datosAplicacion.nombrePuesto}" exitosamente.`
+          };
+
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+          }); 
+        } else {
+          alert("Error al enviar la aplicación");
+        }
+      } catch (error) {
+        console.log("Error:", error);
         alert("Error al enviar la aplicación");
       }
-    } catch (error) {
-      console.log("Error:", error);
-      alert("Error al enviar la aplicación");
+    } else {
+      // User clicked "Cancel," do nothing or show a message
+      alert("Cancelaste la acción de aplicar para este trabajo.");
     }
   }
 };
+
 
 
 window.onload = function () {
