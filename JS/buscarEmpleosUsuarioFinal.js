@@ -24,7 +24,7 @@ async function empresasDropdown() {
 
     const empresasHTML = document.getElementById("nombre");
     empresas.forEach(function (empresa) {
-      const option = `<option value="${empresa._id}">${empresa.nombre}</option>`;
+      const option = `<option value="${empresa.nombre}">${empresa.nombre}</option>`;
       empresasHTML.innerHTML += option;
     });
   } catch (error) {
@@ -33,12 +33,38 @@ async function empresasDropdown() {
   }
 };
 
+let infoEmpleoArray;
+
 // Cambio HTML para que se muestren los empleos con ejemplo de DIV
-async function empleosOverview() {
+async function empleosOverview(nombreEmpresa, rangoSalarialID, requisitosMinimos) {
   try {
-    const respuestaEmpleos = await fetch("http://localhost:3000/empleosOverview");
+
+    let url = "http://localhost:3000/empleosOverview?";
+    if (nombreEmpresa) {
+      url += `nombreEmpresa=${nombreEmpresa}&`;
+      console.log(url);
+    }
+    if (rangoSalarialID) {
+      url += `rangoSalarialID=${rangoSalarialID}&`;
+      console.log(url);
+    }
+    if (requisitosMinimos) {
+      url += `requisitosMinimos=${requisitosMinimos}&`;
+      console.log(url);
+    }
+
+    const respuestaEmpleos = await fetch(url);
     const empleos = await respuestaEmpleos.json();
     console.log(empleos);
+
+    infoEmpleoArray = empleos.map((empleo) => {
+      return {
+        jobId: empleo._id,
+        nombrePuesto: empleo.titulo,
+        requisitosMinimos: empleo.requisitosMinimos,
+        requisitosDeseados: empleo.requisitosDeseados,
+      };
+    });
 
     const empleosHTML = document.getElementById("puestos-overview");
     let i = 0;
@@ -48,19 +74,90 @@ async function empleosOverview() {
                 <h2>${empleo.titulo}</h2>
                 <h3>Rango Salarial: ${empleo.rangoSalarial}</h3>
                 <h3>Empresa: ${empleo.empresa}</h3>
+                <div class="seccion-puesto-info">
+                    <h4>Requisitos Mínimos</h4>
+                    <p>${empleo.requisitosMinimos}</p>
+                    <h4>Requisitos Deseados</h4>
+                    <p>${empleo.requisitosDeseados}</p>
+                </div>
+                <div class="seccion-aplicar-boton">
+                    <button type="submit" data-job-index="${i}" id="aplicar${i}">Aplicar</button>
+                </div>
             </div>
             `;
       empleosHTML.innerHTML += div;
       i += 1;
     });
+
+    empleosHTML.addEventListener("click", function (evento) {
+      botonAplicar(evento, infoEmpleoArray);
+    });
+
   } catch (error) {
     console.log("Error:", error);
     alert("Error al cargar los empleos");
   }
 };
 
+async function botonAplicar(evento) {
+  if (evento.target.tagName === "BUTTON" && evento.target.id.startsWith("aplicar")) {
+    const button = evento.target;
+    const jobIndex = button.getAttribute("data-job-index");
+
+    const infoEmpleo = infoEmpleoArray[jobIndex];
+
+    const datosAplicacion = {
+      nombrePuesto: infoEmpleo.nombrePuesto,
+      nombreAplicante: localStorage.getItem("userName"),
+      correoAplicante: localStorage.getItem("userEmail"),
+      estadoAplicacion: "Enviada",
+      requisitosMinimos: infoEmpleo.requisitosMinimos,
+      requisitosDeseados: infoEmpleo.requisitosDeseados,
+    };
+
+    try {
+      const respuesta = await fetch("http://localhost:3000/aplicacionesUsuarioFinal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datosAplicacion),
+      });
+
+      if (respuesta.ok) {
+        const aplicacionGuardada = await respuesta.json();
+        console.log(aplicacionGuardada);
+        alert("Aplicación enviada exitosamente");
+      } else {
+        alert("Error al enviar la aplicación");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      alert("Error al enviar la aplicación");
+    }
+  }
+};
+
+
 window.onload = function () {
   rangosSalarialesDropdown();
   empresasDropdown();
   empleosOverview();
+
+  const filtrarButton = document.getElementById("filtrar");
+  filtrarButton.addEventListener("click", async function (evento) {
+    evento.preventDefault();
+    
+    const nombreEmpresa = document.getElementById("nombre").value;
+    const rangoSalarialID = document.getElementById("rango-salarial").value;
+    const requisitosMinimos = document.getElementById("requisitos").value;
+
+    const empleosHTML = document.getElementById("puestos-overview");
+    empleosHTML.innerHTML = "";
+
+    empleosHTML.removeEventListener("click", botonAplicar);
+
+    empleosOverview(nombreEmpresa, rangoSalarialID, requisitosMinimos);
+  });
+
 };

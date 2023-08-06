@@ -8,7 +8,7 @@ const EmpleosModel = require("./models/empleos");
 const AdminsModel = require("./models/usuarioAdmin");
 const GenerosModel = require("./models/genero");
 const UsuarioColaboradorModel = require("./models/usuarioColaborador");
-const EstadoAplicaciones = require("./models/estadoAplicaciones");
+const Aplicaciones = require("./models/aplicaciones");
 const UsuarioFinalModel = require("./models/usuarioFinal");
 
 // Configuración
@@ -84,6 +84,7 @@ app.post("/empleos", async function (req, res) {
         empresa: req.body.empresa,
         titulo: req.body.titulo,
         visibilidad: req.body.visibilidad,
+        rangoSalarialID: req.body.rangoSalarialID,
         rangoSalarial: req.body.rangoSalarial,
         requisitosMinimos: req.body.requisitosMinimos,
         requisitosDeseados: req.body.requisitosDeseados
@@ -161,7 +162,25 @@ app.get("/empleosOverview", async function (req, res) {
 
     try {
         console.log ("Consultando empleos en la base de datos");
-        const empleos = await EmpleosModel.find({ visibilidad: 'Pública' }, { empresa: 1, titulo: 1, rangoSalarial: 1 });
+
+        const query = { visibilidad: 'Pública' };
+
+        if (req.query.nombreEmpresa) {
+            query.empresa = req.query.nombreEmpresa;
+            console.log("Query:", query);
+        }
+
+        if (req.query.rangoSalarialID) {
+            query.rangoSalarialID = req.query.rangoSalarialID;
+            console.log("Query:", query);
+        }
+
+        if (req.query.requisitosMinimos) {
+            query.requisitosMinimos = req.query.requisitosMinimos;
+            console.log("Query:", query);
+        }
+        
+        const empleos = await EmpleosModel.find(query);
         console.log ("Empleos:", empleos);
         res.status(200).send(empleos);
 
@@ -336,8 +355,10 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
 
 app.get("/aplicacionesUsuarioFinal", async function (req, res) {
     console.log("Atendiendo solicitud GET /aplicacionesUsuario");
+    
     try {
-        const aplicaciones = await EstadoAplicaciones.find({});
+        const userEmail = req.query.correo;
+        const aplicaciones = await Aplicaciones.find({ correoAplicante: userEmail });   
         console.log ("Aplicaciones:", aplicaciones);
         res.status(200).send(aplicaciones);
     } catch (error) {
@@ -354,13 +375,11 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
         return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
     }
 
-    const aplicacion = EstadoAplicaciones({
-        id: req.body.id,
+    const aplicacion = Aplicaciones({
         nombrePuesto: req.body.nombrePuesto,
         nombreAplicante: req.body.nombreAplicante,
         correoAplicante: req.body.correoAplicante,
         estadoAplicacion: req.body.estadoAplicacion,
-        fechaPostulacion: req.body.fechaPostulacion,
         requisitosMinimos: req.body.requisitosMinimos,
         requisitosDeseados: req.body.requisitosDeseados
     });
@@ -372,9 +391,10 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
         res.status(201).send(aplicacionGuardada);
     } catch (error) {
         console.log("Error:", error);
-        res.status(500).send(error);   
+        res.status(500).send(error);
     }
 });
+
 
 app.get('/datosPerfilEmpresa', async function (req, res){
     console.log("Atendiendo solicitud GET /datosPerfilEmpresa");
