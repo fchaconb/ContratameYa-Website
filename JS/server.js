@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const nodemailer = require("nodemailer");
 
 // Modelos
 const RangosSalarialesModel = require("./models/rangosSalariales");

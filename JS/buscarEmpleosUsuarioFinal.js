@@ -124,6 +124,29 @@ async function botonAplicar(evento) {
         const aplicacionGuardada = await respuesta.json();
         console.log(aplicacionGuardada);
         alert("Aplicación enviada exitosamente");
+
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'rrodriguezmo@ucenfotec.ac.cr',
+            pass: 'tuajxtjtqzihazvw'
+          }
+        });
+
+        const mailOptions = {
+          from: 'rrodriguezmo@ucenfotec.ac.cr',
+          to: 'rrodriguezmo@ucenfotec.ac.cr',
+          subject: 'Notificación de aplicación',
+          text: `Hola ${datosAplicacion.nombreAplicante},\n\nHas aplicado al puesto "${datosAplicacion.nombrePuesto}" exitosamente.`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log('Error al enviar el correo de notificación:', error);
+          } else {
+            console.log('Correo de notificación enviado:', info.response);
+          }
+        }); 
       } else {
         alert("Error al enviar la aplicación");
       }
@@ -136,6 +159,7 @@ async function botonAplicar(evento) {
 
 
 window.onload = function () {
+
   rangosSalarialesDropdown();
   empresasDropdown();
   empleosOverview();
