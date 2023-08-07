@@ -129,28 +129,21 @@ async function botonAplicar(evento) {
           console.log(aplicacionGuardada);
           alert("Aplicación enviada exitosamente");
 
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'rrodriguezmo@ucenfotec.ac.cr',
-              pass: 'tuajxtjtqzihazvw'
-            }
-          });
-
-          const mailOptions = {
-            from: 'rrodriguezmo@ucenfotec.ac.cr',
-            to: 'rrodriguezmo@ucenfotec.ac.cr',
-            subject: 'Notificación de aplicación',
-            text: `Hola ${datosAplicacion.nombreAplicante},\n\nHas aplicado al puesto "${datosAplicacion.nombrePuesto}" exitosamente.`
+          // Post to "notificaciones" endpoint with relevant information
+          const notificacionData = {
+            correoRecipiente: datosAplicacion.correoAplicante,
+            titulo: "Nueva Aplicación",
+            mensaje: `Se ha aplicado al puesto "${datosAplicacion.nombrePuesto}" exitosamente.`,
           };
 
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              console.log('Error al enviar el correo de notificación:', error);
-            } else {
-              console.log('Correo de notificación enviado:', info.response);
-            }
-          }); 
+          await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionData),
+          });
+
         } else {
           alert("Error al enviar la aplicación");
         }
@@ -164,6 +157,7 @@ async function botonAplicar(evento) {
     }
   }
 };
+
 
 
 

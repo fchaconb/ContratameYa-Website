@@ -11,11 +11,21 @@ const GenerosModel = require("./models/genero");
 const UsuarioColaboradorModel = require("./models/usuarioColaborador");
 const Aplicaciones = require("./models/aplicaciones");
 const UsuarioFinalModel = require("./models/usuarioFinal");
+const Notificaciones = require("./models/notificaciones");
 
 // Configuración
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'contratame.ya.trabajos@gmail.com',
+      pass: 'xdxearacnncfyfpb'
+    }
+});
+
 
 // Conexión a la base de datos
 mongoose.connect("mongodb+srv://admin:Q9lvp68kolzGS7dB@cluster0.pzmtrxf.mongodb.net/?retryWrites=true&w=majority");
@@ -399,6 +409,22 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
         const aplicacionGuardada = await aplicacion.save();
         console.log("Aplicacion guardada:", aplicacionGuardada);
         res.status(201).send(aplicacionGuardada);
+
+        const mailOptions = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correoAplicante,
+            subject: 'Notificación de aplicación',
+            text: `Hola ${req.body.nombreAplicante},\n\nHas aplicado al puesto "${req.body.nombrePuesto}" exitosamente.`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
@@ -447,6 +473,59 @@ app.put('/editarPerfilEmpresa', async function (req, res){
     }
 });
 
+app.get("/notificaciones", async function (req, res) {
+    console.log("Atendiendo solicitud GET /notificaciones");
+
+    try {
+        console.log ("Consultando notificaciones en la base de datos");
+        const notificaciones = await Notificaciones.find({ correoRecipiente: req.query.correoRecipiente });
+        console.log ("Notificaciones:", notificaciones);
+        res.status(200).send(notificaciones);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.post("/notificaciones", async function (req, res) {
+    console.log("Atendiendo solicitud POST /notificaciones");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const notificacion = Notificaciones({
+        correoRecipiente: req.body.correoRecipiente,
+        titulo: req.body.titulo,
+        mensaje: req.body.mensaje
+    });
+
+    try {
+        console.log("Guardando notificacion en la base de datos");
+        const notificacionGuardada = await notificacion.save();
+        console.log("Notificacion guardada:", notificacionGuardada);
+        res.status(201).send(notificacionGuardada);
+
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.delete("/notificaciones/:id", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /notificaciones/:id");
+
+    try {
+        console.log("Eliminando notificacion de la base de datos");
+        const notificacionEliminada = await Notificaciones.findByIdAndDelete(req.params.id);
+        console.log("Notificacion eliminada:", notificacionEliminada);
+        res.status(200).send(notificacionEliminada);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
 
 // Iniciar servidor
 
