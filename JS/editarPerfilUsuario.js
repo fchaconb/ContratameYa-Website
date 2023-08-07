@@ -107,53 +107,92 @@ function previewCV(file) {
   reader.readAsDataURL(file);
 }
 
-async function generosDropdown() {
-  try {
-    const respuestaGeneros = await fetch("http://localhost:3000/generosEditarPerfil");
-    const generos = await respuestaGeneros.json();
-    console.log(generos);
+async function cargarDatosPerfil() {
+  const userEmail = localStorage.getItem("userEmail");
 
-    const generosHTML = document.getElementById("genero");
-    generos.forEach(function (genero) {
-      const option = 
-      `
-      <option value="${genero.id}">${genero.genero}</option>
-      `;
-      generosHTML.innerHTML += option;
-    });
+  try {
+    const respuestaUsuario = await fetch(`http://localhost:3000/datosUsuarioFinal?correo=${userEmail}`);
+    const usuario = await respuestaUsuario.json();
+    console.log(usuario);
+
+    document.getElementById("nombre").value = usuario.nombre;
+    document.getElementById("apellidos").value = usuario.apellidos;
+    document.getElementById("correo").value = usuario.correo;
+    document.getElementById("genero").value = usuario.genero;
+
+    document.getElementById("tituloExperiencia").value = usuario.experiencia.titulo;
+    document.getElementById("empresa").value = usuario.experiencia.empresa;
+    document.getElementById("fechaInicioExperiencia").value = (usuario.experiencia.fechaInicio.split("T")[0]);
+
+    if (usuario.experiencia.fechaFin == null) {
+      document.getElementById("fechaFinExperiencia").value = new Date().toISOString().split("T")[0];
+    } else {
+      document.getElementById("fechaFinExperiencia").value = (usuario.experiencia.fechaFin.split("T")[0]);
+    }
+    document.getElementById("descripcionTrabajo").value = usuario.experiencia.descripcion;
+
+
+    document.getElementById("education").value = usuario.educacion.nivelEducativo;
+    document.getElementById("institucion").value = usuario.educacion.institucion;
+    document.getElementById("fechaInicioEducacion").value = (usuario.educacion.fechaInicioEducacion.split("T")[0]);
+
+    if (usuario.educacion.fechaFinEducacion == null) {
+      document.getElementById("fechaFinalEducacion").value = new Date().toISOString().split("T")[0];
+    } else {
+      document.getElementById("fechaFinalEducacion").value = (usuario.educacion.fechaFinEducacion.split("T")[0]);
+    }
+
+    document.getElementById("descripcionEducacion").value = usuario.educacion.descripcionEducacion;
+
   } catch (error) {
     console.log("Error:", error);
-    alert("Error al cargar los generos");
-  }
+    alert("Error al cargar los datos del usuario");
+  }    
 }
 
-/*function validarDatos(evento) {
+
+
+async function editarPerfil(evento) {
   evento.preventDefault();
-  var clave = document.getElementById('password1').value;
-  var confirmarClave = document.getElementById('password2').value;
-  var formularioValido = true;
 
-  if (clave !== confirmarClave) {
-      alert('La clave y la confirmación de clave no coinciden.');
-      formularioValido = false;
-  }
+  var nombre = document.getElementById("nombre").value;
+  var apellidos = document.getElementById("apellidos").value;
+  var correo = document.getElementById("correo").value;
+  var genero = document.getElementById("genero").value;
+  var clave = document.getElementById("password1").value;
+  var clave2 = document.getElementById("password2").value;
 
-  if (clave.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres");
-      formularioValido = false;
-  }
+  
 
-  if (formularioValido === true) {
 
-      //debe dejar guardar perfil, y preguntar que sucede cuando se le da click a guardar perfil para ponerlo dentro de este condicional
-
-  }
-
-}*/
+}
 
 
 window.onload = function () {
-  generosDropdown();
-  /*let formulario = document.getElementById('formularioEditarUsuarioFinal');
-  formulario.addEventListener('submit', validarDatos);*/
+  cargarDatosPerfil();
+
+  let form = document.getElementById("formularioEditarUsuarioFinal");
+  form.addEventListener("submit", editarPerfil);
+
+  let fechaFinalizacionLaboral = document.getElementById("fechaFinExperiencia");
+  let posicionActual = document.getElementById("posicionActual");
+  fechaFinalizacionLaboral.addEventListener("input", function () {
+    if (fechaFinalizacionLaboral.value !== "") {
+      document.getElementById("posicionActual").disabled = true;
+      document.getElementById("posicionActual").checked = false;
+    } else {
+      document.getElementById("posicionActual").disabled = false;
+    }
+  });
+
+  posicionActual.addEventListener("change", function () {
+    if (posicionActual.checked) {
+      document.getElementById("fechaFinExperiencia").disabled = true;
+      document.getElementById("fechaFinExperiencia").value = "";
+    } else {
+      document.getElementById("fechaFinExperiencia").disabled = false;
+    }
+  });
+
+
 }
