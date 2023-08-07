@@ -66,6 +66,24 @@ async function botonEliminar(evento, aplicaciones) {
                 console.log(data);
                 alert("Se ha retirado la postulación");
                 window.location.href = "aplicacionesUsuarioFinal.html";
+
+                if (respuesta.ok) {
+                    const notificacionData = {
+                        correoRecipiente: aplicacion.correoAplicante,
+                        titulo: "Postulación Retirada",
+                        mensaje: `Se ha retirado la postulación al puesto "${aplicacion.nombrePuesto}".`,
+                    };
+
+                    await fetch("http://localhost:3000/notificaciones", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(notificacionData),
+                    });
+                } else {
+                    alert("Error al retirar la postulación");
+                }
             } catch (error) {
                 console.log("Error:", error);
                 alert("Error al retirar la postulación");

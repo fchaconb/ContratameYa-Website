@@ -364,7 +364,7 @@ app.get("/aplicacionesUsuarioFinal", async function (req, res) {
     
     try {
         console.log ("Consultando aplicaciones en la base de datos");
-        const aplicaciones = await Aplicaciones.find({ correoAplicante: req.query.correoAplicante });
+        const aplicaciones = (await Aplicaciones.find({ correoAplicante: req.query.correoAplicante })).reverse();
         console.log ("Aplicaciones:", aplicaciones);
         res.status(200).send(aplicaciones);
     } catch (error) {
@@ -478,7 +478,7 @@ app.get("/notificaciones", async function (req, res) {
 
     try {
         console.log ("Consultando notificaciones en la base de datos");
-        const notificaciones = await Notificaciones.find({ correoRecipiente: req.query.correoRecipiente });
+        const notificaciones = (await Notificaciones.find({ correoRecipiente: req.query.correoRecipiente })).reverse();
         console.log ("Notificaciones:", notificaciones);
         res.status(200).send(notificaciones);
     } catch (error) {
