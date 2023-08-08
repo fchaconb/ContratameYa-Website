@@ -84,6 +84,9 @@ async function actualizarDatosEmpresa() {
       descripcion: descripcion
     };
 
+    const confirmEdit = confirm("¿Estás seguro que deseas actualizar tus datos?");
+
+    if (confirmEdit) {
     try {
       const respuesta = await fetch("http://localhost:3000/editarPerfilEmpresa", {
         method: "PUT",
@@ -99,7 +102,10 @@ async function actualizarDatosEmpresa() {
     } catch (error) {
       console.log("Error:", error);
     }
+  } else {
+    alert("Cancelaste la acción de actualizar tus datos.");
   }
+}
 }
 
 // Ejecutar la función al cargar la página
