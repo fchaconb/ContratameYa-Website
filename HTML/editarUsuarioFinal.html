@@ -123,13 +123,7 @@
             <div class="contenedor-perfil">
               <div class="perfil">
                 <label for="nombre"> Nombre</label>
-                <input
-                  type="text"
-                  name="nombre"
-                  id="nombre"
-                  value="John"
-                  required
-                />
+                <input type="text" name="nombre" id="nombre" required />
               </div>
               <div class="perfil">
                 <label for="password1">Contraseña</label>
@@ -143,13 +137,7 @@
 
               <div class="perfil">
                 <label for="apellidos"> Apellidos</label>
-                <input
-                  type="text"
-                  name="apellidos"
-                  id="apellidos"
-                  value="Doe Doe"
-                  required
-                />
+                <input type="text" name="apellidos" id="apellidos" required />
               </div>
 
               <div class="perfil">
@@ -164,21 +152,16 @@
 
               <div class="perfil">
                 <label for="correo">Correo</label>
-                <input
-                  type="email"
-                  name="correo"
-                  id="correo"
-                  value="jdoe@example.com"
-                  readonly
-                />
+                <input type="email" name="correo" id="correo" readonly />
               </div>
 
               <div class="perfil">
                 <label for="genero">Género</label>
                 <select name="genero" id="genero" required>
-                  <option value="generoDefault" selected disabled>
-                    Seleccion Género
-                  </option>
+                  <option value="selected" disabled>Seleccion Género</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                  <option value="No Especifica">Prefiero no especificar</option>
                 </select>
               </div>
             </div>
@@ -215,7 +198,6 @@
                     type="date"
                     name="fechaFinExperiencia"
                     id="fechaFinExperiencia"
-                    required
                   />
                 </div>
               </div>
@@ -236,7 +218,6 @@
                   id="descripcionTrabajo"
                   cols="30"
                   rows="10"
-                  required
                   overflow="auto"
                 ></textarea>
               </div>
@@ -256,7 +237,7 @@
                 <div class="perfil">
                   <label for="education">Nivel educativo:</label>
                   <select id="education" name="education" required>
-                    <option value="" selected disabled>
+                    <option value="" disabled selected>
                       Seleccionar nivel educativo
                     </option>
                     <option value="primaria">Educación primaria</option>
@@ -295,16 +276,6 @@
                   />
                 </div>
               </div>
-              <div class="btn-posicion">
-                <button
-                  id="estudioActual"
-                  class="btn-posicion-actual"
-                  type="button"
-                >
-                  Estudio Actual
-                </button>
-              </div>
-
               <div class="experiencia">
                 <label for="descripcion">Descripción</label>
                 <textarea
@@ -312,7 +283,6 @@
                   id="descripcionEducacion"
                   cols="30"
                   rows="10"
-                  required
                   overflow="auto"
                 ></textarea>
               </div>

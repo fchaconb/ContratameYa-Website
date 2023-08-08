@@ -318,6 +318,23 @@ app.post("/registrarUsuarioColaborador", async function (req, res) {
     }
 });
 
+app.get("/datosUsuarioFinal", async function (req, res){
+    console.log("Atendiendo solicitud GET /datosUsuarioFinal");
+
+    try {
+        const userEmail = req.query.correo;
+        console.log('Consultando informacion del usuario final ' + userEmail + 'en la base de datos');
+        const usuariosFinales = await UsuarioFinalModel.findOne({ correo: userEmail }, { nombre: 1, apellidos: 1, correo: 1, genero: 1, experiencia: 1, educacion: 1 });
+        console.log('Usuarios finales:', usuariosFinales);
+        res.status(200).send(usuariosFinales);
+
+    } catch (error) {
+        console.log('Error:', error);
+        res.status(500).send(error);
+    }
+});
+
+
 app.post("/registrarUsuarioFinal", async function (req, res) {
     console.log("Atendiendo solicitud POST /registrarUsuarioFinal");
 
@@ -353,6 +370,47 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
         const usuarioFinalGuardado = await usuarioFinal.save();
         console.log("Usuario final guardado:", usuarioFinalGuardado);
         res.status(201).send(usuarioFinalGuardado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.put('/editarPerfilUsuarioFinal', async function (req, res){
+    console.log("Atendiendo solicitud PUT /editarPerfilUsuarioFinal");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const usuarioFinal = {
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        clave: req.body.clave,
+        correo: req.body.correo,
+        genero: req.body.genero,
+        experiencia: {
+            empresa: req.body.experiencia.empresa,
+            titulo: req.body.experiencia.titulo,
+            fechaInicio: req.body.experiencia.fechaInicio,
+            fechaFin: req.body.experiencia.fechaFin,
+            descripcion: req.body.experiencia.descripcion
+        },
+        educacion: {
+            nivelEducativo: req.body.educacion.nivelEducativo,
+            institucion: req.body.educacion.institucion,
+            fechaInicioEducacion: req.body.educacion.fechaInicioEducacion,
+            fechaFinEducacion: req.body.educacion.fechaFinEducacion,
+            descripcionEducacion: req.body.educacion.descripcionEducacion
+        },
+    };
+
+    try {
+        console.log("Actualizando usuario final en la base de datos");
+        const usuarioFinalActualizado = await UsuarioFinalModel.findOneAndUpdate({ correo: usuarioFinal.correo }, usuarioFinal, { new: true });
+        console.log("Usuario final actualizado:", usuarioFinalActualizado);
+        res.status(201).send(usuarioFinalActualizado);
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
