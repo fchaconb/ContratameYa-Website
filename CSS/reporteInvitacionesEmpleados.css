@@ -4,9 +4,9 @@
     font-size: 20px;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 30px;  
+    margin-bottom: 30px;
 }
-  
+
 .titulo-link {
     display: flex;
     align-items: center;
@@ -29,6 +29,7 @@ html {
     flex-direction: column;
     align-items: center;
 }
+
 .contenedor-general {
     display: flex;
     flex-flow: column;
@@ -85,7 +86,7 @@ html {
     background-size: 100% 100%;
     background-position: center;
     background: conic-gradient(rgb(214, 173, 236) 40%,
-            rgb(14, 14, 14) 40% 60%,
+            rgb(173, 236, 204) 40% 60%,
             rgb(246, 243, 244) 60%);
     border-radius: 50%
 }
@@ -103,15 +104,16 @@ textarea {
     margin-left: 4rem;
 
     font-family: 'Sarabun', sans-serif;
-    color: #808080; /* Color gris */
-    margin-top: 0.5rem; 
-    margin-bottom: 1rem; 
+    color: #808080;
+    /* Color gris */
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
     overflow: auto;
 }
 
 
 ::placeholder {
-    font-family: 'Sarabun', sans-serif; 
+    font-family: 'Sarabun', sans-serif;
 }
 
 .legend {
@@ -138,7 +140,7 @@ textarea {
 }
 
 .black {
-    background-color: #000000;
+    background-color: #ADDECB;
 }
 
 .white {
@@ -149,4 +151,21 @@ textarea {
     background-color: #d6aded;
 }
 
-/*BREAKPOINT
+.dataSpace {
+    padding-bottom: 5px;
+    width: 100px;
+}
+
+.cajaData {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10%;
+}
+
+.tabla {
+    /* height: 100%; */
+    width: 1000px;
+    padding: 15px;
+    border-spacing: 1em;
+
+}
