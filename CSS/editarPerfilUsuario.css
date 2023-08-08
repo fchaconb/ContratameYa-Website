@@ -254,6 +254,8 @@ h2 {
     justify-content: flex-end;
     align-items: center;
     margin-right: 120px;
+    gap: 10px;
+
 }
 .btn-posicion-actual {
     width: 150px;
@@ -284,4 +286,15 @@ h2 {
     opacity: 1; 
     border: none; 
     border-radius: 4px; 
+}
+
+
+.checkbox-posicion-actual + label {
+    cursor: pointer;
+}
+
+.checkbox-posicion-actual:checked + label::before {
+    font-size: 18px;
+    color: green;
+    margin-right: 5px;
 }
