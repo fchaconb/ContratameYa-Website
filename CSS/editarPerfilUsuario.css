@@ -62,7 +62,7 @@
 .experiencia {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     justify-content: center;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .experiencia textarea {
-    max-width: 800px; 
+    width: 800px; 
     height: 150px; 
     padding: 16px; 
     font-size: 16px; 
@@ -222,7 +222,7 @@ select option {
     padding-bottom: 7px; 
     padding-left: 12px; 
     padding-right: 12px; 
-    max-width: 800px; 
+    max-width: 1150px; 
     height: 650px; 
     background: #27346924; /* tertiary2-500 */
     border-radius: 0px; 
@@ -252,8 +252,9 @@ h2 {
 .btn-posicion {
     display: flex;
     justify-content: flex-end;
+    align-self: flex-end;
     align-items: center;
-    margin-right: 120px;
+    margin-right: 150px;
     gap: 10px;
 
 }
@@ -297,4 +298,12 @@ h2 {
     font-size: 18px;
     color: green;
     margin-right: 5px;
+}
+
+.contenedor-exp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
