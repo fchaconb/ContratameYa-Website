@@ -168,46 +168,48 @@
           </section>
           <section>
             <div class="overlay">
-              <h2>Experiencia</h2>
-              <div class="contenedor-experiencia">
-                <div class="perfil">
-                  <label for="tituloExperiencia">Título</label>
+              <div class="contenedor-exp">
+                <h2>Experiencia</h2>
+                <div class="contenedor-experiencia">
+                  <div class="perfil">
+                    <label for="tituloExperiencia">Título</label>
+                    <input
+                      type="text"
+                      name="tituloExperiencia"
+                      id="tituloExperiencia"
+                      required
+                    />
+                  </div>
+                  <div class="perfil">
+                    <label for="fechaInicio">Fecha de Inicio</label>
+                    <input
+                      type="date"
+                      name="fechaInicioExperiencia"
+                      id="fechaInicioExperiencia"
+                      required
+                    />
+                  </div>
+                  <div class="perfil">
+                    <label for="empresa">Empresa</label>
+                    <input type="text" name="empresa" id="empresa" required />
+                  </div>
+                  <div class="perfil">
+                    <label for="fechaFinal">Fecha de Finalización</label>
+                    <input
+                      type="date"
+                      name="fechaFinExperiencia"
+                      id="fechaFinExperiencia"
+                    />
+                  </div>
+                </div>
+                <div class="btn-posicion">
                   <input
-                    type="text"
-                    name="tituloExperiencia"
-                    id="tituloExperiencia"
-                    required
+                    id="posicionActual"
+                    class="checkbox-posicion-actual"
+                    type="checkbox"
                   />
+                  <label for="posicionActual">Posición Actual</label>
                 </div>
-                <div class="perfil">
-                  <label for="fechaInicio">Fecha de Inicio</label>
-                  <input
-                    type="date"
-                    name="fechaInicioExperiencia"
-                    id="fechaInicioExperiencia"
-                    required
-                  />
-                </div>
-                <div class="perfil">
-                  <label for="empresa">Empresa</label>
-                  <input type="text" name="empresa" id="empresa" required />
-                </div>
-                <div class="perfil">
-                  <label for="fechaFinal">Fecha de Finalización</label>
-                  <input
-                    type="date"
-                    name="fechaFinExperiencia"
-                    id="fechaFinExperiencia"
-                  />
-                </div>
-              </div>
-              <div class="btn-posicion">
-                <input
-                  id="posicionActual"
-                  class="checkbox-posicion-actual"
-                  type="checkbox"
-                />
-                <label for="posicionActual">Posición Actual</label>
               </div>
 
               <div class="experiencia">
@@ -232,64 +234,66 @@
           <section>
             <div class="overlay">
               <h2>Educación</h2>
-              <div class="contenedor-experiencia">
-                <div class="perfil">
-                  <label for="education">Nivel educativo:</label>
-                  <select id="education" name="education" required>
-                    <option value="" disabled selected>
-                      Seleccionar nivel educativo
-                    </option>
-                    <option value="primaria">Educación primaria</option>
-                    <option value="secundaria">Educación secundaria</option>
-                    <option value="bachillerato">Bachillerato</option>
-                    <option value="licenciatura">Licenciatura</option>
-                    <option value="maestria">Maestría</option>
-                    <option value="doctorado">Doctorado</option>
-                  </select>
+              <div class="contenedor-exp">
+                <div class="contenedor-experiencia">
+                  <div class="perfil">
+                    <label for="education">Nivel educativo:</label>
+                    <select id="education" name="education" required>
+                      <option value="" disabled selected>
+                        Seleccionar nivel educativo
+                      </option>
+                      <option value="primaria">Educación primaria</option>
+                      <option value="secundaria">Educación secundaria</option>
+                      <option value="bachillerato">Bachillerato</option>
+                      <option value="licenciatura">Licenciatura</option>
+                      <option value="maestria">Maestría</option>
+                      <option value="doctorado">Doctorado</option>
+                    </select>
+                  </div>
+                  <div class="perfil">
+                    <label for="fechaInicio">Fecha de Inicio</label>
+                    <input
+                      type="date"
+                      name="fechaInicioEducacion"
+                      id="fechaInicioEducacion"
+                      required
+                    />
+                  </div>
+                  <div class="perfil">
+                    <label for="institucion">Institución</label>
+                    <input
+                      type="text"
+                      name="institucion"
+                      id="institucion"
+                      required
+                    />
+                  </div>
+                  <div class="perfil">
+                    <label for="fechaFinal">Fecha de Finalización</label>
+                    <input
+                      type="date"
+                      name="fechaFinalEducacion"
+                      id="fechaFinalEducacion"
+                      required
+                    />
+                  </div>
                 </div>
-                <div class="perfil">
-                  <label for="fechaInicio">Fecha de Inicio</label>
-                  <input
-                    type="date"
-                    name="fechaInicioEducacion"
-                    id="fechaInicioEducacion"
-                    required
-                  />
+                <div class="experiencia">
+                  <label for="descripcion">Descripción</label>
+                  <textarea
+                    name="descripcion"
+                    id="descripcionEducacion"
+                    cols="30"
+                    rows="10"
+                    overflow="auto"
+                  ></textarea>
                 </div>
-                <div class="perfil">
-                  <label for="institucion">Institución</label>
-                  <input
-                    type="text"
-                    name="institucion"
-                    id="institucion"
-                    required
-                  />
-                </div>
-                <div class="perfil">
-                  <label for="fechaFinal">Fecha de Finalización</label>
-                  <input
-                    type="date"
-                    name="fechaFinalEducacion"
-                    id="fechaFinalEducacion"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="experiencia">
-                <label for="descripcion">Descripción</label>
-                <textarea
-                  name="descripcion"
-                  id="descripcionEducacion"
-                  cols="30"
-                  rows="10"
-                  overflow="auto"
-                ></textarea>
-              </div>
 
-              <div class="btn-agregar">
-                <button class="btn-agregar-style" id="agregarEducacion">
-                  Agregar Educación
-                </button>
+                <div class="btn-agregar">
+                  <button class="btn-agregar-style" id="agregarEducacion">
+                    Agregar Educación
+                  </button>
+                </div>
               </div>
             </div>
 

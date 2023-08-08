@@ -68,7 +68,7 @@
         </div>
       </section>
       <section>
-        <form>
+        <form id="editarPerfilColaborador">
           <div class="contenedor-foto-perfil">
             <div class="foto-perfil">
               <label for="fotoPerfil">Foto de Perfil</label>
@@ -92,13 +92,7 @@
           <div class="contenedor-perfil">
             <div class="perfil">
               <label for="nombre"> Nombre</label>
-              <input
-                type="text"
-                name="nombre"
-                id="nombre"
-                value="John"
-                required
-              />
+              <input type="text" name="nombre" id="nombre" required />
             </div>
             <div class="perfil">
               <label for="password1">Contraseña</label>
@@ -107,13 +101,7 @@
 
             <div class="perfil">
               <label for="apellidos"> Apellidos</label>
-              <input
-                type="text"
-                name="apellidos"
-                id="apellidos"
-                value="Doe Doe"
-                required
-              />
+              <input type="text" name="apellidos" id="apellidos" required />
             </div>
 
             <div class="perfil">
@@ -123,27 +111,21 @@
 
             <div class="perfil">
               <label for="correo">Correo</label>
-              <input
-                type="email"
-                name="correo"
-                id="correo"
-                value="jdoe@example.com"
-                readonly
-              />
+              <input type="email" name="correo" id="correo" readonly />
             </div>
 
             <div class="perfil">
               <label for="genero">Genero</label>
               <select name="genero" id="genero" required>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="no-especifica">Prefiero no especificar</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="No Especifica">Prefiero no especificar</option>
               </select>
             </div>
 
             <div class="perfil">
               <label for="rol">Rol</label>
-              <input type="text" name="rol" id="rol" value="Gerente" readonly />
+              <input type="text" name="rol" id="rol" readonly />
             </div>
           </div>
           <div class="botones-perfil">

@@ -585,6 +585,49 @@ app.delete("/notificaciones/:id", async function (req, res) {
     }
 });
 
+app.get('/datosPerfilColaborador', async function (req, res){
+    console.log("Atendiendo solicitud GET /datosPerfilColaborador");
+
+    try {
+        const userEmail = req.query.correo;
+        console.log('Consultando informacion del colaborador ' + userEmail + 'en la base de datos');
+        const colaboradores = await UsuarioColaboradorModel.findOne({ correo: userEmail }, { nombre: 1, apellidos: 1, correo: 1, genero: 1, rol: 1 });
+        console.log('Colaboradores:', colaboradores);
+        res.status(200).send(colaboradores);
+    } catch (error) {
+        console.log('Error:', error);
+        res.status(500).send(error);
+    }
+}); 
+
+app.put('/editarPerfilColaborador', async function (req, res){
+    console.log("Atendiendo solicitud PUT /editarPerfilColaborador");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const colaborador = {
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        correo: req.body.correo,
+        rol: req.body.rol,
+        genero: req.body.genero,
+        contrasena: req.body.contrasena
+    };
+
+    try {
+        console.log("Actualizando colaborador en la base de datos");
+        const colaboradorActualizado = await UsuarioColaboradorModel.findOneAndUpdate({ correo: colaborador.correo }, colaborador, { new: true });
+        console.log('Colaborador actualizado:', colaboradorActualizado);
+        res.status(201).send(colaboradorActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(201).send(error);
+    }
+});
+
 // Iniciar servidor
 
 app.listen(3000, function proyecto() {

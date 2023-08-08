@@ -65,9 +65,8 @@ async function botonEliminar(evento, aplicaciones) {
                 const data = await respuesta.json();
                 console.log(data);
                 alert("Se ha retirado la postulación");
-                window.location.href = "aplicacionesUsuarioFinal.html";
 
-                if (respuesta.ok) {
+                if (respuesta) {
                     const notificacionData = {
                         correoRecipiente: aplicacion.correoAplicante,
                         titulo: "Postulación Retirada",
@@ -81,6 +80,7 @@ async function botonEliminar(evento, aplicaciones) {
                         },
                         body: JSON.stringify(notificacionData),
                     });
+                    window.location.reload();
                 } else {
                     alert("Error al retirar la postulación");
                 }
