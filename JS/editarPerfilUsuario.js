@@ -162,11 +162,126 @@ async function editarPerfil(evento) {
   var clave = document.getElementById("password1").value;
   var clave2 = document.getElementById("password2").value;
 
-  
+  var tituloExperiencia = document.getElementById("tituloExperiencia").value;
+  var empresa = document.getElementById("empresa").value;
+  var fechaInicioExperiencia = document.getElementById("fechaInicioExperiencia").value;
+  var fechaFinExperiencia = document.getElementById("fechaFinExperiencia").value;
+  var descripcionTrabajo = document.getElementById("descripcionTrabajo").value;
 
+  var education = document.getElementById("education").value;
+  var institucion = document.getElementById("institucion").value;
+  var fechaInicioEducacion = document.getElementById("fechaInicioEducacion").value;
+  var fechaFinalEducacion = document.getElementById("fechaFinalEducacion").value;
+  var descripcionEducacion = document.getElementById("descripcionEducacion").value;
 
-}
+  var fechaActual = new Date();
+  var fechaInicioLaboral = new Date(fechaInicioExperiencia);
+  var fechaFinalizacionLaboral = new Date(fechaFinExperiencia);
+  var fechaInicioAcademica = new Date(fechaInicioEducacion);
+  var fechaFinalAcademica = new Date(fechaFinalEducacion);
+  var formularioValido = true;
 
+  if (clave !== clave2) {
+    alert("Las contraseñas no coinciden");
+    formularioValido = false;
+  }
+
+  if (clave.length < 6) {
+    alert("La contraseña debe tener al menos 6 caracteres");
+    formularioValido = false;
+  }
+
+  if (fechaInicioLaboral > fechaActual) {
+    alert("La fecha de inicio de experiencia laboral no puede ser en el futuro");
+    formularioValido = false;
+  }
+
+  if (fechaFinalizacionLaboral > fechaActual) {
+    alert("La fecha de finalización de experiencia laboral no puede ser en el futuro");
+    formularioValido = false;
+  }
+
+  if (fechaInicioAcademica > fechaActual) {
+    alert("La fecha de inicio de educación no puede ser en el futuro");
+    formularioValido = false;
+  }
+
+  if (fechaInicioLaboral > fechaFinalizacionLaboral) {
+    alert("La fecha de inicio de experiencia laboral no puede ser posterior a la fecha de finalización");
+    formularioValido = false;
+  }
+
+  if (fechaInicioAcademica > fechaFinalAcademica) {
+    alert("La fecha de inicio de educación no puede ser posterior a la fecha de finalización");
+    formularioValido = false;
+  }
+
+  if (formularioValido) {
+
+    const usuarioFinal = {
+      nombre: nombre,
+      apellidos: apellidos,
+      correo: correo,
+      clave: clave,
+      genero: genero,
+      experiencia: {
+        empresa: empresa,
+        titulo: tituloExperiencia,
+        fechaInicio: fechaInicioLaboral,
+        fechaFin: fechaFinalizacionLaboral,
+        descripcion: descripcionTrabajo
+      },
+      educacion: {
+        nivelEducativo: education,
+        institucion: institucion,
+        fechaInicioEducacion: fechaInicioAcademica,
+        fechaFinEducacion: fechaFinalAcademica,
+        descripcionEducacion: descripcionEducacion
+      },
+    };
+
+    const confirmEdit = confirm("¿Estás seguro de que deseas editar tu perfil?");
+
+    if (confirmEdit) {
+      try {
+        const respuesta = await fetch('http://localhost:3000/editarPerfilUsuarioFinal', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(usuarioFinal)
+        });
+
+        const exitoso = await respuesta.json();
+        if (exitoso) {
+          alert('Usuario editado exitosamente');
+
+          const notificacionData = {
+            correoRecipiente: correo,
+            titulo: "Perfil Editado",
+            mensaje: `Tu perfil ha sido editado exitosamente.`,
+          };
+
+          await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionData),
+          });
+
+        } else {
+          alert('Error al editar usuario');
+        }
+      } catch (error) {
+        console.log('Error:', error);
+        alert('Error al editar usuario');
+      }
+    } else {
+      alert("Cancelaste la acción de editar tu perfil.");
+    }
+  }
+};
 
 window.onload = function () {
   cargarDatosPerfil();
