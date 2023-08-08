@@ -447,7 +447,7 @@ app.get('/datosPerfilEmpresa', async function (req, res){
     }
 });
 
-app.put('/editarPerfilEmpresa', async function (req, res){
+app.put('/editarPerfilEmpresa', async function (req, res){ 
     console.log("Atendiendo solicitud PUT /editarPerfilEmpresa");
 
     if (!req.body) {
