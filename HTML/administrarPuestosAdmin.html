@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gerente</title>
-
+    <title>Administrar Puestos</title>
     <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
-    <link rel="stylesheet" type="text/css" href="/CSS/landingGerentes.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/administrarPuestos.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,11 +13,13 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
+
+    <script src="/JS/administrarPuestosAdmin.js"></script>
   </head>
   <body>
     <header>
       <nav>
-        <a href="/HTML/landingGerente.html">
+        <a href="/HTML/landingAdministrador.html">
           <img
             src="/Media/Fotos/logo-script-elite.png"
             alt="logo"
@@ -26,14 +27,14 @@
           />
         </a>
         <div class="navegacion-derecha">
-          <a href="/HTML/notificacionesGerente.html">
+          <a href="/HTML/notificacionesAdministrador.html">
             <img
               src="/Media/Fotos/alert.png"
               alt="Icono de notification"
               class="notificacion-nav"
             />
           </a>
-          <a href="/HTML/editarPerfilColaborador.html">
+          <a href="/HTML/editarPerfilAdministrador.html">
             <img
               src="/Media/Fotos/man.png"
               alt="Foto de perfil usuario final"
@@ -51,31 +52,25 @@
           class="imagen-empresa-landing"
         />
       </section>
-      <section>
-        <div class="contenedor-acciones-admin">
-          <a href="/HTML/administrarAplicaciones.html" class="accion-admin">
-            <img
-              src="/Media/Fotos/form.png"
-              alt="Icono de administrar apliaciones"
-              class="iconos-acciones"
-            />
-            <p>Administrar Aplicaciones</p>
-          </a>
-        </div>
-        <div class="contenedor-acciones-admin">
-          <a
-            href="/HTML/administrarPuestosGerente.html"
-            class="accion-admin accion-admin-centered"
-          >
-            <img
-              src="/Media/Fotos/job-seeker.png"
-              alt="Icono de editar usuario"
-              class="iconos-acciones"
-            />
-            <p>Administrar Puestos</p>
-          </a>
+      <section class="seccion-titulos">
+        <div class="titulo-link">
+          <img
+            src="/Media/Fotos/job-seeker.png"
+            alt="Icono de administrar puestos"
+            class="seccion-iconos"
+          />
+          <h1>Administrar Puestos de Trabajo</h1>
         </div>
       </section>
+      <section>
+        <button
+          class="btn-crear-puesto"
+          onclick="location.href='./crearPuestoTrabajoAdmin.html'"
+        >
+          Crear un nuevo puesto
+        </button>
+      </section>
+      <section id="empleos-publicados"></section>
     </main>
     <footer>
       <img

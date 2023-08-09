@@ -122,7 +122,7 @@ textarea {
     margin-top: 10px;
 }
 
-.boton-perfil-style input[type="submit"]{
+.boton-perfil-style button{
     align-items: center; 
     justify-content: center; 
     height: 44px; 

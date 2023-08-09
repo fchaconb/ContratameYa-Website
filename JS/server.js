@@ -69,6 +69,80 @@ app.post("/rangosSalariales", async function (req, res) {
     }
 });
 
+app.get("/empleosAdmin", async function (req, res) {
+    console.log("Atendiendo solicitud GET /empleosAdmin");
+
+    try {
+        const empresa = req.query.empresa;
+        console.log('Consultando empleos de la empresa ' + empresa + ' en la base de datos');
+        const empleos = await EmpleosModel.find({empresa: empresa});
+        console.log ("Empleos:", empleos);
+        res.status(200).send(empleos);
+
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.get("/empleosAdmin/:id", async function (req, res) {
+    console.log("Atendiendo solicitud GET /empleosAdmin/:id");
+
+    try {
+        console.log ("Consultando empleo en la base de datos");
+        const empleo = await EmpleosModel.findById(req.params.id);
+        console.log ("Empleo:", empleo);
+        res.status(200).send(empleo);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.put("/empleosAdmin/:id", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /empleosAdmin/:id");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const empleo = {
+        empresa: req.body.empresa,
+        titulo: req.body.titulo,
+        visibilidad: req.body.visibilidad,
+        rangoSalarialID: req.body.rangoSalarialID,
+        rangoSalarial: req.body.rangoSalarial,
+        requisitosMinimos: req.body.requisitosMinimos,
+        requisitosDeseados: req.body.requisitosDeseados,
+        correoGerenete: req.body.correoGerenete
+    };
+
+    try {
+        console.log("Actualizando empleo en la base de datos");
+        const empleoActualizado = await EmpleosModel.findByIdAndUpdate(req.params.id, empleo, { new: true });
+        console.log("Empleo actualizado:", empleoActualizado);
+        res.status(201).send(empleoActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.delete("/empleosAdmin/:id", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /empleosAdmin/:id");
+
+    try {
+        console.log("Eliminando empleo de la base de datos");
+        const empleoEliminado = await EmpleosModel.findByIdAndDelete(req.params.id);
+        console.log("Empleo eliminado:", empleoEliminado);
+        res.status(200).send(empleoEliminado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
 app.get("/empleosLanding", async function (req, res) {
     console.log("Atendiendo solicitud GET /empleosLanding");
     try {
@@ -98,7 +172,8 @@ app.post("/empleos", async function (req, res) {
         rangoSalarialID: req.body.rangoSalarialID,
         rangoSalarial: req.body.rangoSalarial,
         requisitosMinimos: req.body.requisitosMinimos,
-        requisitosDeseados: req.body.requisitosDeseados
+        requisitosDeseados: req.body.requisitosDeseados,
+        correoGerenete: req.body.correoGerenete
     });
 
     try {
