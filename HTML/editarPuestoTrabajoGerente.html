@@ -18,6 +18,8 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
+
+    <script src="/JS/editarPuestoTrabajoGerente.js"></script>
   </head>
   <body>
     <header>
@@ -66,7 +68,7 @@
         </div>
       </section>
       <section class="seccion-puestos">
-        <form>
+        <form id="editarPuestoForm">
           <div class="container-puestos">
             <div class="input-puesto">
               <label for="nombre"> Nombre del Puesto</label>
@@ -76,20 +78,14 @@
             <div class="input-puesto">
               <label for="visibilidad">Visibilidad</label>
               <select name="visibilidad" id="visibilidad" required>
-                <option value="publico">Público</option>
-                <option value="privado">Privado</option>
+                <option value="Pública">Público</option>
+                <option value="Privada">Privado</option>
               </select>
             </div>
 
             <div class="input-puesto">
               <label for="rangoSalarial"> Rango Salarial</label>
-              <input
-                class="input-puesto"
-                type="text"
-                name="rangoSalarial"
-                id="rangoSalarial"
-                required
-              />
+              <select name="rangoSalarial" id="rango-salarial"></select>
             </div>
 
             <div class="input-puesto">

@@ -69,6 +69,82 @@ app.post("/rangosSalariales", async function (req, res) {
     }
 });
 
+app.get("/empleosGerente", async function (req, res) {
+    console.log("Atendiendo solicitud GET /empleosGerente");
+
+    try {
+        const empresa = req.query.empresa;
+        const correo = req.query.correoGerente;
+        console.log('Consultando empleos de la empresa ' + empresa + ' y usuario ' + correo + ' en la base de datos');
+
+        const empleos = await EmpleosModel.find({empresa: empresa, correoGerente: correo});
+        console.log ("Empleos:", empleos);
+        res.status(200).send(empleos);
+
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.get("/empleosGerente/:id", async function (req, res) {
+    console.log("Atendiendo solicitud GET /empleosGerente/:id");
+
+    try {
+        console.log ("Consultando empleo en la base de datos");
+        const empleo = await EmpleosModel.findById(req.params.id);
+        console.log ("Empleo:", empleo);
+        res.status(200).send(empleo);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.put("/empleosGerente/:id", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /empleosGerente/:id");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const empleo = {
+        empresa: req.body.empresa,
+        titulo: req.body.titulo,
+        visibilidad: req.body.visibilidad,
+        rangoSalarialID: req.body.rangoSalarialID,
+        rangoSalarial: req.body.rangoSalarial,
+        requisitosMinimos: req.body.requisitosMinimos,
+        requisitosDeseados: req.body.requisitosDeseados,
+        correoGerente: req.body.correoGerente
+    };
+
+    try {
+        console.log("Actualizando empleo en la base de datos");
+        const empleoActualizado = await EmpleosModel.findByIdAndUpdate(req.params.id, empleo, { new: true });
+        console.log("Empleo actualizado:", empleoActualizado);
+        res.status(201).send(empleoActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+app.delete("/empleosGerente/:id", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /empleosGerente/:id");
+
+    try {
+        console.log("Eliminando empleo de la base de datos");
+        const empleoEliminado = await EmpleosModel.findByIdAndDelete(req.params.id);
+        console.log("Empleo eliminado:", empleoEliminado);
+        res.status(200).send(empleoEliminado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
 app.get("/empleosAdmin", async function (req, res) {
     console.log("Atendiendo solicitud GET /empleosAdmin");
 
@@ -115,7 +191,7 @@ app.put("/empleosAdmin/:id", async function (req, res) {
         rangoSalarial: req.body.rangoSalarial,
         requisitosMinimos: req.body.requisitosMinimos,
         requisitosDeseados: req.body.requisitosDeseados,
-        correoGerenete: req.body.correoGerenete
+        correoGerente: req.body.correoGerente
     };
 
     try {
@@ -173,7 +249,7 @@ app.post("/empleos", async function (req, res) {
         rangoSalarial: req.body.rangoSalarial,
         requisitosMinimos: req.body.requisitosMinimos,
         requisitosDeseados: req.body.requisitosDeseados,
-        correoGerenete: req.body.correoGerenete
+        correoGerente: req.body.correoGerente
     });
 
     try {

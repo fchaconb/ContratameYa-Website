@@ -21,7 +21,7 @@ const puestoId = localStorage.getItem("puestoId");
 async function infoPuestoEditar() {
 
   try {
-    const respuestaPuesto = await fetch("http://localhost:3000/empleosAdmin/" + puestoId);
+    const respuestaPuesto = await fetch("http://localhost:3000/empleosGerente/" + puestoId);
     const puesto = await respuestaPuesto.json();
     console.log(puesto);
 
@@ -40,7 +40,7 @@ async function infoPuestoEditar() {
 async function editarPuesto(evento) {
     evento.preventDefault();
     const puestoTrabajo = {
-        empresa: localStorage.getItem("userName"),
+        empresa: localStorage.getItem("empresa"),
         titulo: document.getElementById("nombre").value,
         visibilidad: document.getElementById("visibilidad").value,
         rangoSalarialID: document.getElementById("rango-salarial").value,
@@ -54,7 +54,7 @@ async function editarPuesto(evento) {
 
     if (confirmacion) {
         try {
-            const respuestaEditarPuestoTrabajo = await fetch("http://localhost:3000/empleosAdmin/" + puestoId, {
+            const respuestaEditarPuestoTrabajo = await fetch("http://localhost:3000/empleosGerente/" + puestoId, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,7 +82,7 @@ async function editarPuesto(evento) {
                   body: JSON.stringify(notificacionData),
                 });
 
-                window.location.href = "administrarPuestosAdmin.html";
+                window.location.href = "administrarPuestosGerente.html";
             } else {
                 alert("Error al editar el puesto de trabajo");
             }
