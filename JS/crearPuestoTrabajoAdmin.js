@@ -61,9 +61,9 @@ async function crearPuestoTrabajo(evento) {
                 alert("Puesto de trabajo creado exitosamente");
 
                 const notificacionData = {
-                    correoRecibe: puestoTrabajo.correoGerenete,
+                    correoRecipiente: puestoTrabajo.correoGerenete,
                     titulo: "Nuevo puesto de trabajo",
-                    mensaje: "Se ha creado un nuevo puesto de trabajo",
+                    mensaje: "Se ha creado el puesto de trabajo '" + puestoTrabajo.titulo +"'.",
                 };
 
                 await fetch("http://localhost:3000/notificaciones", {

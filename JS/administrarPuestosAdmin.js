@@ -68,6 +68,21 @@ async function botonEliminar(evento, puestosEmpresa) {
 
                 if (datosRespuesta) {
                     alert("Puesto eliminado exitosamente");
+
+                    const notificacionData = {
+                        correoRecipiente: puestoEmpresa.correoGerenete,
+                        titulo: "Puesto de trabajo eliminado",
+                        mensaje: "Se ha eliminado el puesto de trabajo '" + puestoEmpresa.titulo + "'.",
+                    };
+
+                    await fetch("http://localhost:3000/notificaciones", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(notificacionData),
+                    });
+
                     window.location.reload();
                 } else {
                     alert("Error al eliminar el puesto");

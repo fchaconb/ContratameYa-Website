@@ -68,6 +68,20 @@ async function editarPuesto(evento) {
             if (puestoTrabajoEditado) {
                 alert("Puesto de trabajo editado exitosamente");
 
+                const notificacionData = {
+                  correoRecipiente: puestoTrabajo.correoGerenete,
+                  titulo: "Puesto de trabajo editado",
+                  mensaje: "Se ha editado el puesto de trabajo '" + puestoTrabajo.titulo +"'.",
+                };
+
+                await fetch("http://localhost:3000/notificaciones", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(notificacionData),
+                });
+
                 window.location.href = "administrarPuestosAdmin.html";
             } else {
                 alert("Error al editar el puesto de trabajo");
