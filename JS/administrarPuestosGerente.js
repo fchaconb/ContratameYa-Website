@@ -1,9 +1,9 @@
 async function mostrarEmpleosEmpresa() {
-    const userName = localStorage.getItem("userName");
-    console.log(userName);
+    const userEmail = localStorage.getItem("userEmail");
+    const empresa = localStorage.getItem("empresa");
 
     try {
-        const respuestaPuestosEmpresa = await fetch("http://localhost:3000/empleosAdmin?empresa=" + userName);
+        const respuestaPuestosEmpresa = await fetch("http://localhost:3000/empleosGerente?empresa=" + empresa + "&correoGerente=" + userEmail);
         const puestosEmpresa = await respuestaPuestosEmpresa.json();
         console.log(puestosEmpresa);
 
@@ -59,7 +59,7 @@ async function botonEliminar(evento, puestosEmpresa) {
 
         if (confirmDelete) {
             try {
-                const respuesta = await fetch("http://localhost:3000/empleosAdmin/" + puestoEmpresaId, {
+                const respuesta = await fetch("http://localhost:3000/empleosGerente/" + puestoEmpresaId, {
                     method: "DELETE",
                 });
 
@@ -70,7 +70,7 @@ async function botonEliminar(evento, puestosEmpresa) {
                     alert("Puesto eliminado exitosamente");
 
                     const notificacionData = {
-                        correoRecipiente: puestoEmpresa.correoGerenete,
+                        correoRecipiente: puestoEmpresa.correoGerente,
                         titulo: "Puesto de trabajo eliminado",
                         mensaje: "Se ha eliminado el puesto de trabajo '" + puestoEmpresa.titulo + "'.",
                     };
@@ -98,7 +98,7 @@ async function botonEliminar(evento, puestosEmpresa) {
 
 async function editarPuesto(puestoId) {
     localStorage.setItem("puestoId", puestoId);
-    window.location.href = "editarPuestoTrabajoAdmin.html";
+    window.location.href = "editarPuestoTrabajoGerente.html";
 }
 
 window.onload = function () {

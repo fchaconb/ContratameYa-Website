@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrar Aplicaciones</title>
+
+    <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/CSS/administrarAplicaciones.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a href="/HTML/landingGerente.html">
+          <img
+            src="/Media/Fotos/logo-script-elite.png"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+        <div class="navegacion-derecha">
+          <a href="/HTML/notificacionesGerente.html">
+            <img
+              src="/Media/Fotos/alert.png"
+              alt="Icono de notification"
+              class="notificacion-nav"
+            />
+          </a>
+          <a href="/HTML/editarPerfilGerente.html">
+            <img
+              src="/Media/Fotos/man.png"
+              alt="Foto de perfil usuario final"
+              class="perfil-nav"
+            />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="seccion-empresa-img">
+        <img
+          src="/Media/Fotos/empresa-landing.jpg"
+          alt="Imagen landing page para empresas de un edificio con computadores"
+          class="imagen-empresa-landing"
+        />
+      </section>
+      <section class="seccion-titulos">
+        <div class="titulo-link">
+          <img
+            src="/Media/Fotos/form.png"
+            alt="Icono de administrar aplicaciones"
+            class="seccion-iconos"
+          />
+          <h1>Invitar Aplicantes</h1>
+        </div>
+      </section>
+      <section class="centro-secciones">
+        <section class="seccion-invitaciones">
+          <form>
+            <div class="invitaciones">
+              <label for="correo">Correo Usuario</label>
+              <input type="email" name="correo" id="correo" required />
+              <label for="puesto">Puesto de Trabajo</label>
+              <select name="puesto" id="puesto">
+                <option value="puesto1">C# Developer</option>
+                <option value="puesto2">Software Developer</option>
+              </select>
+              <input
+                type="submit"
+                name="Invitar"
+                id="invitar"
+                value="Invitar"
+              />
+            </div>
+          </form>
+        </section>
+      </section>
+      <section class="seccion-titulos">
+        <div class="titulo-link">
+          <img
+            src="/Media/Fotos/form.png"
+            alt="Icono de administrar aplicaciones"
+            class="seccion-iconos"
+          />
+          <h1>Administrar Aplicaciones</h1>
+        </div>
+      </section>
+      <section class="centro-secciones">
+        <section class="seccion-aplicaciones">
+          <section class="seccion-datos">
+            <div class="aplicacion-info">
+              <p>Puesto: C# Developer</p>
+              <p>Cantidad de Aplicantes: 5</p>
+              <form>
+                <div class="aplicacion-info-filters">
+                  <label for="estado">Estado</label>
+                  <select
+                    name="estado"
+                    id="estado"
+                    class="select-info"
+                    required
+                  >
+                    <option value="enviada">Enviada</option>
+                    <option value="en-revision">En Revisión</option>
+                    <option value="aceptada">Aceptada</option>
+                    <option value="denegada">Denegada</option>
+                  </select>
+                  <label for="palabra-clave">Búsqueda por Palabra Clave</label>
+                  <input
+                    type="text"
+                    name="palabra-clave"
+                    id="palabra-clave"
+                    required
+                  />
+                  <div class="boton-filtrar">
+                    <input
+                      id="filtrar"
+                      type="submit"
+                      value="Filtrar"
+                      class="boton-filtrar"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+          <section class="seccion-aplicantes">
+            <table>
+              <thead>
+                <th>Postulante</th>
+                <th>Experiencia</th>
+                <th>Estado</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Emma Johnson</td>
+                  <td>Abrir CV</td>
+
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lucas Anderson</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sophia Martinez</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ethan Thompson</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Olivia Davis</td>
+                  <td>Abrir CV</td>
+
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+      </section>
+      <section class="centro-secciones">
+        <section class="seccion-aplicaciones">
+          <section class="seccion-datos">
+            <div class="aplicacion-info">
+              <p>Puesto: Software Developer</p>
+              <p>Cantidad de Aplicantes: 6</p>
+              <form>
+                <div class="aplicacion-info-filters">
+                  <label for="estado">Estado</label>
+                  <select
+                    name="estado"
+                    id="estado"
+                    class="select-info"
+                    required
+                  >
+                    <option value="enviada">Enviada</option>
+                    <option value="en-revision">En Revisión</option>
+                    <option value="aceptada">Aceptada</option>
+                    <option value="denegada">Denegada</option>
+                  </select>
+                  <label for="palabra-clave">Búsqueda por Palabra Clave</label>
+                  <input
+                    type="text"
+                    name="palabra-clave"
+                    id="palabra-clave"
+                    required
+                  />
+                  <div class="boton-filtrar">
+                    <input
+                      id="filtrar"
+                      type="submit"
+                      value="Filtrar"
+                      class="boton-filtrar"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+          <section class="seccion-aplicantes">
+            <table>
+              <thead>
+                <th>Postulante</th>
+                <th>Experiencia</th>
+                <th>Estado</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Emma Johnson</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Lucas Anderson</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sophia Martinez</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ethan Thompson</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Olivia Davis</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Pedro Pascal</td>
+                  <td>Abrir CV</td>
+                  <td>
+                    <select
+                      name="estado"
+                      id="estado"
+                      class="select-participantes"
+                    >
+                      <option value="enviada">Enviada</option>
+                      <option value="en-revision">En Revisión</option>
+                      <option value="aceptada">Aceptada</option>
+                      <option value="denegada">Denegada</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+      </section>
+    </main>
+    <footer>
+      <img
+        src="/Media/Fotos/logo-script-elite.png"
+        alt="Logo de la empresa Script Elite"
+      />
+    </footer>
+  </body>
+</html>

@@ -19,10 +19,10 @@ async function rangosSalarialesDropdown() {
 async function crearPuestoTrabajo(evento) {
     evento.preventDefault();
 
-    const userName = localStorage.getItem("userName");
+    const empresaGerente = localStorage.getItem("empresa");
     const userEmail = localStorage.getItem("userEmail");
 
-    const empresa = userName;
+    const empresa = empresaGerente;
     const titulo = document.getElementById("nombre").value;
     const visibilidad = document.getElementById("visibilidad").value;
     const rangoSalarialID = document.getElementById("rango-salarial").value;
@@ -74,7 +74,7 @@ async function crearPuestoTrabajo(evento) {
                     body: JSON.stringify(notificacionData),
                 });
 
-                window.location.href = "administrarPuestosAdmin.html";
+                window.location.href = "administrarPuestosGerente.html";
             } else {
                 alert("Error al crear el puesto de trabajo");
             }

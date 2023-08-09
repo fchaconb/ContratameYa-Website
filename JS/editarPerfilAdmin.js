@@ -87,25 +87,44 @@ async function actualizarDatosEmpresa() {
     const confirmEdit = confirm("¿Estás seguro que deseas actualizar tus datos?");
 
     if (confirmEdit) {
-    try {
-      const respuesta = await fetch("http://localhost:3000/editarPerfilEmpresa", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datosEmpresa),
-      });
+      try {
+        const respuesta = await fetch("http://localhost:3000/editarPerfilEmpresa", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datosEmpresa),
+        });
 
-      const datosEmpresaActualizados = await respuesta.json();
-      console.log(datosEmpresaActualizados);
-      alert("Datos actualizados exitosamente");
-    } catch (error) {
-      console.log("Error:", error);
+        const datosEmpresaActualizados = await respuesta.json();
+        if (datosEmpresaActualizados) {
+          alert("Datos actualizados exitosamente");
+
+          const notificacionData = {
+            correoRecipiente: datosEmpresa.correo,
+            titulo: "Datos de perfil actualizados",
+            mensaje: "Se han actualizado los datos de tu perfil.",
+          };
+
+          await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionData),
+          });
+
+          window.location.reload();
+        } else {
+          alert("Error al actualizar los datos");
+        }
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    } else {
+      alert("Cancelaste la acción de actualizar tus datos.");
     }
-  } else {
-    alert("Cancelaste la acción de actualizar tus datos.");
   }
-}
 }
 
 // Ejecutar la función al cargar la página

@@ -14,6 +14,8 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
+
+    <script src="/JS/crearPuestoTrabajoGerente.js"></script>
   </head>
   <body>
     <header>
@@ -33,7 +35,7 @@
               class="notificacion-nav"
             />
           </a>
-          <a href="/HTML/editarPerfilColaborador.html">
+          <a href="/HTML/editarPerfilGerente.html">
             <img
               src="/Media/Fotos/man.png"
               alt="Foto de perfil usuario final"
@@ -62,7 +64,7 @@
         </div>
       </section>
       <section class="seccion-puestos">
-        <form>
+        <form id="crearPuestoForm">
           <div class="container-puestos">
             <div class="input-puesto">
               <label for="nombre"> Nombre del Puesto</label>
@@ -72,27 +74,21 @@
             <div class="input-puesto">
               <label for="visibilidad">Visibilidad</label>
               <select name="visibilidad" id="visibilidad" required>
-                <option value="publico">Público</option>
-                <option value="privado">Privado</option>
+                <option value="Pública">Público</option>
+                <option value="Privada">Privado</option>
               </select>
             </div>
 
             <div class="input-puesto">
               <label for="rangoSalarial"> Rango Salarial</label>
-              <input
-                class="input-puesto"
-                type="text"
-                name="rangoSalarial"
-                id="rangoSalarial"
-                required
-              />
+              <select name="rangoSalarial" id="rango-salarial"></select>
             </div>
 
             <div class="input-puesto">
               <label for="requisitosMinimos">Requisitos Mínimos</label>
               <textarea
                 name="requisitosMinimos"
-                id=""
+                id="requisitosMinimos"
                 cols="30"
                 rows="10"
                 ovwerflow="auto"
@@ -104,7 +100,7 @@
               <label for="requisitosDeseados">Requisitos Deseados</label>
               <textarea
                 name="requisitosDeseados"
-                id=""
+                id="requisitosDeseados"
                 cols="30"
                 rows="10"
                 ovwerflow="auto"
@@ -115,7 +111,7 @@
 
           <div class="botones-perfil">
             <div class="boton-perfil-style">
-              <input id="crearPuesto" type="submit" value="Crear Puesto" />
+              <button type="submit" id="crearPuesto">Crear Puesto</button>
             </div>
           </div>
         </form>
