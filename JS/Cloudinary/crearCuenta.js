@@ -2,6 +2,7 @@ window.onload = function () {
     const buttonElement = document.getElementById("botonFoto");
     const imgElement = document.getElementById("fotoUsuario");
 
+
     let myWidget = cloudinary.createUploadWidget(
         {
             cloudName: "dobj7jqwu",
