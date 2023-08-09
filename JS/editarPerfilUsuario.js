@@ -270,6 +270,8 @@ async function editarPerfil(evento) {
             body: JSON.stringify(notificacionData),
           });
 
+          window.location.reload();
+
         } else {
           alert('Error al editar usuario');
         }

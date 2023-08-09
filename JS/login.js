@@ -69,7 +69,7 @@ function redirigirCuentaGerente() {
 }
 
 function redirigirCuentaReclutador() {
-    window.location.href = "./AdministrarAplicaciones.html";
+    window.location.href = "./landingReclutador.html";
 }
 
 function redirigirCuentaUsuarioFinal() {
