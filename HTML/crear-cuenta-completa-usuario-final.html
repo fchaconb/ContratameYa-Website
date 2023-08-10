@@ -159,7 +159,6 @@
                                 <img id="fotoUsuario" class="fotoUsuario">
 
                                 <button type="button" class="botonGuardar " id="botonFoto" required></button>
-
                                 <p class="estilo-texto-pequeno3">Seleccionar foto</p>
 
                             </div>
@@ -173,11 +172,10 @@
                         <div class="ajuste-texto-y-foto3">
                             <p class="color-texto-foto-perfil3">Curriculum Vitae</p>
                             <div class="photo-input3">
+                                <img id="cvUsuario" class="fotoUsuario">
 
-                                <iframe id="vistaPDF" class="fotoUsuario"> </iframe>
-                                <!-- <img id="cvUsuario" class="fotoUsuario"> -->
-
-                                <button type="button" class="botonGuardar " id="botoncv" required></button>
+                                <button type="button" class="botonGuardar " id="botoncv" onchange="validateImg(event)"
+                                    required></button>
                             </div>
                             <p class="estilo-texto-pequeno3">Se permiten archivos tipo PDF únicamente.</p>
 

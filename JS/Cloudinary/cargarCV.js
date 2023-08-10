@@ -1,6 +1,6 @@
 window.onload = function () {
     const buttonElement = document.getElementById("botoncv");
-    const iframeElement = document.getElementById("vistaPDF");
+    const imgElement = document.getElementById("cvUsuario");
 
     let myWidget = cloudinary.createUploadWidget(
         {
@@ -8,15 +8,12 @@ window.onload = function () {
             uploadPreset: "preset.Rom",
             clientAllowedFormats: ["pdf"],
             maxFileSize: 3000000,
-            multiple: false
         },
         (error, result) => {
 
             if (!error && result && result.event === "success") {
-                const pdfUrl = result.info.secure_url;
-                iframeElement.src = pdfUrl;
-                console.log("Done! Here is the PDF info: ", result.info);
-
+                imgElement.src = result.info.secure_url;
+                console.log("Done! Here is the image info: ", result.info);
             }
         }
     );
