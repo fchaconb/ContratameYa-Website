@@ -313,6 +313,22 @@ app.post("/registrarEmpresas", async function (req, res) {
         const empresaGuardada = await empresa.save();
         console.log("Empresa guardada:", empresaGuardada);
         res.status(201).send(empresaGuardada);
+
+        const mailOptions = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correo,
+            subject: 'Perfil de empresa creado exitosamente!',
+            text: `Hola ${req.body.nombre},\n\nTu perfil de empresa fue creado exitosamente!`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
@@ -463,6 +479,22 @@ app.post("/registrarUsuarioColaborador", async function (req, res) {
         const usuarioColaboradorGuardado = await usuarioColaborador.save();
         console.log("Usuario colaborador guardado:", usuarioColaboradorGuardado);
         res.status(201).send(usuarioColaboradorGuardado);
+
+        const mailOptions = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correo,
+            subject: 'Perfil de usuario creado exitosamente!',
+            text: `Hola ${req.body.nombre},\n\nTu perfil de usuario fue creado exitosamente!`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
