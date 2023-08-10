@@ -57,32 +57,43 @@
 
 
 .buttones-header {
-    padding: 10px 16px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-family: Sarabun; /* Body */
-    font-size: 16px; 
-    line-height: 26px; 
-    color: #FFFFFFFF; /* white */
-    background: #30343FFF; /* primary-500 */
-    opacity: 1; 
-    border: none; 
-    border-radius: 4px; /* border-m */
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Sarabun;
+    /* Body */
+    font-size: 16px;
+    line-height: 26px;
+    color: #FFFFFFFF;
+    /* white */
+    background: #30343FFF;
+    /* primary-500 */
+    opacity: 1;
+    border: none;
+    border-radius: 4px;
+    /* border-m */
 }
-  /* Hover */
+
+/* Hover */
 .buttones-header:hover {
-    color: #FFFFFFFF; /* white */
-    background: #24272FFF; /* primary-700 */
+    color: #FFFFFFFF;
+    /* white */
+    background: #24272FFF;
+    /* primary-700 */
 }
-  /* Pressed */
+
+/* Pressed */
 .buttones-header:hover:active {
-    color: #FFFFFFFF; /* white */
-    background: #17191FFF; /* primary-900 */
+    color: #FFFFFFFF;
+    /* white */
+    background: #17191FFF;
+    /* primary-900 */
 }
-  /* Disabled */
+
+/* Disabled */
 .buttones-header:disabled {
-    opacity: 0.4; 
+    opacity: 0.4;
 }
 
 
@@ -143,32 +154,32 @@
 }
 
 .photo-input input[type="file"] {
-    width: 153px; 
-    height: 44px; 
-    font-size: 16px; 
-    background: #BBBFD8; 
-    border-radius: 7px; 
-    border-width: 0px; 
-    outline: none; 
+    width: 153px;
+    height: 44px;
+    font-size: 16px;
+    background: #BBBFD8;
+    border-radius: 7px;
+    border-width: 0px;
+    outline: none;
     margin-left: 26.5%;
     margin-top: 20px;
 
 }
 
 .photo-input input[type="file"]::file-selector-button {
-    height: 44px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 16px; 
-    line-height: 26px; 
-    color: #273469FF; 
-    background: #FFFFFFFF; 
-    opacity: 1; 
-    border-radius: 3px; 
-    border-width: 1px; 
-    border-color: #273469FF; 
-    border-style: solid; 
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 26px;
+    color: #273469FF;
+    background: #FFFFFFFF;
+    opacity: 1;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: #273469FF;
+    border-style: solid;
 }
 
 
@@ -224,4 +235,15 @@ body {
 
 html {
     font-family: 'Sarabun', sans-serif;
+}
+
+.botonFoto {
+    margin-left: 80px;
+    margin-top: 20px;
+    padding: 10px;
+    width: 150px;
+    background-color: #CCCCCCFF;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
 }

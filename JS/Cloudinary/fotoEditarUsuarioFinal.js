@@ -1,27 +1,23 @@
 window.onload = function () {
-    const buttonElement = document.getElementById("botoncv");
-    const iframeElement = document.getElementById("vistaPDF");
+    const boton = document.getElementById("botonFoto");
+    const imgElement = document.getElementById("fotoUsuario");
 
     let myWidget = cloudinary.createUploadWidget(
         {
             cloudName: "dobj7jqwu",
             uploadPreset: "preset.Rom",
-            clientAllowedFormats: ["pdf"],
+            clientAllowedFormats: ["jpg", "png", "jpeg"],
             maxFileSize: 3000000,
-            multiple: false
         },
         (error, result) => {
-
             if (!error && result && result.event === "success") {
-                const pdfUrl = result.info.secure_url;
-                iframeElement.src = pdfUrl;
-                console.log("Done! Here is the PDF info: ", result.info);
-
+                imgElement.src = result.info.secure_url;
+                console.log("Done! Here is the image info: ", result.info);
             }
         }
     );
 
-    buttonElement.addEventListener(
+    boton.addEventListener(
         "click",
         function () {
             myWidget.open();
