@@ -89,16 +89,13 @@
             </select>
 
             <label for="accion" class="texto-labels">Cambiar Perfil:</label>
-            <select id="accion" name="accion" required>
-              <option value="elijaOpcion" disabled selected>
-                Seleccionar perfil
-              </option>
-
-              <option value="administrarUsuario">Reclutador</option>
-              <option value="cambiarPerfil">Gerente</option>
+            <select id="editarRol" name="accion" required>
+              <option value="opcion0" disabled selected>Seleccionar perfil</option>
+              <option value="Reclutador">Reclutador</option>
+              <option value="Gerente">Gerente</option>
             </select>
 
-            <button type="submit">Guardar Cambios</button>
+            <button type="button" id="editarCambios">Guardar Cambios</button>
           </form>
         </div>
       </div>

@@ -826,6 +826,32 @@ app.get("/administrarEmpleados", async function (req, res) {
 });
 
 
+app.put("/administrarEmpleados/:correo", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /administrarEmpleados");
+
+    const correoSeleccionado = req.params.correo; // Obtener el correo seleccionado desde los parámetros de la URL
+    
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const nuevoRol = req.body.editarRol; // Obtener el nuevo rol desde el cuerpo de la solicitud
+
+    try {
+        console.log("Actualizando empleado en la base de datos");
+        const empleadoActualizado = await UsuarioColaboradorModel.findOneAndUpdate(
+            { correo: correoSeleccionado }, // Buscar por el correo seleccionado
+            { rol: nuevoRol }, // Actualizar el rol
+            { new: true }
+        );
+        console.log("Empleado actualizado:", empleadoActualizado);
+        res.status(201).json(empleadoActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
 
 
 

@@ -128,6 +128,33 @@ async function correoEliminarPerfilEmpleado() {
     }
 }
 
+async function editarPerfilEmpleado () {
+    const correo = document.getElementById("editarPerfilDropDown").value;
+    const rol = document.getElementById("editarRol").value;
+
+    const datos = {
+        editarPerfilDropdown: correo,
+        editarRol: rol
+    };
+
+    try {
+        console.log("Datos enviados", datos);
+        const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        const exitoso = await respuesta.json();
+        console.log(exitoso);
+        alert("Perfil editado con éxito");
+        window.location.href = "/HTML/administrarEmpleados.html";
+    } catch (error) {
+        console.log("Error:", error);
+        alert("Error al editar el perfil");
+    }
+}
 
 
 
@@ -139,9 +166,12 @@ window.onload = function () {
     /*cargarColaboradores();*/
     correoEditarPerfilEmpleado();
     correoEliminarPerfilEmpleado();
+    const guardarCambiosButton = document.getElementById("editarCambios");
+    guardarCambiosButton.addEventListener("click", editarPerfilEmpleado);
 
-    /*tipoPerfil();*/
+    /*tipoPerfil()*/
     // Add other necessary functions here
+    
 }
 
 
