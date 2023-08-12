@@ -21,8 +21,8 @@ app.use(cors());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'contratame.ya.trabajos@gmail.com',
-      pass: 'xdxearacnncfyfpb'
+        user: 'contratame.ya.trabajos@gmail.com',
+        pass: 'xdxearacnncfyfpb'
     }
 });
 
@@ -34,9 +34,9 @@ mongoose.connect("mongodb+srv://admin:Q9lvp68kolzGS7dB@cluster0.pzmtrxf.mongodb.
 app.get("/rangosSalariales", async function (req, res) {
     console.log("Atendiendo solicitud GET /rangosSalariales");
     try {
-        console.log ("Consultando rangos salariales en la base de datos");
+        console.log("Consultando rangos salariales en la base de datos");
         const rangosSalariales = await RangosSalarialesModel.find({});
-        console.log ("Rangos salariales:", rangosSalariales);
+        console.log("Rangos salariales:", rangosSalariales);
 
         res.status(200).send(rangosSalariales);
     } catch (error) {
@@ -52,7 +52,7 @@ app.post("/rangosSalariales", async function (req, res) {
         console.log("El cuerpo de la solicitud no tiene contenido");
         return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
     }
-    
+
     const rangoSalarial = RangosSalarialesModel({
         id: req.body.id,
         rangoSalarial: req.body.rangoSalarial
@@ -72,9 +72,9 @@ app.post("/rangosSalariales", async function (req, res) {
 app.get("/empleosLanding", async function (req, res) {
     console.log("Atendiendo solicitud GET /empleosLanding");
     try {
-        console.log ("Consultando empleos en la base de datos");
-        const empleos = (await EmpleosModel.find({}, {titulo: 1, rangoSalarial: 1, empresa: 1}).limit(8));
-        console.log ("Empleos:", empleos);
+        console.log("Consultando empleos en la base de datos");
+        const empleos = (await EmpleosModel.find({}, { titulo: 1, rangoSalarial: 1, empresa: 1 }).limit(8));
+        console.log("Empleos:", empleos);
         res.status(200).send(empleos);
 
     } catch (error) {
@@ -116,9 +116,9 @@ app.get("/nombreEmpresasLanginUsuarios", async function (req, res) {
     console.log("Atendiendo solicitud GET /nombreEmpresasLanginUsuarios");
 
     try {
-        console.log ("Consultando nombres de empresas en la base de datos");
-        const nombreEmpresas = (await AdminsModel.find({}, {nombre: 1}).limit(6));
-        console.log ("Nombre de empresas:", nombreEmpresas);
+        console.log("Consultando nombres de empresas en la base de datos");
+        const nombreEmpresas = (await AdminsModel.find({}, { nombre: 1 }).limit(6));
+        console.log("Nombre de empresas:", nombreEmpresas);
         res.status(200).send(nombreEmpresas);
 
     } catch (error) {
@@ -131,9 +131,9 @@ app.get("/nombreEmpresasBuscarEmpleos", async function (req, res) {
     console.log("Atendiendo solicitud GET /nombreEmpresasBuscarEmpleos");
 
     try {
-        console.log ("Consultando nombres de empresas en la base de datos");
-        const nombreEmpresas = await AdminsModel.find({}, {nombre: 1});
-        console.log ("Nombre de empresas:", nombreEmpresas);
+        console.log("Consultando nombres de empresas en la base de datos");
+        const nombreEmpresas = await AdminsModel.find({}, { nombre: 1 });
+        console.log("Nombre de empresas:", nombreEmpresas);
         res.status(200).send(nombreEmpresas);
 
     } catch (error) {
@@ -172,7 +172,7 @@ app.get("/empleosOverview", async function (req, res) {
     console.log("Atendiendo solicitud GET /empleosOverview");
 
     try {
-        console.log ("Consultando empleos en la base de datos");
+        console.log("Consultando empleos en la base de datos");
 
         const query = { visibilidad: 'Pública' };
 
@@ -185,9 +185,9 @@ app.get("/empleosOverview", async function (req, res) {
             query.rangoSalarialID = req.query.rangoSalarialID;
             console.log("Query:", query);
         }
-        
+
         const empleos = await EmpleosModel.find(query);
-        console.log ("Empleos:", empleos);
+        console.log("Empleos:", empleos);
         res.status(200).send(empleos);
 
     } catch (error) {
@@ -224,9 +224,9 @@ app.post("/generos", async function (req, res) {
 app.get("/generosEditarPerfil", async function (req, res) {
     console.log("Atendiendo solicitud GET /generosEditarPerfil");
     try {
-        console.log ("Consultando generos en la base de datos");
+        console.log("Consultando generos en la base de datos");
         const generos = await GenerosModel.find({});
-        console.log ("Generos:", generos);
+        console.log("Generos:", generos);
         res.status(200).send(generos);
     } catch (error) {
         console.log("Error:", error);
@@ -250,32 +250,32 @@ app.post("/login", async function (req, res) {
 
     try {
         console.log("Consultando login en la base de datos");
-        const adminLogin  = await AdminsModel.findOne({ correo: login.correo, contrasena: login.contrasena });
+        const adminLogin = await AdminsModel.findOne({ correo: login.correo, contrasena: login.contrasena });
         const colaboradorLogin = await UsuarioColaboradorModel.findOne({ correo: login.correo, contrasena: login.contrasena });
         const usuarioFinalLogin = await UsuarioFinalModel.findOne({ correo: login.correo, clave: login.contrasena });
 
         if (adminLogin) {
             console.log("Login de admin:", adminLogin);
-            res.status(200).send({ 
-                perfil: "admin", 
+            res.status(200).send({
+                perfil: "admin",
                 nombre: adminLogin.nombre,
                 correo: adminLogin.correo,
             });
         } else if (colaboradorLogin) {
             console.log("Login de colaborador:", colaboradorLogin);
-            res.status(200).send({ 
+            res.status(200).send({
                 perfil: "colaborador",
                 empresa: colaboradorLogin.empresa,
                 nombre: colaboradorLogin.nombre,
-                correo: colaboradorLogin.correo, 
+                correo: colaboradorLogin.correo,
                 rol: colaboradorLogin.rol,
             });
         } else if (usuarioFinalLogin) {
             console.log("Login de usuario final:", usuarioFinalLogin);
-            res.status(200).send({ 
+            res.status(200).send({
                 perfil: "usuarioFinal",
                 nombre: usuarioFinalLogin.nombre,
-                correo: usuarioFinalLogin.correo, 
+                correo: usuarioFinalLogin.correo,
             });
         } else {
             console.log("Login incorrecto");
@@ -318,7 +318,7 @@ app.post("/registrarUsuarioColaborador", async function (req, res) {
     }
 });
 
-app.get("/datosUsuarioFinal", async function (req, res){
+app.get("/datosUsuarioFinal", async function (req, res) {
     console.log("Atendiendo solicitud GET /datosUsuarioFinal");
 
     try {
@@ -365,7 +365,7 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
         },
     });
 
-    try { 
+    try {
         console.log("Guardando usuario final en la base de datos");
         const usuarioFinalGuardado = await usuarioFinal.save();
         console.log("Usuario final guardado:", usuarioFinalGuardado);
@@ -376,7 +376,7 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
     }
 });
 
-app.put('/editarPerfilUsuarioFinal', async function (req, res){
+app.put('/editarPerfilUsuarioFinal', async function (req, res) {
     console.log("Atendiendo solicitud PUT /editarPerfilUsuarioFinal");
 
     if (!req.body) {
@@ -419,11 +419,11 @@ app.put('/editarPerfilUsuarioFinal', async function (req, res){
 
 app.get("/aplicacionesUsuarioFinal", async function (req, res) {
     console.log("Atendiendo solicitud GET /aplicacionesUsuario");
-    
+
     try {
-        console.log ("Consultando aplicaciones en la base de datos");
+        console.log("Consultando aplicaciones en la base de datos");
         const aplicaciones = (await Aplicaciones.find({ correoAplicante: req.query.correoAplicante })).reverse();
-        console.log ("Aplicaciones:", aplicaciones);
+        console.log("Aplicaciones:", aplicaciones);
         res.status(200).send(aplicaciones);
     } catch (error) {
         console.log("Error:", error);
@@ -477,11 +477,11 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
 
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-              console.log('Error al enviar el correo de notificación:', error);
+                console.log('Error al enviar el correo de notificación:', error);
             } else {
-              console.log('Correo de notificación enviado:', info.response);
+                console.log('Correo de notificación enviado:', info.response);
             }
-        }); 
+        });
 
     } catch (error) {
         console.log("Error:", error);
@@ -490,7 +490,7 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
 });
 
 
-app.get('/datosPerfilEmpresa', async function (req, res){
+app.get('/datosPerfilEmpresa', async function (req, res) {
     console.log("Atendiendo solicitud GET /datosPerfilEmpresa");
 
     try {
@@ -505,12 +505,12 @@ app.get('/datosPerfilEmpresa', async function (req, res){
     }
 });
 
-app.put('/editarPerfilEmpresa', async function (req, res){ 
+app.put('/editarPerfilEmpresa', async function (req, res) {
     console.log("Atendiendo solicitud PUT /editarPerfilEmpresa");
 
     if (!req.body) {
         console.log("El cuerpo de la solicitud no tiene contenido");
-        return res.status(400).send("El cuerpo de la solicitud no tiene contenido"); 
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
     }
 
     const empresa = {
@@ -535,9 +535,9 @@ app.get("/notificaciones", async function (req, res) {
     console.log("Atendiendo solicitud GET /notificaciones");
 
     try {
-        console.log ("Consultando notificaciones en la base de datos");
+        console.log("Consultando notificaciones en la base de datos");
         const notificaciones = (await Notificaciones.find({ correoRecipiente: req.query.correoRecipiente })).reverse();
-        console.log ("Notificaciones:", notificaciones);
+        console.log("Notificaciones:", notificaciones);
         res.status(200).send(notificaciones);
     } catch (error) {
         console.log("Error:", error);
@@ -585,7 +585,7 @@ app.delete("/notificaciones/:id", async function (req, res) {
     }
 });
 
-app.get('/datosPerfilColaborador', async function (req, res){
+app.get('/datosPerfilColaborador', async function (req, res) {
     console.log("Atendiendo solicitud GET /datosPerfilColaborador");
 
     try {
@@ -598,9 +598,9 @@ app.get('/datosPerfilColaborador', async function (req, res){
         console.log('Error:', error);
         res.status(500).send(error);
     }
-}); 
+});
 
-app.put('/editarPerfilColaborador', async function (req, res){
+app.put('/editarPerfilColaborador', async function (req, res) {
     console.log("Atendiendo solicitud PUT /editarPerfilColaborador");
 
     if (!req.body) {
@@ -627,6 +627,24 @@ app.put('/editarPerfilColaborador', async function (req, res){
         res.status(201).send(error);
     }
 });
+
+app.get("/administrarEmpleados", async function (req, res) {
+    console.log("Atendiendo solicitud GET /administrarEmpleados");
+
+    try {
+        console.log("Consultando empleados en la base de datos");
+        const empleados = await UsuarioColaboradorModel.find({}, { correo: 1, empresa: 1, });
+        console.log("Empleados:", empleados);
+        res.status(200).send(empleados);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
+
+
+
+
 
 // Iniciar servidor
 

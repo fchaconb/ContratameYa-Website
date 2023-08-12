@@ -82,13 +82,18 @@
         <div class="cuadro2">
           <form>
             <label for="buscarCorreo" class="texto-labels">Administrar usuario</label>
-            <select id="editarPerfilDropDown" class="textbox-correo" name="email" required></select>
+            <select id="editarPerfilDropDown" class="textbox-correo" name="email" required>
+              <option value="elijaOpcion1" disabled selected>
+                Seleccionar perfil
+              </option>
+            </select>
 
             <label for="accion" class="texto-labels">Cambiar Perfil:</label>
             <select id="accion" name="accion" required>
               <option value="elijaOpcion" disabled selected>
                 Seleccionar perfil
               </option>
+
               <option value="administrarUsuario">Reclutador</option>
               <option value="cambiarPerfil">Gerente</option>
             </select>
@@ -104,7 +109,12 @@
           <form>
             <label for="buscarCorreoEliminar" class="texto-labels">Eliminar usuario</label>
 
-            <select id="eliminarPerfilDropDown" class="dropDownNew" name="email" required></select>
+            <select id="eliminarPerfilDropDown" class="dropDownNew" name="email" required>
+              <option value="elijaOpcion2" disabled selected>
+                Seleccione usuario
+              </option>
+
+            </select>
             <label for="buscarCorreo" class="texto-labels">Nombre</label>
             <input type="text" class="textbox-correo" id="buscarCorreo" name="buscarCorreo" value="John" disabled />
             <label for="buscarCorreo" class="texto-labels">Rol</label>
