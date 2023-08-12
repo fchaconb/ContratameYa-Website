@@ -3,16 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notificaciones</title>
-    <link rel="stylesheet" href="/CSS/notificacionesUsuarioFinal.css" />
+    <title>Administrar Puestos</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/administrarPuestos.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
-    <script src="/JS/notificacionesUsuarios.js"></script>
+
+    <script src="/JS/administrarPuestosGerente.js"></script>
   </head>
   <body>
     <header>
@@ -53,14 +55,22 @@
       <section class="seccion-titulos">
         <div class="titulo-link">
           <img
-            src="/Media/Fotos/alert.png"
-            alt="Icono de notificaciones"
+            src="/Media/Fotos/job-seeker.png"
+            alt="Icono de administrar puestos"
             class="seccion-iconos"
           />
-          <h1>Notificaciones</h1>
+          <h1>Administrar Puestos de Trabajo</h1>
         </div>
       </section>
-      <section id="seccion-notificaciones"></section>
+      <section>
+        <button
+          class="btn-crear-puesto"
+          onclick="location.href='./crearPuestoTrabajoGerente.html'"
+        >
+          Crear un nuevo puesto
+        </button>
+      </section>
+      <section id="empleos-publicados"></section>
     </main>
     <footer>
       <img

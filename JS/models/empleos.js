@@ -8,6 +8,7 @@ const EmpleosSchema = new mongoose.Schema(
         rangoSalarial: { type: String, required: true },
         requisitosMinimos: { type: String, required: true },
         requisitosDeseados: { type: String, required: true },
+        correoGerente: { type: String, required: true },
     },
     { 
         timestamps: true, 

@@ -18,11 +18,13 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
+
+    <script src="/JS/editarPuestoTrabajoGerente.js"></script>
   </head>
   <body>
     <header>
       <nav>
-        <a href="/HTML/landingAdministrador.html">
+        <a href="/HTML/landingGerente.html">
           <img
             src="/Media/Fotos/logo-script-elite.png"
             alt="logo"
@@ -30,14 +32,14 @@
           />
         </a>
         <div class="navegacion-derecha">
-          <a href="/HTML/landingAdministrador.html">
+          <a href="/HTML/notificacionesGerente.html">
             <img
               src="/Media/Fotos/alert.png"
               alt="Icono de notification"
               class="notificacion-nav"
             />
           </a>
-          <a href="/HTML/editarPerfilAdministrador.html">
+          <a href="/HTML/editarPerfilGerente.html">
             <img
               src="/Media/Fotos/man.png"
               alt="Foto de perfil usuario final"
@@ -66,7 +68,7 @@
         </div>
       </section>
       <section class="seccion-puestos">
-        <form>
+        <form id="editarPuestoForm">
           <div class="container-puestos">
             <div class="input-puesto">
               <label for="nombre"> Nombre del Puesto</label>
@@ -76,20 +78,14 @@
             <div class="input-puesto">
               <label for="visibilidad">Visibilidad</label>
               <select name="visibilidad" id="visibilidad" required>
-                <option value="publico">Público</option>
-                <option value="privado">Privado</option>
+                <option value="Pública">Público</option>
+                <option value="Privada">Privado</option>
               </select>
             </div>
 
             <div class="input-puesto">
               <label for="rangoSalarial"> Rango Salarial</label>
-              <input
-                class="input-puesto"
-                type="text"
-                name="rangoSalarial"
-                id="rangoSalarial"
-                required
-              />
+              <select name="rangoSalarial" id="rango-salarial"></select>
             </div>
 
             <div class="input-puesto">
@@ -131,23 +127,5 @@
         alt="Logo de la empresa Script Elite"
       />
     </footer>
-    <script src="/JS/editarPuestoTrabajo.js"></script>
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const nombrePuesto = urlParams.get("nombre");
-      const rangoSalarial = urlParams.get("rangoSalarial");
-      const requisitosMinimos = urlParams.get("requisitosMinimos");
-      const requisitosDeseados = urlParams.get("requisitosDeseados");
-
-      // Fill the fields with the retrieved values
-      document.getElementById("nombre").value =
-        decodeURIComponent(nombrePuesto);
-      document.getElementById("rangoSalarial").value =
-        decodeURIComponent(rangoSalarial);
-      document.getElementById("requisitosMinimos").value =
-        decodeURIComponent(requisitosMinimos);
-      document.getElementById("requisitosDeseados").value =
-        decodeURIComponent(requisitosDeseados);
-    </script>
   </body>
 </html>

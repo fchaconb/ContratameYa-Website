@@ -12,11 +12,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" type="text/css" href="/CSS/header-footer.css" />
+    <script src="/JS/notificacionesUsuarios.js"></script>
   </head>
   <body>
     <header>
       <nav>
-        <a href="/HTML/landingGerente.html">
+        <a href="/HTML/landingReclutador.html">
           <img
             src="/Media/Fotos/logo-script-elite.png"
             alt="logo"
@@ -24,14 +25,14 @@
           />
         </a>
         <div class="navegacion-derecha">
-          <a href="/HTML/notificacionesGerente.html">
+          <a href="/HTML/notificacionesReclutador.html">
             <img
               src="/Media/Fotos/alert.png"
               alt="Icono de notification"
               class="notificacion-nav"
             />
           </a>
-          <a href="/HTML/editarPerfilColaborador.html">
+          <a href="/HTML/editarPerfilReclutador.html">
             <img
               src="/Media/Fotos/man.png"
               alt="Foto de perfil usuario final"
@@ -59,68 +60,7 @@
           <h1>Notificaciones</h1>
         </div>
       </section>
-      <section>
-        <div class="container1">
-          <div class="notification success">
-            <div class="textarea">
-              <p>12/7/2023</p>
-              <p>Cambio Estado Aplicación</p>
-              <p class="container2">
-                Se cambio el estado del usuario 'user@example.com' de 'Recibida'
-                a 'En Revisión'.
-              </p>
-              <button>Leído</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="container1">
-          <div class="notification success">
-            <div class="textarea">
-              <p>12/7/2023</p>
-              <p>Puesto Publicado</p>
-              <p class="container2">
-                Puesto de 'Data Analyst' fue publicado exitosamente.
-              </p>
-              <button>Leído</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="container1">
-          <div class="notification success">
-            <div class="textarea">
-              <p>12/7/2023</p>
-              <p>Puesto Publicado</p>
-              <p class="container2">
-                Puesto de 'Cisco Support Agent' fue publicado exitosamente.
-              </p>
-              <button>Leído</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="container1">
-          <div class="notification success">
-            <div class="textarea">
-              <p>12/7/2023</p>
-              <p>Invitación Aplicación</p>
-              <p class="container2">
-                Invitación a 'user5@example.com' para la posición de 'Support
-                Manager' fue enviada exitosamente.
-              </p>
-              <button>Leído</button>
-              <button>Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section id="seccion-notificaciones"></section>
     </main>
     <footer>
       <img
