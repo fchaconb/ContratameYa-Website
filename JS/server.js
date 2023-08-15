@@ -553,6 +553,22 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
         const usuarioFinalGuardado = await usuarioFinal.save();
         console.log("Usuario final guardado:", usuarioFinalGuardado);
         res.status(201).send(usuarioFinalGuardado);
+
+        const mailOptions = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correo,
+            subject: 'Perfil de usuario creado exitosamente!',
+            text: `Hola ${req.body.nombre},\n\nTu perfil de usuario fue creado exitosamente!`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+        
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
