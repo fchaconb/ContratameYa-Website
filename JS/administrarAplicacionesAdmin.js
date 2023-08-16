@@ -1,0 +1,69 @@
+async function dropdownPuestos() {
+    const userName = localStorage.getItem("userName");
+    console.log(userName);
+    try {
+        const respuestaPuestos = await fetch('http://localhost:3000/empleosAdmin?empresa=' + userName);
+        const puestos = await respuestaPuestos.json();
+        console.log(puestos);
+
+        const puestosHTML = document.getElementById('puesto');
+
+        puestos.forEach(function(puesto) {
+            const select = `<option value="${puesto._id}">${puesto.titulo}</option>`;
+            puestosHTML.innerHTML += select;
+        });
+    } catch (error) {
+        console.log(error);
+        alert(error);
+    }
+};
+
+async function invitarUsuarioAPuesto(evento) {
+    evento.preventDefault();
+    const idPuesto = document.getElementById('puesto').value;
+    const nombrePuesto = document.getElementById('puesto').options[document.getElementById('puesto').selectedIndex].text;
+    const correoInvitado = document.getElementById('correo').value;
+    const nombreAdministrador = localStorage.getItem("userName");
+    const correoAdministrador = localStorage.getItem("userEmail");
+    const empresa = localStorage.getItem("userName");
+
+    const data = {
+        idPuesto,
+        nombrePuesto,
+        correoInvitado,
+        nombreAdministrador,
+        correoAdministrador,
+        empresa
+    };
+
+    const confirmacion = confirm('¿Está seguro de que desea invitar a ' + correoInvitado + ' al puesto de ' + nombrePuesto + '?');
+
+    if (confirmacion) {
+        try {
+            const respuesta = await fetch('http://localhost:3000/invitarUsuarioAPuesto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const resultado = await respuesta.json();
+            console.log(resultado);
+            alert('La invitación se ha enviado correctamente.');
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+            alert(error);
+        }
+    } else {
+        alert('La invitación no se ha enviado.');
+    }
+};
+
+window.onload = function() {
+    dropdownPuestos();
+
+    let formInvitacionesUsuarios = document.getElementById('invitar-usuarios');
+    formInvitacionesUsuarios.addEventListener('submit', invitarUsuarioAPuesto);
+};
