@@ -832,7 +832,7 @@ app.get("/administrarEmpleados", async function (req, res) {
 
     try {
         console.log("Consultando empleados en la base de datos");
-        const empleados = await UsuarioColaboradorModel.find({}, { correo: 1, empresa: 1, });
+        const empleados = await UsuarioColaboradorModel.find({}, { correo: 1, empresa: 1, nombre: 1, rol: 1});
         console.log("Empleados:", empleados);
         res.status(200).send(empleados);
     } catch (error) {
@@ -846,6 +846,7 @@ app.put("/administrarEmpleados/:correo", async function (req, res) {
     console.log("Atendiendo solicitud PUT /administrarEmpleados");
 
     const correoSeleccionado = req.params.correo; // Obtener el correo seleccionado desde los parámetros de la URL
+    console.log("Correo seleccionado:", correoSeleccionado);
     
     if (!req.body) {
         console.log("El cuerpo de la solicitud no tiene contenido");
@@ -863,6 +864,29 @@ app.put("/administrarEmpleados/:correo", async function (req, res) {
         );
         console.log("Empleado actualizado:", empleadoActualizado);
         res.status(201).json(empleadoActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
+
+
+
+
+app.delete("/administrarEmpleados/:correo", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /administrarEmpleados");
+
+    const correoSeleccionadoDelete = req.params.correo; // Obtener el correo seleccionado desde los parámetros de la URL
+    console.log("Correo seleccionado:", correoSeleccionadoDelete);
+    
+
+    try {
+        console.log("Eliminando empleado de la base de datos");
+        const empleadoEliminado = await UsuarioColaboradorModel.findOneAndDelete({ correo: correoSeleccionadoDelete });
+        console.log("Empleado eliminado:", empleadoEliminado);
+
+
+        res.status(200).json(empleadoEliminado);
     } catch (error) {
         console.log("Error:", error);
         res.status(500).json(error);
