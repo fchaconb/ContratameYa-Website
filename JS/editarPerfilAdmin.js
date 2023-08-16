@@ -97,27 +97,9 @@ async function actualizarDatosEmpresa() {
         });
 
         const datosEmpresaActualizados = await respuesta.json();
-        if (datosEmpresaActualizados) {
-          alert("Datos actualizados exitosamente");
-
-          const notificacionData = {
-            correoRecipiente: datosEmpresa.correo,
-            titulo: "Datos de perfil actualizados",
-            mensaje: "Se han actualizado los datos de tu perfil.",
-          };
-
-          await fetch("http://localhost:3000/notificaciones", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(notificacionData),
-          });
-
-          window.location.reload();
-        } else {
-          alert("Error al actualizar los datos");
-        }
+        alert("Datos actualizados exitosamente");
+        window.location.reload();
+    
       } catch (error) {
         console.log("Error:", error);
       }

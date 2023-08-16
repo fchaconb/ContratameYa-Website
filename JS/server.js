@@ -724,6 +724,21 @@ app.put('/editarPerfilEmpresa', async function (req, res) {
         const empresaActualizada = await AdminsModel.findOneAndUpdate({ correo: empresa.correo }, empresa, { new: true });
         console.log("Empresa actualizada:", empresaActualizada);
         res.status(201).send(empresaActualizada);
+
+        const notificacionData = {
+            correoRecipiente: req.body.correo,
+            titulo: "Datos de perfil actualizados",
+            mensaje: "Se han actualizado los datos de tu perfil.",
+          };
+
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionData),
+        });
+
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
