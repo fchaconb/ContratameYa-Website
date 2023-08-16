@@ -12,6 +12,7 @@ const UsuarioColaboradorModel = require("./models/usuarioColaborador");
 const Aplicaciones = require("./models/aplicaciones");
 const UsuarioFinalModel = require("./models/usuarioFinal");
 const Notificaciones = require("./models/notificaciones");
+const InvitacionesPuestos = require("./models/invitacionesPuestosTrabajo");
 
 // Configuración
 const app = express();
@@ -658,7 +659,8 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
         correoAplicante: req.body.correoAplicante,
         estadoAplicacion: req.body.estadoAplicacion,
         requisitosMinimos: req.body.requisitosMinimos,
-        requisitosDeseados: req.body.requisitosDeseados
+        requisitosDeseados: req.body.requisitosDeseados,
+        empresa: req.body.empresa,
     });
 
     try {
@@ -724,6 +726,21 @@ app.put('/editarPerfilEmpresa', async function (req, res) {
         const empresaActualizada = await AdminsModel.findOneAndUpdate({ correo: empresa.correo }, empresa, { new: true });
         console.log("Empresa actualizada:", empresaActualizada);
         res.status(201).send(empresaActualizada);
+
+        const notificacionData = {
+            correoRecipiente: req.body.correo,
+            titulo: "Datos de perfil actualizados",
+            mensaje: "Se han actualizado los datos de tu perfil.",
+          };
+
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionData),
+        });
+
     } catch (error) {
         console.log("Error:", error);
         res.status(500).send(error);
@@ -867,6 +884,112 @@ app.put("/administrarEmpleados/:correo", async function (req, res) {
     } catch (error) {
         console.log("Error:", error);
         res.status(500).json(error);
+    }
+});
+
+app.post("/invitarUsuarioAPuesto", async function (req, res) {
+    console.log("Atendiendo solicitud POST /invitarUsuarioAPuesto");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const invitacion = InvitacionesPuestos({
+        idPuesto: req.body.idPuesto,
+        nombrePuesto: req.body.nombrePuesto,
+        correoInvitado: req.body.correoInvitado,
+        nombreAdministrador: req.body.nombreAdministrador,
+        correoAdministrador: req.body.correoAdministrador,
+        empresa: req.body.empresa,
+    });
+
+    try {
+        console.log("Guardando invitacion en la base de datos");
+        const invitacionGuardada = await invitacion.save();
+        console.log("Invitacion guardada:", invitacionGuardada);
+        res.status(201).send(invitacionGuardada);
+
+        const notificacionUsuarioFinal = {
+            correoRecipiente: req.body.correoInvitado,
+            titulo: "Invitación a puesto" + req.body.nombrePuesto,
+            mensaje: "El usuario " + req.body.nombreAdministrador + " te ha invitado a aplicar al puesto " 
+            + req.body.nombrePuesto + " en la empresa " + req.body.empresa + ".",
+          };
+    
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionUsuarioFinal),
+        });
+
+        const notificacionAdmin = {
+            correoRecipiente: req.body.correoAdministrador,
+            titulo: "Invitación a puesto " + req.body.nombrePuesto,
+            mensaje: "Invitación al puesto de "+ req.body.nombrePuesto +" enviada existosamente al usuario " + req.body.correoInvitado + ".",
+          };
+    
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionAdmin),
+        });
+
+        const mailUsuarioFinal = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correoInvitado,
+            subject: "Invitación a puesto " + req.body.nombrePuesto,
+            text: "Hola! \n\nTe informamos que el usuario " + req.body.nombreAdministrador 
+            + " te ha invitado a aplicar al puesto " + req.body.nombrePuesto + " en la empresa " + req.body.empresa 
+            + ".\n\nPara ver la invitación, ingresa a la plataforma.\n\nSaludos,\n\nEl equipo de Contrátame Ya.",
+        };
+
+        transporter.sendMail(mailUsuarioFinal, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+
+        const mailAdmin = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correoAdministrador,
+            subject: "Invitación a puesto " + req.body.nombrePuesto,
+            text: "Invitación al puesto de "+ req.body.nombrePuesto +" enviada existosamente al usuario " + req.body.correoInvitado + ".",
+        };
+
+        transporter.sendMail(mailAdmin, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+
+
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+
+});
+
+app.get("/administrarAplicaciones", async function (req, res) {
+    console.log("Atendiendo solicitud GET /administrarAplicaciones");
+
+    try {
+        console.log("Consultando aplicaciones en la base de datos");
+        const aplicaciones = await Aplicaciones.find({empresa: req.query.empresa});
+        console.log("Aplicaciones:", aplicaciones);
+        res.status(200).send(aplicaciones);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
     }
 });
 

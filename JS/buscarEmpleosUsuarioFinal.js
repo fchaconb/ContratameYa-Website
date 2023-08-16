@@ -59,6 +59,7 @@ async function empleosOverview(nombreEmpresa, rangoSalarialID) {
         nombrePuesto: empleo.titulo,
         requisitosMinimos: empleo.requisitosMinimos,
         requisitosDeseados: empleo.requisitosDeseados,
+        empresa: empleo.empresa,
       };
     });
 
@@ -77,17 +78,22 @@ async function empleosOverview(nombreEmpresa, rangoSalarialID) {
                     <p>${empleo.requisitosDeseados}</p>
                 </div>
                 <div class="seccion-aplicar-boton">
-                    <button type="submit" data-job-index="${i}" id="aplicar${i}">Aplicar</button>
+                    <button type="click" data-job-index="${i}" id="aplicar${i}">Aplicar</button>
                 </div>
             </div>
             `;
       empleosHTML.innerHTML += div;
+
+      const botonAplicarEmpleosHTML = document.getElementById(`aplicar${i}`);
+
+      botonAplicarEmpleosHTML.addEventListener("click", function (evento) {
+        botonAplicar(evento, infoEmpleoArray);
+      });
+
       i += 1;
     });
 
-    empleosHTML.addEventListener("click", function (evento) {
-      botonAplicar(evento, infoEmpleoArray);
-    });
+    
 
   } catch (error) {
     console.log("Error:", error);
@@ -101,6 +107,7 @@ async function botonAplicar(evento) {
     const jobIndex = button.getAttribute("data-job-index");
 
     const infoEmpleo = infoEmpleoArray[jobIndex];
+    console.log(infoEmpleo);
 
     const datosAplicacion = {
       nombrePuesto: infoEmpleo.nombrePuesto,
@@ -109,6 +116,7 @@ async function botonAplicar(evento) {
       estadoAplicacion: "Enviada",
       requisitosMinimos: infoEmpleo.requisitosMinimos,
       requisitosDeseados: infoEmpleo.requisitosDeseados,
+      empresa: infoEmpleo.empresa,
     };
 
     // Display a confirmation dialog before sending the application
