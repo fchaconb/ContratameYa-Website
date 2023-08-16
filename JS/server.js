@@ -659,7 +659,8 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
         correoAplicante: req.body.correoAplicante,
         estadoAplicacion: req.body.estadoAplicacion,
         requisitosMinimos: req.body.requisitosMinimos,
-        requisitosDeseados: req.body.requisitosDeseados
+        requisitosDeseados: req.body.requisitosDeseados,
+        empresa: req.body.empresa,
     });
 
     try {
@@ -975,6 +976,20 @@ app.post("/invitarUsuarioAPuesto", async function (req, res) {
         res.status(500).send(error);
     }
 
+});
+
+app.get("/administrarAplicaciones", async function (req, res) {
+    console.log("Atendiendo solicitud GET /administrarAplicaciones");
+
+    try {
+        console.log("Consultando aplicaciones en la base de datos");
+        const aplicaciones = await Aplicaciones.find({empresa: req.query.empresa});
+        console.log("Aplicaciones:", aplicaciones);
+        res.status(200).send(aplicaciones);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
 });
 
 

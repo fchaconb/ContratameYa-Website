@@ -59,6 +59,7 @@ async function empleosOverview(nombreEmpresa, rangoSalarialID) {
         nombrePuesto: empleo.titulo,
         requisitosMinimos: empleo.requisitosMinimos,
         requisitosDeseados: empleo.requisitosDeseados,
+        empresa: empleo.empresa,
       };
     });
 
@@ -106,6 +107,7 @@ async function botonAplicar(evento) {
     const jobIndex = button.getAttribute("data-job-index");
 
     const infoEmpleo = infoEmpleoArray[jobIndex];
+    console.log(infoEmpleo);
 
     const datosAplicacion = {
       nombrePuesto: infoEmpleo.nombrePuesto,
@@ -114,6 +116,7 @@ async function botonAplicar(evento) {
       estadoAplicacion: "Enviada",
       requisitosMinimos: infoEmpleo.requisitosMinimos,
       requisitosDeseados: infoEmpleo.requisitosDeseados,
+      empresa: infoEmpleo.empresa,
     };
 
     // Display a confirmation dialog before sending the application

@@ -61,8 +61,104 @@ async function invitarUsuarioAPuesto(evento) {
     }
 };
 
+async function cargarAplicaciones() {
+    const userName = localStorage.getItem("userName");
+
+    try {
+        const respuestaPuestos = await fetch('http://localhost:3000/empleosAdmin?empresa=' + userName);
+        const respuestaAplicaciones = await fetch('http://localhost:3000/administrarAplicaciones?empresa=' + userName);
+
+        const puestos = await respuestaPuestos.json();
+        const aplicaciones = await respuestaAplicaciones.json();
+
+        console.log(puestos);
+        console.log(aplicaciones);
+
+        const puestosHTML = document.getElementById('aplicaciones-center');
+
+        puestos.forEach(function(puesto, i) {
+            const section = 
+            `
+            <section class="seccion-aplicaciones">
+                <section class="seccion-datos">
+                    <div class="aplicacion-info">
+                        <p>Puesto: ${puesto.titulo}</p>
+                        <form>
+                            <div class="aplicacion-info-filters">
+                                <label for="estado">Estado</label>
+                                <select
+                                    name="filtroEstado"
+                                    id="filtroEstado${i}"
+                                    class="select-info"
+                                    required
+                                >
+                                    <option value="Enviada">Enviada</option>
+                                    <option value="En Revisión">En Revisión</option>
+                                    <option value="Aceptada">Aceptada</option>
+                                    <option value="Denegada">Denegada</option>
+                                </select>
+                                <label for="palabra-clave">Búsqueda por Palabra Clave</label>
+                                <input
+                                    type="text"
+                                    name="palabra-clave"
+                                    id="palabra-clave${i}"
+                                    required
+                                />
+                                <div class="boton-filtrar">
+                                    <input
+                                        id="filtrar"
+                                        type="submit"
+                                        value="Filtrar"
+                                        class="boton-filtrar"
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <section class="seccion-aplicantes">
+                    <table>
+                        <thead>
+                            <th>Postulante</th>
+                            <th>Experiencia</th>
+                            <th>Estado</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            `;
+
+            puestosHTML.innerHTML += section;
+            
+            const aplicantesHTML = document.querySelectorAll('.seccion-aplicantes tbody')[i];
+
+            aplicaciones.forEach(function(aplicacion) {
+                if (aplicacion.nombrePuesto === puesto.titulo) {
+                    const aplicante = 
+                    `
+                    <tr>
+                        <td>${aplicacion.nombreAplicante}</td>
+                        <td>${aplicacion.experiencia}</td>
+                        <td>${aplicacion.estadoAplicacion}</td>
+                    </tr>
+                    `;
+
+                    aplicantesHTML.innerHTML += aplicante;
+                }
+            });
+
+        });
+    } catch (error) {
+        console.log(error);
+        alert(error);
+    }
+};
+
 window.onload = function() {
     dropdownPuestos();
+    cargarAplicaciones();
 
     let formInvitacionesUsuarios = document.getElementById('invitar-usuarios');
     formInvitacionesUsuarios.addEventListener('submit', invitarUsuarioAPuesto);

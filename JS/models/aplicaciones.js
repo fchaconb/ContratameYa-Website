@@ -7,6 +7,7 @@ const AplicacionesSchema = new mongoose.Schema(
         estadoAplicacion: { type: String, required: true },
         requisitosMinimos: { type: String, required: true },
         requisitosDeseados: { type: String, required: true },
+        empresa: { type: String, required: true },
     } ,
     {
         timestamps: true,
