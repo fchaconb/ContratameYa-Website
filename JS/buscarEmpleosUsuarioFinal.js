@@ -77,17 +77,22 @@ async function empleosOverview(nombreEmpresa, rangoSalarialID) {
                     <p>${empleo.requisitosDeseados}</p>
                 </div>
                 <div class="seccion-aplicar-boton">
-                    <button type="submit" data-job-index="${i}" id="aplicar${i}">Aplicar</button>
+                    <button type="click" data-job-index="${i}" id="aplicar${i}">Aplicar</button>
                 </div>
             </div>
             `;
       empleosHTML.innerHTML += div;
+
+      const botonAplicarEmpleosHTML = document.getElementById(`aplicar${i}`);
+
+      botonAplicarEmpleosHTML.addEventListener("click", function (evento) {
+        botonAplicar(evento, infoEmpleoArray);
+      });
+
       i += 1;
     });
 
-    empleosHTML.addEventListener("click", function (evento) {
-      botonAplicar(evento, infoEmpleoArray);
-    });
+    
 
   } catch (error) {
     console.log("Error:", error);
