@@ -13,6 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,500;1,300&display=swap"
       rel="stylesheet"
     />
+
+    <script src="/JS/recuperarClave.js"></script>
   </head>
   <body>
     <header>
@@ -36,13 +38,9 @@
     </header>
     <div class="contenedor">
       <p class="texto-recuperar-clave">Recuperar clave</p>
-      <form>
+      <form id="formRecuperarClave">
         <label for="correo" class="text-label">Correo electrónico</label>
-        <input id="correo"
-          type="email"
-          class="textbox"
-          required
-        />
+        <input id="correo" type="email" class="textbox" required />
         <div class="text-form">
           <p>
             Ingresa tu correo, y si está en nuestra base de datos te enviaremos

@@ -993,6 +993,59 @@ app.get("/administrarAplicaciones", async function (req, res) {
 });
 
 
+app.put("/recuperarClave", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /recuperarClave");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const correo = req.body.correo;
+    const contrasena = req.body.clave;
+
+    try {
+        // Check user type and update password accordingly
+        const adminLogin = await AdminsModel.findOne({ correo: correo });
+        const colaboradorLogin = await UsuarioColaboradorModel.findOne({ correo: correo });
+        const usuarioFinalLogin = await UsuarioFinalModel.findOne({ correo: correo });
+
+        if (adminLogin) {
+            console.log("Usuario encontrado:", adminLogin);
+            await AdminsModel.findOneAndUpdate({ correo: correo }, { contrasena: contrasena }, { new: true });
+        } else if (colaboradorLogin) {
+            console.log("Usuario encontrado:", colaboradorLogin);
+            await UsuarioColaboradorModel.findOneAndUpdate({ correo: correo }, { contrasena: contrasena }, { new: true });
+        } else if (usuarioFinalLogin) {
+            console.log("Usuario encontrado:", usuarioFinalLogin);
+            await UsuarioFinalModel.findOneAndUpdate({ correo: correo }, { clave: contrasena }, { new: true });
+        } else {
+            console.log("Usuario no encontrado");
+            return res.status(404).send("Usuario no encontrado");
+        }
+
+        console.log("Clave actualizada en la base de datos");
+        res.status(200).json({ message: "Clave actualizada correctamente" });
+
+        const recuperarEmail = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correo,
+            subject: "Recuperación de clave",
+            text: "Hola! \n\nTe informamos que tu clave ha sido actualizada exitosamente. \n\nTe nueva clave temporal es: " + req.body.clave + "\n\nSaludos,\n\nEl equipo de Contrátame Ya."
+        };
+
+        transporter.sendMail(recuperarEmail, (error, info) => {
+            if (error) {
+              console.log('Error al enviar el correo de notificación:', error);
+            } else {
+              console.log('Correo de notificación enviado:', info.response);
+            }
+        }); 
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).send(error);
+    }
+});
 
 // Iniciar servidor
 
