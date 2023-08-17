@@ -48,33 +48,35 @@
         <p class="texto-alinear">Invitar empleado</p>
         <div class="cuadro1">
           <form>
-            <label for="email" class="texto-labels">Correo:</label>
-            <input type="email" class="form-input" id="email" name="email" required />
+            <div class="subcontenedorv3">
+              <label for="email" class="texto-labels">Correo:</label>
+              <input type="email" class="form-input" id="email" name="email" required />
 
-            <label for="Contraseña" class="texto-labels">Contraseña:</label>
-            <input type="email" class="form-input" id="email" name="email" required />
+              <label for="Contraseña" class="texto-labels">Contraseña:</label>
+              <input type="email" class="form-input" id="email" name="email" required />
 
-            <label for="nombreInvitar" class="texto-labels">Nombre:</label>
-            <input type="text" class="form-input" id="nombre" name="nombreInvitar" required />
-            <label for="nombreInvitar" class="texto-labels">Apellidos:</label>
-            <input type="text" class="form-input" id="nombre" name="nombreInvitar" required />
+              <label for="nombreInvitar" class="texto-labels">Nombre:</label>
+              <input type="text" class="form-input" id="nombre" name="nombreInvitar" required />
+              <label for="nombreInvitar" class="texto-labels">Apellidos:</label>
+              <input type="text" class="form-input" id="nombre" name="nombreInvitar" required />
 
-            <label for="Genero" class="texto-labels">Genero:</label>
-            <select  class="form-dropdown">
-              <option value="" selected disabled>Selecciona un género</option>
-              <option value="Administrador">Masculino</option>
-              <option value="Gerente">Femenino</option>
-              <option value="Gerente">Prefiero no especificar</option>
-            </select>
+              <label for="Genero" class="texto-labels">Genero:</label>
+              <select class="form-dropdown">
+                <option value="" selected disabled>Selecciona un género</option>
+                <option value="Administrador">Masculino</option>
+                <option value="Gerente">Femenino</option>
+                <option value="Gerente">Prefiero no especificar</option>
+              </select>
 
-            <label for="perfil" class="texto-labels">Asignar un Perfil:</label>
-            <select id="perfil" name="perfil" class="form-dropdown" required></select>
-            <div class="btn">
-              <button type="button" class="button-color-2" onclick="redireccionarAReporte()">
-                Reporte de invitaciones
-              </button>
-              <button type="submit" class="button-color">Invitar</button>
-            </div>
+              <label for="perfil" class="texto-labels">Asignar un Perfil:</label>
+              <select id="perfil" name="perfil" class="form-dropdown" required></select>
+              <div class="btn">
+                <button type="submit" class="button-color">Enviar invitación</button>
+                <button type="button" class="button-color-2" onclick="redireccionarAReporte()">
+                  Reporte de invitaciones
+                </button>
+              </div>
+            </div>  
           </form>
         </div>
       </div>
@@ -98,8 +100,8 @@
                 <option value="Gerente">Gerente</option>
               </select>
 
-              <button type="button" id="editarCambios"class="button-color" >Guardar Cambios</button>
-            </div>  
+              <button type="button" id="editarCambios" class="button-color">Guardar Cambios</button>
+            </div>
           </form>
         </div>
       </div>
@@ -120,11 +122,10 @@
               <label for="buscarCorreo" class="texto-labelsv2">Nombre</label>
               <input type="text" class="form-inputv2" id="nombreEliminar" name="nombreEliminar" disabled />
               <label for="buscarCorreo" class="texto-labelsv3">Rol</label>
-              <input type="text" class="form-inputv3" id="rol" name="rol" 
-                disabled />
+              <input type="text" class="form-inputv3" id="rol" name="rol" disabled />
 
               <button type="button" id="eliminarPerfil" class="button-color">Eliminar usuario</button>
-            </div>  
+            </div>
           </form>
         </div>
       </div>
