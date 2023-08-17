@@ -19,6 +19,10 @@ async function correoEditarPerfilEmpleado() {
     }
 }
 
+
+
+
+
 async function cargarDatosPerfilColaborador(correo) {
     try {
         console.log("cargarDatosPerfilColaborador");
@@ -28,6 +32,7 @@ async function cargarDatosPerfilColaborador(correo) {
 
         document.getElementById("nombreEliminar").value = colaborador.nombre; // Populate name input
         document.getElementById("rol").value = colaborador.rol; // Populate role input
+        document.getElementById("apellidosEliminar").value = colaborador.apellidos; // Populate last name input
     } catch (error) {
         console.log("Error:", error);
         alert("Error al cargar los datos del colaborador");
@@ -113,13 +118,61 @@ async function eliminarPerfilEmpleado() {
     }
 }
 
+async function enviarInvitacion() {
+    const correo = document.getElementById("correo").value;
+    const contrasena = document.getElementById("contrasena").value;
+    const empresa = document.getElementById("empresa").value;
+    const nombre = document.getElementById("nombre").value;
+    const apellidos = document.getElementById("apellidos").value;
+    const genero = document.getElementById("genero").value;
+    const rol = document.getElementById("rol").value;
+
+    const datosInvitacion = {
+        correo: correo,
+        contrasena: contrasena,
+        empresa: empresa,
+        nombre: nombre,
+        apellidos: apellidos,
+        genero: genero,
+        rol: rol
+    };
+
+
+    try {
+        console.log("Datos enviados", datosInvitacion);
+        const respuesta = await fetch(`http://localhost:3000/administrarEmpleados`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datosInvitacion),
+
+        });
+        const exitoso = await respuesta.json();
+        console.log(exitoso);
+        alert("Invitación enviada con éxito");
+        window.location.href = "/HTML/administrarEmpleados.html";
+    } catch (error) {
+        console.log("Error:", error);
+        alert("Error al enviar la invitación");
+    }
+}
+
+
+
+    
+
+
 window.onload = function () {
     correoEditarPerfilEmpleado();
     mostrarCorreoEliminarPerfilEmpleado();
+
     const guardarCambiosButton = document.getElementById("editarCambios");
     guardarCambiosButton.addEventListener("click", editarPerfilEmpleado);
     const eliminarPerfilButton = document.getElementById("eliminarPerfil");
     eliminarPerfilButton.addEventListener("click", eliminarPerfilEmpleado);
+    const invitarEmpleadosButton = document.getElementById("btnEnviarInvitacion");
+    invitarEmpleadosButton.addEventListener("click", enviarInvitacion);
 }
 
 

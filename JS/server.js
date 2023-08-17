@@ -847,6 +847,8 @@ app.put('/editarPerfilColaborador', async function (req, res) {
 app.get("/administrarEmpleados", async function (req, res) {
     console.log("Atendiendo solicitud GET /administrarEmpleados");
 
+    const colaborador = req.query.empresa;
+
     try {
         console.log("Consultando empleados en la base de datos");
         const empleados = await UsuarioColaboradorModel.find({}, { correo: 1, empresa: 1, nombre: 1, rol: 1});
@@ -1063,6 +1065,40 @@ app.delete("/administrarEmpleados/:correo", async function (req, res) {
 
 
         res.status(200).json(empleadoEliminado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
+
+
+app.post("/administrarEmpleados", async function (req, res) {
+    console.log("Atendiendo solicitud POST /administrarEmpleados");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const invitacionEmpleado = {
+        empresa: req.body.empresa,
+        nombre: req.body.nombre,
+        apellidos: req.body.apellidos,
+        correo: req.body.correo,
+        contrasena: req.body.contrasena,
+        genero: req.body.genero,
+        rol: req.body.rol,
+
+    };
+
+    console.log("Empleado a crear:", invitacionEmpleado);
+
+
+    try {
+        console.log("Creando empleado en la base de datos");
+        const empleadoCreado = await UsuarioColaboradorModel.create(invitacionEmpleado);
+        console.log("Empleado creado:", empleadoCreado);
+        res.status(200).json(empleadoCreado);
     } catch (error) {
         console.log("Error:", error);
         res.status(500).json(error);
