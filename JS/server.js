@@ -1080,7 +1080,7 @@ app.post("/administrarEmpleados", async function (req, res) {
         return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
     }
 
-    const invitacionEmpleado = {
+    const invitacionEmpleado = UsuarioColaboradorModel({
         empresa: req.body.empresa,
         nombre: req.body.nombre,
         apellidos: req.body.apellidos,
@@ -1089,7 +1089,7 @@ app.post("/administrarEmpleados", async function (req, res) {
         genero: req.body.genero,
         rol: req.body.rol,
 
-    };
+    });
 
     console.log("Empleado a crear:", invitacionEmpleado);
 
@@ -1097,6 +1097,21 @@ app.post("/administrarEmpleados", async function (req, res) {
     try {
         console.log("Creando empleado en la base de datos");
         const empleadoCreado = await UsuarioColaboradorModel.create(invitacionEmpleado);
+        const mailOptions = {
+            from: 'contratame.ya.trabajos@gmail.com',
+            to: req.body.correo,
+            subject: `Invitación a ser ${req.body.rol} de ${req.body.empresa}`,
+            text: `Hola ${req.body.nombre} ${req.body.apellidos}, te invitamos a ser ${req.body.rol} de la empresa ${req.body.empresa} en la plataforma Contrátame Ya. Para ingresar a la plataforma, utiliza el siguiente correo y contraseña: ${req.body.correo} y ${req.body.contrasena}. ¡Te esperamos!`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+                alert("Error al enviar la invitación");
+            } else {
+                console.log('Cuerpo del correo enviado:', info.response);
+            }
+        });
         console.log("Empleado creado:", empleadoCreado);
         res.status(200).json(empleadoCreado);
     } catch (error) {

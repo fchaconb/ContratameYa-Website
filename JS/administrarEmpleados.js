@@ -31,7 +31,7 @@ async function cargarDatosPerfilColaborador(correo) {
         console.log(colaborador);
 
         document.getElementById("nombreEliminar").value = colaborador.nombre; // Populate name input
-        document.getElementById("rol").value = colaborador.rol; // Populate role input
+        document.getElementById("rolEliminar").value = colaborador.rol; // Populate role input
         document.getElementById("apellidosEliminar").value = colaborador.apellidos; // Populate last name input
     } catch (error) {
         console.log("Error:", error);
@@ -105,7 +105,7 @@ async function eliminarPerfilEmpleado() {
         const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
             method: "DELETE",
         });
-        body.JSON.stringify(dato);
+        
 
         console.log("Respuesta:", respuesta);
         const exitoso = await respuesta.json();
@@ -150,6 +150,8 @@ async function enviarInvitacion() {
         });
         const exitoso = await respuesta.json();
         console.log(exitoso);
+
+
         alert("Invitación enviada con éxito");
         window.location.href = "/HTML/administrarEmpleados.html";
     } catch (error) {
