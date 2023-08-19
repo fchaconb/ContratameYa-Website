@@ -20,6 +20,13 @@
     margin-right: 15px;
 }
 
+.seccion-crear-puesto{
+    width: 1440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .btn-crear-puesto {
     margin-left: 100px;
     width: 255px; 
