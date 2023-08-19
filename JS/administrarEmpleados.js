@@ -109,7 +109,7 @@ async function eliminarPerfilEmpleado() {
         const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
             method: "DELETE",
         });
-        
+
 
         console.log("Respuesta:", respuesta);
         const exitoso = await respuesta.json();
@@ -166,7 +166,7 @@ async function enviarInvitacion() {
 
 
 
-    
+
 
 
 window.onload = function () {
