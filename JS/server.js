@@ -850,12 +850,12 @@ app.put('/editarPerfilColaborador', async function (req, res) {
 
 app.get("/administrarEmpleados", async function (req, res) {
     console.log("Atendiendo solicitud GET /administrarEmpleados");
-
-    const colaborador = req.query.empresa;
+    const empresa = req.query.empresa;
+    console.log("Empresa:", empresa);
 
     try {
         console.log("Consultando empleados en la base de datos");
-        const empleados = await UsuarioColaboradorModel.find({}, { correo: 1, empresa: 1, nombre: 1, rol: 1});
+        const empleados = await UsuarioColaboradorModel.find({empresa: empresa}, { correo: 1, empresa: 1, nombre: 1, rol: 1});
         console.log("Empleados:", empleados);
         res.status(200).send(empleados);
     } catch (error) {
