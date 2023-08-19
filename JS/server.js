@@ -508,7 +508,7 @@ app.get("/datosUsuarioFinal", async function (req, res) {
     try {
         const userEmail = req.query.correo;
         console.log('Consultando informacion del usuario final ' + userEmail + 'en la base de datos');
-        const usuariosFinales = await UsuarioFinalModel.findOne({ correo: userEmail }, { nombre: 1, apellidos: 1, correo: 1, genero: 1, experiencia: 1, educacion: 1 });
+        const usuariosFinales = await UsuarioFinalModel.findOne({ correo: userEmail });
         console.log('Usuarios finales:', usuariosFinales);
         res.status(200).send(usuariosFinales);
 
@@ -547,6 +547,8 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
             fechaFinEducacion: req.body.educacion.fechaFinEducacion,
             descripcionEducacion: req.body.educacion.descripcionEducacion
         },
+        fotoPerfil: req.body.fotoPerfil,
+        curriculum: req.body.curriculum,
     });
 
     try {
@@ -604,6 +606,8 @@ app.put('/editarPerfilUsuarioFinal', async function (req, res) {
             fechaFinEducacion: req.body.educacion.fechaFinEducacion,
             descripcionEducacion: req.body.educacion.descripcionEducacion
         },
+        fotoPerfil: req.body.fotoPerfil,
+        curriculum: req.body.curriculum,
     };
 
     try {

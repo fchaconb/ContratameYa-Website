@@ -1,111 +1,65 @@
-// Wrap the JavaScript code in an event listener for DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function () {
-  var defaultImageURL = '/Media/Fotos/man.png';
+async function cargarFoto() {
+  const buttonElement = document.getElementById("botonFoto");
+  const imgElement = document.getElementById("fotoUsuario");
 
-  // Function to display the default image on page load
-  function displayDefaultImage() {
-    var imagePreview = document.getElementById('imagePreview');
-    imagePreview.src = defaultImageURL;
-    imagePreview.style.display = 'block';
-  }
+  let myWidget = cloudinary.createUploadWidget(
+      {
+          cloudName: "dobj7jqwu",
+          uploadPreset: "preset.Rom",
+          clientAllowedFormats: ["jpg", "png", "jpeg"],
+          maxFileSize: 3000000,
+      },
+      (error, result) => {
 
-  // Call the function to display the default image on page load
-  displayDefaultImage();
+          if (!error && result && result.event === "success") {
+              imgElement.src = result.info.secure_url;
+              localStorage.setItem("newfotoPerfil", imgElement.src);
+              console.log(imgElement.src);
+              console.log("Done! Here is the image info: ", result.info);
+          }
+      }
+  );
 
-});
+  buttonElement.addEventListener(
+      "click",
+      function () {
+          myWidget.open();
+      },
+      false
+  );
 
+};
 
-function validateImg(event) {
-  var fileInput = event.target;
-  var file = fileInput.files[0];
+async function cargarCV() {
+  const buttonElement = document.getElementById("botoncv");
 
-  if (file) {
-    var fileType = file.type;
-    var validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+  let myWidget = cloudinary.createUploadWidget(
+      {
+          cloudName: "dobj7jqwu",
+          uploadPreset: "preset.Rom",
+          clientAllowedFormats: ["pdf"],
+          maxFileSize: 3000000,
+      },
+      (error, result) => {
+          if (error) {
+              console.error("Error uploading file:", error);
+          } else if (result && result.event === "success") {
+              localStorage.setItem("cv", result.info.secure_url);
+              console.log("Done! Here is the PDF info:", result.info);
+              alert("El archivo se ha subido correctamente");
+          }
+      }
+  );
 
-    if (!validExtensions.includes(fileType)) {
-      alert('Por favor usar un formato soportado para imagenes: JPG, JPEG, o PNG.');
-      fileInput.value = '';
-      return;
-    }
+  buttonElement.addEventListener(
+      "click",
+      function () {
+          myWidget.open();
+      },
+      false
+  );
 
-    // Proceed with validating the file size
-    validateImgSize(file);
-  } else {
-    // If no file selected (user canceled), display the default image again
-    displayDefaultImage();
-  }
-}
-
-function validateImgSize(file) {
-  var fileSize = file.size;
-  var maxSize = 3 * 1024 * 1024; // 3MB in bytes
-
-  if (fileSize > maxSize) {
-    alert('La imagen seleccionada tiene un peso mayor a 3MB.');
-    return;
-  }
-
-  // Proceed with previewing the image
-  previewImage(file);
-}
-
-function previewImage(file) {
-  var reader = new FileReader();
-
-  reader.onload = function (e) {
-    var imagePreview = document.getElementById('imagePreview');
-    imagePreview.src = e.target.result;
-    imagePreview.style.display = 'block';
-  };
-
-  reader.readAsDataURL(file);
-}
-
-
-function validateCV(event) {
-  var fileInput = event.target;
-  var file = fileInput.files[0];
-
-  if (file) {
-    var fileType = file.type;
-    var validExtensions = ['application/pdf'];
-
-    if (!validExtensions.includes(fileType)) {
-      alert('Por favor, utiliza el formato PDF para el CV.');
-      fileInput.value = '';
-      return;
-    }
-
-    // Proceed with previewing the CV
-    validateCVSize(file);
-  }
-}
-
-function validateCVSize(file) {
-  var fileSize = file.size;
-  var maxSize = 3 * 1024 * 1024; // 3MB in bytes
-
-  if (fileSize > maxSize) {
-    alert('La CV tiene un peso mayor a 3MB.');
-    return;
-  }
-
-  // Proceed with previewing the image
-  previewCV(file);
-}
-
-function previewCV(file) {
-  var reader = new FileReader();
-
-  reader.onload = function (e) {
-    var cvPreview = document.getElementById('CVPreview');
-    cvPreview.src = e.target.result;
-    cvPreview.style.display = 'block';
-  };
-
-  reader.readAsDataURL(file);
-}
+};
 
 async function cargarDatosPerfil() {
   const userEmail = localStorage.getItem("userEmail");
@@ -143,6 +97,7 @@ async function cargarDatosPerfil() {
     }
 
     document.getElementById("descripcionEducacion").value = usuario.educacion.descripcionEducacion;
+    document.getElementById("fotoUsuario").src = usuario.fotoPerfil;
 
   } catch (error) {
     console.log("Error:", error);
@@ -173,6 +128,9 @@ async function editarPerfil(evento) {
   var fechaInicioEducacion = document.getElementById("fechaInicioEducacion").value;
   var fechaFinalEducacion = document.getElementById("fechaFinalEducacion").value;
   var descripcionEducacion = document.getElementById("descripcionEducacion").value;
+
+  var fotoPerfil = localStorage.getItem("newfotoPerfil");
+  var cv = localStorage.getItem("cv");
 
   var fechaActual = new Date();
   var fechaInicioLaboral = new Date(fechaInicioExperiencia);
@@ -238,6 +196,8 @@ async function editarPerfil(evento) {
         fechaFinEducacion: fechaFinalAcademica,
         descripcionEducacion: descripcionEducacion
       },
+      fotoPerfil: fotoPerfil,
+      curriculum: cv,
     };
 
     const confirmEdit = confirm("¿Estás seguro de que deseas editar tu perfil?");
@@ -287,6 +247,8 @@ async function editarPerfil(evento) {
 
 window.onload = function () {
   cargarDatosPerfil();
+  cargarFoto();
+  cargarCV();
 
   let form = document.getElementById("formularioEditarUsuarioFinal");
   form.addEventListener("submit", editarPerfil);

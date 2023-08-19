@@ -20,6 +20,10 @@
     />
 
     <script src="/JS/editarPerfilUsuario.js"></script>
+    <script
+      src="https://widget.cloudinary.com/v2.0/global/all.js"
+      type="text/javascript"
+    ></script>
   </head>
   <body>
     <header>
@@ -55,7 +59,7 @@
           </a>
           <a href="/HTML/editarUsuarioFinal.html">
             <img
-              src="/Media/Fotos/man.png"
+              src="/Media/Fotos/edit-user-icon.png"
               alt="Foto de perfil usuario final"
               class="perfil-nav"
             />
@@ -87,37 +91,22 @@
             <div class="contenedor-foto-perfil">
               <div class="foto-perfil">
                 <label for="fotoPerfil">Foto de Perfil</label>
-                <input
-                  type="file"
-                  name="fotoPerfil"
-                  id="fotoPerfil"
-                  required
-                  onchange="validateImg(event)"
-                />
+                <button type="button" id="botonFoto" required>
+                  Seleccionar Imagen
+                </button>
                 <p class="perfil-req">
                   Formato puede ser JPG, JPEG o PNG. Tamaño máximo 3MB.
                 </p>
                 <div>
-                  <img
-                    id="imagePreview"
-                    src="/Media/Fotos/man.png"
-                    alt="Preview imagen foto de perfil"
-                  />
+                  <img id="fotoUsuario" class="fotoUsuario" />
                 </div>
               </div>
               <div class="foto-perfil">
                 <label for="curriculum">Currículum</label>
-                <input
-                  type="file"
-                  name="curriculum"
-                  id="curriculum"
-                  required
-                  onchange="validateCV(event)"
-                />
+                <button type="button" id="botoncv" required>
+                  Seleccionar Archivo
+                </button>
                 <p class="perfil-req">Formato PDF. Tamaño máximo 3MB.</p>
-                <div>
-                  <embed id="CVPreview" src="" type="application/pdf" />
-                </div>
               </div>
             </div>
             <div class="contenedor-perfil">

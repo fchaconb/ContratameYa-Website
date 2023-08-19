@@ -140,6 +140,22 @@
     border-style: solid; 
 }
 
+.foto-perfil button {
+    height: 44px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 16px; 
+    line-height: 26px; 
+    color: #273469FF; 
+    background: #FFFFFFFF; 
+    opacity: 1; 
+    border-radius: 3px; 
+    border-width: 1px; 
+    border-color: #273469FF; 
+    border-style: solid; 
+}
+
 #imagePreview {
     width: 150px; 
     height: 150px; 
@@ -306,4 +322,33 @@ h2 {
     align-items: center;
     justify-content: center;
 
+}
+
+.botonGuardar {
+    background-color: #CCCCCCFF;
+    border: none;
+    border-radius: 5px;
+    margin-left: 30px;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 180px;
+    font-size: 16px;
+}
+
+.fotoUsuario {
+    /* margin-top: 20px; */
+    padding: 9px;
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #BDC1CAFF;
+    border-style: dashed;
 }

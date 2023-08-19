@@ -20,7 +20,8 @@ const usuarioFinalSchema = new mongoose.Schema(
             fechaFinEducacion : { type: Date, required: false },
             descripcionEducacion : { type: String, required: false },
         },
-
+        fotoPerfil : { type: String, required: false },
+        curriculum : { type: String, required: false },
     }
 );
 

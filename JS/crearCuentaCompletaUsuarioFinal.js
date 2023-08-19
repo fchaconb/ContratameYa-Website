@@ -1,120 +1,67 @@
-/*Inicio seccion 3*/
+async function cargarFoto() {
+    const buttonElement = document.getElementById("botonFoto");
+    const imgElement = document.getElementById("fotoUsuario");
 
-function validateImg(event) {
-    var fileInput = event.target;
-    var file = fileInput.files[0];
 
-    if (file) {
-        var fileType = file.type;
-        var validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+    let myWidget = cloudinary.createUploadWidget(
+        {
+            cloudName: "dobj7jqwu",
+            uploadPreset: "preset.Rom",
+            clientAllowedFormats: ["jpg", "png", "jpeg"],
+            maxFileSize: 3000000,
+        },
+        (error, result) => {
 
-        if (!validExtensions.includes(fileType)) {
-            alert('Por favor usar un formato soportado para imagenes: JPG, JPEG, o PNG.');
-            fileInput.value = '';
-            return;
+            if (!error && result && result.event === "success") {
+                imgElement.src = result.info.secure_url;
+                localStorage.setItem("fotoPerfil", imgElement.src);
+                console.log(imgElement.src);
+                console.log("Done! Here is the image info: ", result.info);
+            }
         }
+    );
 
-        // Proceed with validating the file size
-        validateImgSize(file);
-    }
-}
+    buttonElement.addEventListener(
+        "click",
+        function () {
+            myWidget.open();
+        },
+        false
+    );
 
-function validateImgSize(file) {
-    var fileSize = file.size;
-    var maxSize = 3 * 1024 * 1024; // 3MB in bytes
+};
 
-    if (fileSize > maxSize) {
-        alert('La imagen seleccionada tiene un peso mayor a 3MB.');
-        return;
-    }
+async function cargarCV() {
+    const buttonElement = document.getElementById("botoncv");
+    const iframeElement = document.getElementById("vistaPDF");
 
-    // Proceed with previewing the image
-    mostrarFoto(file);
-}
-
-function mostrarFoto(file) {
-    var photoContainer = document.getElementById('photo-container3');
-
-    // This removes the existing photo if the user selects another one
-    var existingPhoto = photoContainer.querySelector('img');
-    if (existingPhoto) {
-        existingPhoto.remove();
-    }
-
-    if (file) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            var img = document.createElement('img');
-            img.setAttribute('src', e.target.result);
-            img.style.display = 'initial';
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            photoContainer.appendChild(img);
-        };
-
-        reader.readAsDataURL(file);
-    }
-}
-
-function validateCV(event) {
-    var fileInput = event.target;
-    var file = fileInput.files[0];
-
-    if (file) {
-        var fileType = file.type;
-        var validExtensions = ['application/pdf'];
-
-        if (!validExtensions.includes(fileType)) {
-            alert('Por favor, utiliza el formato PDF para el CV.');
-            fileInput.value = '';
-            return;
+    let myWidget = cloudinary.createUploadWidget(
+        {
+            cloudName: "dobj7jqwu",
+            uploadPreset: "preset.Rom",
+            clientAllowedFormats: ["pdf"],
+            maxFileSize: 3000000,
+        },
+        (error, result) => {
+            if (error) {
+                console.error("Error uploading file:", error);
+            } else if (result && result.event === "success") {
+                localStorage.setItem("cv", result.info.secure_url);
+                console.log("Done! Here is the PDF info:", result.info);
+                alert("El archivo se ha subido correctamente");
+            }
         }
+    );
 
-        // Proceed with previewing the CV
-        validateCVSize(file);
-    }
-}
+    buttonElement.addEventListener(
+        "click",
+        function () {
+            myWidget.open();
+        },
+        false
+    );
 
-function validateCVSize(file) {
-    var fileSize = file.size;
-    var maxSize = 3 * 1024 * 1024; // 3MB in bytes
-
-    if (fileSize > maxSize) {
-        alert('La CV tiene un peso mayor a 3MB.');
-        return;
-    }
-
-    // Proceed with previewing the image
-    mostrarCurriculum(file);
-}
-
-function mostrarCurriculum(file) {
-    var fileCV = file;
-    var cvContainer = document.getElementById('cv-container3');
-    var existingCV = cvContainer.querySelector('object');
-    if (existingCV) {
-        existingCV.remove();
-    }
-
-    if (fileCV) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            var object = document.createElement('object');
-            object.setAttribute('data', e.target.result);
-            object.setAttribute('type', 'application/pdf');
-            object.style.width = '100%';
-            object.style.height = '100%';
-            cvContainer.appendChild(object);
-        };
-
-        reader.readAsDataURL(fileCV);
-    }
-}
-
-/*Fin seccion 3 */ 
-
+};
 
 async function crearCuentaUsuarioFinal(evento) {
     evento.preventDefault();
@@ -136,7 +83,10 @@ async function crearCuentaUsuarioFinal(evento) {
     var fechaInicioLaboral = document.getElementById("fechaInicioLaboral").value;
     var fechaFinalizacionLaboral = document.getElementById("fechaFinalizacionLaboral").value;
     var descripcionRol = document.getElementById("descripcionRol").value;
-
+    var fotoPerfil = localStorage.getItem("fotoPerfil");
+    var cv = localStorage.getItem("cv");
+    console.log(fotoPerfil);
+    console.log(cv);
 
     var fechaActual = new Date();
     var fechaInicioElegidaAcademica = new Date(fechaInicioAcademica);
@@ -196,6 +146,8 @@ async function crearCuentaUsuarioFinal(evento) {
                 fechaInicioEducacion: fechaInicioAcademica,
                 fechaFinEducacion: fechaFinalAcademica,
             },
+            fotoPerfil: fotoPerfil,
+            curriculum: cv,
         };
 
         try {
@@ -222,11 +174,17 @@ async function crearCuentaUsuarioFinal(evento) {
     }
 }
 
+
+
 window.onload = function () {
+    cargarFoto();
+    cargarCV();
+
+
     let formulario = document.getElementById('formularioGeneralUsuario');
     formulario.addEventListener('submit', crearCuentaUsuarioFinal);
 
-    
+
     let fechaFinalizacionLaboral = document.getElementById("fechaFinalizacionLaboral");
     let actualmenteTrabaja = document.getElementById("actualmenteTrabaja");
     /*let sinExperiencia = document.getElementById("sinExperiencia");*/
