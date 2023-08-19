@@ -885,6 +885,35 @@ app.put("/administrarEmpleados/:correo", async function (req, res) {
             { rol: nuevoRol }, // Actualizar el rol
             { new: true }
         );
+
+      /*  const notificacionAdmin = {
+            correoRecipiente: localStorage.getItem("userEmail"),
+            titulo: "Se ha cambiado el rol de un empleado",
+            mensaje: "Se ha cambiado el rol de " + req.body.correo + " a " + req.body.rol + ".",
+          };
+    
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionAdmin),
+        }); */
+
+        const notificacionColaborador = {
+            correoRecipiente: correoSeleccionado,
+            titulo: "Te han cambiado el rol",
+            mensaje: "Se te ha cambiado el rol a " + nuevoRol + ".",
+          };
+    
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionColaborador),
+        });
+
         console.log("Empleado actualizado:", empleadoActualizado);
         res.status(201).json(empleadoActualizado);
     } catch (error) {
@@ -1101,6 +1130,35 @@ app.post("/administrarEmpleados", async function (req, res) {
     try {
         console.log("Creando empleado en la base de datos");
         const empleadoCreado = await UsuarioColaboradorModel.create(invitacionEmpleado);
+
+  /*      const notificacionAdmin = {
+            correoRecipiente: localStorage.getItem("userEmail"),
+            titulo: "Se ha enviado una invitación a un nuevo empleado",
+            mensaje: "Se ha enviado una invitación a" + req.body.nombre + " " + req.body.apellidos + " para que sea " + req.body.rol + " de la empresa " + req.body.empresa + ".",
+          };
+    
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionAdmin),
+        }); */
+
+        const notificacionColaborador = {
+            correoRecipiente: req.body.correo,
+            titulo: "Te han invitado a ser parte de una empresa",
+            mensaje: "Te han invitado a ser " + req.body.rol + " de la empresa " + req.body.empresa + ".",
+          };
+    
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionColaborador),
+        });
+
         const mailOptions = {
             from: 'contratame.ya.trabajos@gmail.com',
             to: req.body.correo,
