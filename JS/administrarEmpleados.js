@@ -1,7 +1,10 @@
 async function correoEditarPerfilEmpleado() {
+    const userName = localStorage.getItem("userName");
+    console.log(userName);
+
     try {
         console.log("correoEditarPerfilEmpleado");
-        const respuestaCorreo = await fetch(`http://localhost:3000/administrarEmpleados`);
+        const respuestaCorreo = await fetch(`http://localhost:3000/administrarEmpleados?empresa=${userName}`);
         const correos = await respuestaCorreo.json();
         console.log(correos);
 
@@ -40,9 +43,10 @@ async function cargarDatosPerfilColaborador(correo) {
 }
 
 async function mostrarCorreoEliminarPerfilEmpleado() {
+    const userName = localStorage.getItem("userName");
     try {
         console.log("correoEliminarPerfilEmpleado");
-        const respuestaCorreo = await fetch(`http://localhost:3000/administrarEmpleados`);
+        const respuestaCorreo = await fetch(`http://localhost:3000/administrarEmpleados?empresa=${userName}`);
         const correos = await respuestaCorreo.json();
         console.log(correos);
 
@@ -121,7 +125,7 @@ async function eliminarPerfilEmpleado() {
 async function enviarInvitacion() {
     const correo = document.getElementById("correo").value;
     const contrasena = document.getElementById("contrasena").value;
-    const empresa = document.getElementById("empresa").value;
+    const empresa = localStorage.getItem("userName");
     const nombre = document.getElementById("nombre").value;
     const apellidos = document.getElementById("apellidos").value;
     const genero = document.getElementById("genero").value;
