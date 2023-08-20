@@ -18,27 +18,32 @@ async function enviarInvitacion() {
         rol: rol
     };
 
+    const confirmInvite = confirm("¿Estás seguro de que deseas enviar la invitación?");
 
-    try {
-        console.log("Datos enviados", datosInvitacion);
-        const respuesta = await fetch(`http://localhost:3000/administrarEmpleados`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datosInvitacion),
+    if (confirmInvite) {
+        try {
+            console.log("Datos enviados", datosInvitacion);
+            const respuesta = await fetch(`http://localhost:3000/administrarEmpleados`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(datosInvitacion),
 
-        });
-        const exitoso = await respuesta.json();
-        console.log(exitoso);
+            });
+            const exitoso = await respuesta.json();
+            console.log(exitoso);
 
 
-        alert("Invitación enviada con éxito");
-        window.location.href = "/HTML/administrarEmpleados.html";
-    } catch (error) {
-        console.log("Error:", error);
-        alert("Error al enviar la invitación");
-    }
+            alert("Invitación enviada con éxito");
+            window.location.href = "/HTML/administrarEmpleados.html";
+        } catch (error) {
+            console.log("Error:", error);
+            alert("Error al enviar la invitación");
+        }
+    } else {
+        alert("Cancelaste la acción de enviar la invitación.");
+    }    
 }
 
 /*FIN DE INVITAR EMPLEADO*/
@@ -106,22 +111,28 @@ async function editarPerfilEmpleado() {
         editarRol: rol
     };
 
-    try {
-        console.log("Datos enviados", datos);
-        const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datos),
-        });
-        const exitoso = await respuesta.json();
-        console.log(exitoso);
-        alert("Perfil editado con éxito");
-        window.location.href = "/HTML/administrarEmpleados.html";
-    } catch (error) {
-        console.log("Error:", error);
-        alert("Error al editar el perfil");
+    const confirmEdit = confirm("¿Estás seguro de que deseas editar el perfil?");
+
+    if (confirmEdit) {
+        try {
+            console.log("Datos enviados", datos);
+            const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(datos),
+            });
+            const exitoso = await respuesta.json();
+            console.log(exitoso);
+            alert("Perfil editado con éxito");
+            window.location.href = "/HTML/administrarEmpleados.html";
+        } catch (error) {
+            console.log("Error:", error);
+            alert("Error al editar el perfil");
+        }
+    } else {
+        alert("Cancelaste la acción de editar el perfil.");
     }
 }
 
@@ -179,22 +190,29 @@ async function eliminarPerfilEmpleado() {
         eliminarPerfilDropDown: correo
     }
 
-    try {
-        console.log("Dato enviado", dato);
-        const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
-            method: "DELETE",
-        });
+    const confirmDelete = confirm("¿Estás seguro de que deseas eliminar el perfil?");
+
+    if (confirmDelete) {
+        try {
+            console.log("Dato enviado", dato);
+            const respuesta = await fetch(`http://localhost:3000/administrarEmpleados/${correo}`, {
+                method: "DELETE",
+            });
 
 
-        console.log("Respuesta:", respuesta);
-        const exitoso = await respuesta.json();
-        console.log(exitoso);
-        alert("Perfil eliminado con éxito");
-        window.location.href = "/HTML/administrarEmpleados.html";
-    } catch (error) {
-        console.log("Error:", error);
-        alert("Error al eliminar el perfil");
+            console.log("Respuesta:", respuesta);
+            const exitoso = await respuesta.json();
+            console.log(exitoso);
+            alert("Perfil eliminado con éxito");
+            window.location.href = "/HTML/administrarEmpleados.html";
+        } catch (error) {
+            console.log("Error:", error);
+            alert("Error al eliminar el perfil");
+        }
+    } else {
+        alert("Cancelaste la acción de eliminar el perfil.");
     }
+    
 }
 /*FIN ELIMINAR EMPLEADO*/
 
