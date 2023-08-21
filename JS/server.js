@@ -932,9 +932,9 @@ app.post("/invitarUsuarioAPuesto", async function (req, res) {
 
         const notificacionUsuarioFinal = {
             correoRecipiente: req.body.correoInvitado,
-            titulo: "Invitación a puesto" + req.body.nombrePuesto,
-            mensaje: "El usuario " + req.body.nombreAdministrador + " te ha invitado a aplicar al puesto " 
-            + req.body.nombrePuesto + " en la empresa " + req.body.empresa + ".",
+            titulo: "Invitación a puesto " + req.body.nombrePuesto,
+            mensaje: "El usuario '" + req.body.nombreAdministrador + "' te ha invitado a aplicar al puesto '" 
+            + req.body.nombrePuesto + "' en la empresa " + req.body.empresa + ".",
           };
     
         await fetch("http://localhost:3000/notificaciones", {
@@ -948,7 +948,7 @@ app.post("/invitarUsuarioAPuesto", async function (req, res) {
         const notificacionAdmin = {
             correoRecipiente: req.body.correoAdministrador,
             titulo: "Invitación a puesto " + req.body.nombrePuesto,
-            mensaje: "Invitación al puesto de "+ req.body.nombrePuesto +" enviada existosamente al usuario " + req.body.correoInvitado + ".",
+            mensaje: "Invitación al puesto de '"+ req.body.nombrePuesto +"' enviada existosamente al usuario '" + req.body.correoInvitado + "'.",
           };
     
         await fetch("http://localhost:3000/notificaciones", {
@@ -963,8 +963,8 @@ app.post("/invitarUsuarioAPuesto", async function (req, res) {
             from: 'contratame.ya.trabajos@gmail.com',
             to: req.body.correoInvitado,
             subject: "Invitación a puesto " + req.body.nombrePuesto,
-            text: "Hola! \n\nTe informamos que el usuario " + req.body.nombreAdministrador 
-            + " te ha invitado a aplicar al puesto " + req.body.nombrePuesto + " en la empresa " + req.body.empresa 
+            text: "Hola! \n\nTe informamos que el usuario '" + req.body.nombreAdministrador 
+            + "' te ha invitado a aplicar al puesto '" + req.body.nombrePuesto + "' en la empresa " + req.body.empresa 
             + ".\n\nPara ver la invitación, ingresa a la plataforma.\n\nSaludos,\n\nEl equipo de Contrátame Ya.",
         };
 
@@ -980,7 +980,7 @@ app.post("/invitarUsuarioAPuesto", async function (req, res) {
             from: 'contratame.ya.trabajos@gmail.com',
             to: req.body.correoAdministrador,
             subject: "Invitación a puesto " + req.body.nombrePuesto,
-            text: "Invitación al puesto de "+ req.body.nombrePuesto +" enviada existosamente al usuario " + req.body.correoInvitado + ".",
+            text: "Invitación al puesto de '"+ req.body.nombrePuesto +"' enviada existosamente al usuario '" + req.body.correoInvitado + "'.",
         };
 
         transporter.sendMail(mailAdmin, (error, info) => {
