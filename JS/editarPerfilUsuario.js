@@ -74,7 +74,7 @@ async function cargarDatosPerfil() {
     document.getElementById("correo").value = usuario.correo;
     document.getElementById("genero").value = usuario.genero;
 
-    document.getElementById("tituloExperiencia").value = usuario.experiencia.titulo;
+   /* document.getElementById("tituloExperiencia").value = usuario.experiencia.titulo;
     document.getElementById("empresa").value = usuario.experiencia.empresa;
     document.getElementById("fechaInicioExperiencia").value = (usuario.experiencia.fechaInicio.split("T")[0]);
 
@@ -96,7 +96,8 @@ async function cargarDatosPerfil() {
       document.getElementById("fechaFinalEducacion").value = (usuario.educacion.fechaFinEducacion.split("T")[0]);
     }
 
-    document.getElementById("descripcionEducacion").value = usuario.educacion.descripcionEducacion;
+    document.getElementById("descripcionEducacion").value = usuario.educacion.descripcionEducacion; */
+
     document.getElementById("fotoUsuario").src = usuario.fotoPerfil;
 
   } catch (error) {
@@ -117,7 +118,7 @@ async function editarPerfil(evento) {
   var clave = document.getElementById("password1").value;
   var clave2 = document.getElementById("password2").value;
 
-  var tituloExperiencia = document.getElementById("tituloExperiencia").value;
+/*  var tituloExperiencia = document.getElementById("tituloExperiencia").value;
   var empresa = document.getElementById("empresa").value;
   var fechaInicioExperiencia = document.getElementById("fechaInicioExperiencia").value;
   var fechaFinExperiencia = document.getElementById("fechaFinExperiencia").value;
@@ -127,7 +128,7 @@ async function editarPerfil(evento) {
   var institucion = document.getElementById("institucion").value;
   var fechaInicioEducacion = document.getElementById("fechaInicioEducacion").value;
   var fechaFinalEducacion = document.getElementById("fechaFinalEducacion").value;
-  var descripcionEducacion = document.getElementById("descripcionEducacion").value;
+  var descripcionEducacion = document.getElementById("descripcionEducacion").value; */
 
   var fotoPerfil = localStorage.getItem("newfotoPerfil");
   var cv = localStorage.getItem("cv");
@@ -182,20 +183,6 @@ async function editarPerfil(evento) {
       correo: correo,
       clave: clave,
       genero: genero,
-      experiencia: {
-        empresa: empresa,
-        titulo: tituloExperiencia,
-        fechaInicio: fechaInicioLaboral,
-        fechaFin: fechaFinalizacionLaboral,
-        descripcion: descripcionTrabajo
-      },
-      educacion: {
-        nivelEducativo: education,
-        institucion: institucion,
-        fechaInicioEducacion: fechaInicioAcademica,
-        fechaFinEducacion: fechaFinalAcademica,
-        descripcionEducacion: descripcionEducacion
-      },
       fotoPerfil: fotoPerfil,
       curriculum: cv,
     };
@@ -249,9 +236,17 @@ window.onload = function () {
   cargarDatosPerfil();
   cargarFoto();
   cargarCV();
+  experienciaLaboral();
+  educacion();
 
-  let form = document.getElementById("formularioEditarUsuarioFinal");
-  form.addEventListener("submit", editarPerfil);
+  let botonEditarPerfil = document.getElementById("guardarPerfilBtn");
+  botonEditarPerfil.addEventListener("click", editarPerfil);
+
+  let botonAgregarExperiencia = document.getElementById("agregarExperiencia");
+  botonAgregarExperiencia.addEventListener("click", agregarExperiencia);
+
+  let botonAgregarEducacion = document.getElementById("agregarEducacion");
+  botonAgregarEducacion.addEventListener("click", agregarEducacion);
 
   let fechaFinalizacionLaboral = document.getElementById("fechaFinExperiencia");
   let posicionActual = document.getElementById("posicionActual");
@@ -274,4 +269,235 @@ window.onload = function () {
   });
 
 
+}
+
+async function experienciaLaboral() {
+
+  const correo = localStorage.getItem("userEmail");
+
+  try {
+    const response = await fetch(`http://localhost:3000/experiencia/${correo}`);
+    const experiencias = await response.json();
+
+    const tableBody = document.getElementById("tablaExperienciaBody");
+
+    experiencias.forEach((experiencia) => {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${experiencia.titulo}</td>
+        <td>${experiencia.empresa}</td>
+        <td>${experiencia.fechaInicio}</td>
+        <td>${experiencia.fechaFin}</td>
+        <td>${experiencia.descripcion}</td>
+        <td><button type="button" class="btn-eliminar" onclick="eliminarExperiencia(${experiencia.id})">Eliminar</button></td>
+      `;
+      tableBody.appendChild(newRow);
+    });
+
+  } catch (error) {
+    console.log(error);
+    alert("Error al cargar la experiencia laboral");
+  }
+
+};
+
+async function agregarExperiencia() {
+  
+    const correo = localStorage.getItem("userEmail");
+  
+    const tituloExperiencia = document.getElementById("tituloExperiencia").value;
+    const empresa = document.getElementById("empresa").value;
+    const fechaInicioExperiencia = document.getElementById("fechaInicioExperiencia").value;
+    const fechaFinExperiencia = document.getElementById("fechaFinExperiencia").value;
+    const descripcionTrabajo = document.getElementById("descripcionTrabajo").value;
+  
+    const fechaActual = new Date();
+    const fechaInicioLaboral = new Date(fechaInicioExperiencia);
+    const fechaFinalizacionLaboral = new Date(fechaFinExperiencia);
+  
+    if (fechaInicioLaboral > fechaActual) {
+      alert("La fecha de inicio de experiencia laboral no puede ser en el futuro");
+    } else if (fechaFinalizacionLaboral > fechaActual) {
+      alert("La fecha de finalización de experiencia laboral no puede ser en el futuro");
+    } else if (fechaInicioLaboral > fechaFinalizacionLaboral) {
+      alert("La fecha de inicio de experiencia laboral no puede ser posterior a la fecha de finalización");
+    } else {
+  
+      const experiencia = {
+        correo: correo,
+        titulo: tituloExperiencia,
+        empresa: empresa,
+        fechaInicio: fechaInicioExperiencia,
+        fechaFin: fechaFinExperiencia,
+        descripcion: descripcionTrabajo,
+      };
+
+      const confirmacion = confirm("¿Estás seguro de que deseas agregar esta experiencia laboral?");
+
+      if (confirmacion) {
+      try {
+        const response = await fetch("http://localhost:3000/experiencia/" + correo, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(experiencia),
+        });
+  
+        const exitoso = await response.json();
+        if (exitoso) {
+          alert("Experiencia laboral agregada exitosamente");
+          window.location.reload();
+        } else {
+          alert("Error al agregar experiencia laboral");
+        }
+      } catch (error) {
+        console.log(error);
+        alert("Error al agregar experiencia laboral");
+      }
+    } else {
+      alert("Cancelaste la acción de agregar experiencia laboral.");
+    }
+  }
+};
+
+async function eliminarExperiencia(id) {
+
+  const correo = localStorage.getItem("userEmail");
+  const confirmacion = confirm("¿Estás seguro de que deseas eliminar esta experiencia laboral?");
+
+  if (confirmacion) {
+    try {
+      const response = await fetch("http://localhost:3000/experiencia/" + correo + "/" + id, {
+        method: "DELETE",
+      });
+
+      const exitoso = await response.json();
+      if (exitoso) {
+        alert("Experiencia laboral eliminada exitosamente");
+        window.location.reload();
+      } else {
+        alert("Error al eliminar experiencia laboral");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Error al eliminar experiencia laboral");
+    }
+  } else {
+    alert("Cancelaste la acción de eliminar experiencia laboral.");
+  }
+};
+
+async function educacion() {
+
+  const correo = localStorage.getItem("userEmail");
+
+  try {
+    const response = await fetch(`http://localhost:3000/educacion/${correo}`);
+    const educaciones = await response.json();
+
+    const tableBody = document.getElementById("tbodyEducacion");
+
+    educaciones.forEach((educacion) => {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${educacion.nivelEducativo}</td>
+        <td>${educacion.institucion}</td>
+        <td>${educacion.fechaInicio}</td>
+        <td>${educacion.fechaFin}</td>
+        <td>${educacion.descripcion}</td>
+        <td><button type="button" class="btn-eliminar" onclick="eliminarEducacion(${educacion.id})">Eliminar</button></td>
+      `;
+      tableBody.appendChild(newRow);
+    });
+
+  } catch (error) {
+    console.log(error);
+    alert("Error al cargar la educación");
+  }
+};
+
+async function agregarEducacion() {
+  
+    const correo = localStorage.getItem("userEmail");
+  
+    const nivelEducativo = document.getElementById("education").value;
+    const institucion = document.getElementById("institucion").value;
+    const fechaInicioEducacion = document.getElementById("fechaInicioEducacion").value;
+    const fechaFinalEducacion = document.getElementById("fechaFinalEducacion").value;
+    const descripcionEducacion = document.getElementById("descripcionEducacion").value;
+  
+    const fechaActual = new Date();
+    const fechaInicio = new Date(fechaInicioEducacion);
+    const fechaFinal = new Date(fechaFinalEducacion);
+  
+    if (fechaInicio > fechaActual) {
+      alert("La fecha de inicio de educación no puede ser en el futuro");
+    } else if (fechaInicio > fechaFinal) {
+      alert("La fecha de inicio de educación no puede ser posterior a la fecha de finalización");
+    } else {
+  
+      const educacion = {
+        correo: correo,
+        nivelEducativo: nivelEducativo,
+        institucion: institucion,
+        fechaInicio: fechaInicioEducacion,
+        fechaFin: fechaFinalEducacion,
+        descripcion: descripcionEducacion,
+      };
+
+      const confirmacion = confirm("¿Estás seguro de que deseas agregar esta educación?");
+  
+      if (confirmacion) {
+        try {
+          const response = await fetch("http://localhost:3000/educacion/" + correo, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(educacion),
+          });
+  
+          const exitoso = await response.json();
+          if (exitoso) {
+            alert("Educación agregada exitosamente");
+            window.location.reload();
+          } else {
+            alert("Error al agregar educación");
+          }
+        } catch (error) {
+          console.log(error);
+          alert("Error al agregar educación");
+        }
+      } else {
+        alert("Cancelaste la acción de agregar educación.");
+      }
+    }
+};
+
+async function eliminarEducacion(id) {
+
+  const correo = localStorage.getItem("userEmail");
+  const confirmacion = confirm("¿Estás seguro de que deseas eliminar esta educación?");
+
+  if (confirmacion) {
+    try {
+      const response = await fetch("http://localhost:3000/educacion/" + correo + "/" + id, {
+        method: "DELETE",
+      });
+
+      const exitoso = await response.json();
+      if (exitoso) {
+        alert("Educación eliminada exitosamente");
+        window.location.reload();
+      } else {
+        alert("Error al eliminar educación");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Error al eliminar educación");
+    }
+  } else {
+    alert("Cancelaste la acción de eliminar educación.");
+  }
 }

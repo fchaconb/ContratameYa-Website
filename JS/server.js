@@ -592,20 +592,6 @@ app.put('/editarPerfilUsuarioFinal', async function (req, res) {
         clave: req.body.clave,
         correo: req.body.correo,
         genero: req.body.genero,
-        experiencia: {
-            empresa: req.body.experiencia.empresa,
-            titulo: req.body.experiencia.titulo,
-            fechaInicio: req.body.experiencia.fechaInicio,
-            fechaFin: req.body.experiencia.fechaFin,
-            descripcion: req.body.experiencia.descripcion
-        },
-        educacion: {
-            nivelEducativo: req.body.educacion.nivelEducativo,
-            institucion: req.body.educacion.institucion,
-            fechaInicioEducacion: req.body.educacion.fechaInicioEducacion,
-            fechaFinEducacion: req.body.educacion.fechaFinEducacion,
-            descripcionEducacion: req.body.educacion.descripcionEducacion
-        },
         fotoPerfil: req.body.fotoPerfil,
         curriculum: req.body.curriculum,
     };
@@ -1182,7 +1168,188 @@ app.post("/administrarEmpleados", async function (req, res) {
     }
 });
 
+app.get("/experiencia/:correo", async function (req, res) {
+    try {
+        console.log(req.params.correo);
+        console.log("Consultando experiencias en la base de datos");
+        const usuario = await UsuarioFinalModel.findOne({ correo: req.params.correo });
+        console.log("Experiencias:", usuario.experiencia);
+        res.status(200).json(usuario.experiencia);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json({ error: "Error al obtener las experiencias" });
+    }
+});
 
+
+app.put("/experiencia/:correo", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /experiencia");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const correoSeleccionado = req.params.correo; // Obtener el correo seleccionado desde los parámetros de la URL
+    console.log("Correo seleccionado:", correoSeleccionado);
+
+    const experiencia = {
+        id: generateUniqueId(),
+        titulo: req.body.titulo,
+        empresa: req.body.empresa,
+        fechaInicio: req.body.fechaInicio,
+        fechaFin: req.body.fechaFin,
+        descripcion: req.body.descripcion,
+    };
+
+    try {
+        console.log("Actualizando experiencia en la base de datos");
+        const usuarioActualizado = await UsuarioFinalModel.findOneAndUpdate({ correo: correoSeleccionado }, { $push: { experiencia: experiencia } }, { new: true });
+        console.log("Usuario actualizado:", usuarioActualizado);
+        res.status(200).json(usuarioActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
+
+generateUniqueId = () => {
+    const randomNumber = Math.floor(100000 + Math.random() * 900000); // Generates a random 6-digit number
+    return randomNumber.toString();
+}
+
+
+app.delete("/experiencia/:correo/:id", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /experiencia");
+  
+    const correoSeleccionado = req.params.correo;
+    console.log("Correo seleccionado:", correoSeleccionado);
+  
+    const idSeleccionado = parseInt(req.params.id);
+    console.log("Id seleccionado:", idSeleccionado);
+  
+    try {
+      console.log("Eliminando experiencia en la base de datos");
+      const usuario = await UsuarioFinalModel.findOne({ correo: correoSeleccionado });
+      
+      if (!usuario) {
+        console.log("Usuario no encontrado");
+        return res.status(404).json({ message: "Usuario no encontrado" });
+      }
+  
+      // Find the index of the experiencia with the given ID in the array
+      const experienciaIndex = usuario.experiencia.findIndex(exp => exp.id == idSeleccionado);
+      console.log("Experiencia array:", usuario.experiencia);
+        console.log("Experiencia index:", experienciaIndex);
+  
+      if (experienciaIndex === -1) {
+        console.log("Experiencia no encontrada");
+        return res.status(404).json({ message: "Experiencia no encontrada" });
+      }
+  
+      // Use $pull to remove the experiencia with the given ID from the array
+      usuario.experiencia.splice(experienciaIndex, 1);
+  
+      // Save the updated document
+      const experienciaEliminada = await usuario.save();
+  
+      console.log("Experiencia eliminada:", experienciaEliminada);
+      res.status(200).json(experienciaEliminada);
+    } catch (error) {
+      console.log("Error:", error);
+      res.status(500).json(error);
+    }
+  });
+  
+
+app.get("/educacion/:correo", async function (req, res) {
+    console.log("Atendiendo solicitud GET /educacion");
+
+    try {
+        console.log("Consultando educacion en la base de datos");
+        const usuario = await UsuarioFinalModel.findOne({ correo: req.params.correo });
+        console.log("Educacion:", usuario.educacion);
+        res.status(200).json(usuario.educacion);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json({ error: "Error al obtener la educacion" });
+    }
+});
+
+app.put("/educacion/:correo", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /educacion");
+
+    if (!req.body) {
+        console.log("El cuerpo de la solicitud no tiene contenido");
+        return res.status(400).send("El cuerpo de la solicitud no tiene contenido");
+    }
+
+    const correoSeleccionado = req.params.correo; // Obtener el correo seleccionado desde los parámetros de la URL
+    console.log("Correo seleccionado:", correoSeleccionado);
+
+    const educacion = {
+        id: generateUniqueId(),
+        nivelEducativo: req.body.nivelEducativo,
+        institucion: req.body.institucion,
+        fechaInicio: req.body.fechaInicio,
+        fechaFin: req.body.fechaFin,
+        descripcion: req.body.descripcion,
+    };
+
+    try {
+        console.log("Actualizando educacion en la base de datos");
+        const usuarioActualizado = await UsuarioFinalModel.findOneAndUpdate({ correo: correoSeleccionado }, { $push: { educacion: educacion } }, { new: true });
+        console.log("Usuario actualizado:", usuarioActualizado);
+        res.status(200).json(usuarioActualizado);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
+
+app.delete("/educacion/:correo/:id", async function (req, res) {
+    console.log("Atendiendo solicitud DELETE /educacion");
+
+    const correoSeleccionado = req.params.correo;
+    console.log("Correo seleccionado:", correoSeleccionado);
+
+    const idSeleccionado = parseInt(req.params.id);
+    console.log("Id seleccionado:", idSeleccionado);
+
+    try {
+        console.log("Eliminando educacion en la base de datos");
+        const usuario = await UsuarioFinalModel.findOne({ correo: correoSeleccionado });
+
+        if (!usuario) {
+            console.log("Usuario no encontrado");
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+
+        // Find the index of the educacion with the given ID in the array
+        const educacionIndex = usuario.educacion.findIndex(edu => edu.id == idSeleccionado);
+        console.log("Educacion array:", usuario.educacion);
+        console.log("Educacion index:", educacionIndex);
+
+        if (educacionIndex === -1) {
+            console.log("Educacion no encontrada");
+            return res.status(404).json({ message: "Educacion no encontrada" });
+        }
+
+        // Use $pull to remove the educacion with the given ID from the array
+        usuario.educacion.splice(educacionIndex, 1);
+
+        // Save the updated document
+        const educacionEliminada = await usuario.save();
+
+        console.log("Educacion eliminada:", educacionEliminada);
+        res.status(200).json(educacionEliminada);
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
+  
+  
 
 // Iniciar servidor
 

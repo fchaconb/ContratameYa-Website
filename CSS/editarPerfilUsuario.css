@@ -232,14 +232,14 @@ select option {
 .overlay {
     display: flex;
     flex-direction: column;
-    align-items: left;    
+    align-items: center;    
     margin: 0 auto;
     padding-top: 7px; 
     padding-bottom: 7px; 
     padding-left: 12px; 
     padding-right: 12px; 
     max-width: 1150px; 
-    height: 650px; 
+    height: 900px; 
     background: #27346924; /* tertiary2-500 */
     border-radius: 0px; 
     margin-top: 50px;
@@ -351,4 +351,44 @@ h2 {
     border-width: 1px;
     border-color: #BDC1CAFF;
     border-style: dashed;
+}
+
+.cajaData {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    width: 95%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 6px;
+    overflow: auto;
+}
+
+.tabla {
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    font-size: 16px;
+    border: 3px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.btn-eliminar {
+    width: 80px;
+    height: 25px;  
+    font-family: Sarabun; 
+    font-size: 16px; 
+    color: #FFFFFFFF; 
+    background: #273469FF; 
+    opacity: 1; 
+    border: none; 
+    border-radius: 4px; 
 }
