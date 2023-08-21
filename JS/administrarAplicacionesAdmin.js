@@ -140,7 +140,7 @@ async function cargarAplicaciones() {
                     `
                     <tr>
                         <td>${aplicacion.nombreAplicante}</td>
-                        <td>${aplicacion.experiencia}</td>
+                        <td><a href=${aplicacion.cvAplicante} target="_blank" download">Descargar CV</a></td>
                         <td>${aplicacion.estadoAplicacion}</td>
                     </tr>
                     `;

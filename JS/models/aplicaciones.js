@@ -8,6 +8,7 @@ const AplicacionesSchema = new mongoose.Schema(
         requisitosMinimos: { type: String, required: true },
         requisitosDeseados: { type: String, required: true },
         empresa: { type: String, required: true },
+        cvAplicante: { type: String, required: true },
     } ,
     {
         timestamps: true,

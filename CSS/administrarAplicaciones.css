@@ -232,3 +232,8 @@ td, th {
     padding: 8px;
     font-size: 16px;
 }
+
+a {
+    text-decoration: underline;
+    color: #273469FF;
+}

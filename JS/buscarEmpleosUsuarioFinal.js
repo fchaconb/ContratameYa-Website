@@ -117,7 +117,10 @@ async function botonAplicar(evento) {
       requisitosMinimos: infoEmpleo.requisitosMinimos,
       requisitosDeseados: infoEmpleo.requisitosDeseados,
       empresa: infoEmpleo.empresa,
+      cvAplicante: localStorage.getItem("userCV"),
     };
+
+    console.log(datosAplicacion);
 
     // Display a confirmation dialog before sending the application
     const confirmApply = confirm("¿Estás seguro de que deseas aplicar para este trabajo?");

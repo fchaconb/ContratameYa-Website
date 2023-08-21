@@ -36,6 +36,7 @@ async function login(evento) {
                 localStorage.setItem('userEmail', loginConsultado.correo);
                 localStorage.setItem('empresa', loginConsultado.empresa);
                 localStorage.setItem('rol', loginConsultado.rol);
+                localStorage.setItem('userCV', loginConsultado.curriculum);
 
                 if (loginConsultado.perfil === "admin") {
                     redirigirCuentaAdmin();

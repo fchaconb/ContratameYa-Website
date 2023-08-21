@@ -19,6 +19,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const cloudinary = require('cloudinary').v2;
+      
+cloudinary.config({ 
+  cloud_name: 'dobj7jqwu', 
+  api_key: '394851558792411', 
+  api_secret: 'ZK3jjb9PWQbckkUrgvKC3CZuMOQ' 
+});
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -444,6 +452,7 @@ app.post("/login", async function (req, res) {
                 perfil: "usuarioFinal",
                 nombre: usuarioFinalLogin.nombre,
                 correo: usuarioFinalLogin.correo,
+                curriculum: usuarioFinalLogin.curriculum,
             });
         } else {
             console.log("Login incorrecto");
@@ -639,7 +648,9 @@ app.post("/aplicacionesUsuarioFinal", async function (req, res) {
         requisitosMinimos: req.body.requisitosMinimos,
         requisitosDeseados: req.body.requisitosDeseados,
         empresa: req.body.empresa,
+        cvAplicante: req.body.cvAplicante,
     });
+    console.log("Aplicacion:", aplicacion);
 
     try {
         console.log("Guardando aplicacion en la base de datos");

@@ -39,6 +39,7 @@ async function cargarCV() {
           uploadPreset: "preset.Rom",
           clientAllowedFormats: ["pdf"],
           maxFileSize: 3000000,
+          resource_type: "raw",
       },
       (error, result) => {
           if (error) {
