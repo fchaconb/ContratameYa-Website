@@ -533,20 +533,8 @@ app.post("/registrarUsuarioFinal", async function (req, res) {
         clave: req.body.clave,
         correo: req.body.correo,
         genero: req.body.genero,
-        experiencia: {
-            empresa: req.body.experiencia.empresa,
-            titulo: req.body.experiencia.titulo,
-            fechaInicio: req.body.experiencia.fechaInicio,
-            fechaFin: req.body.experiencia.fechaFin,
-            descripcion: req.body.experiencia.descripcion
-        },
-        educacion: {
-            nivelEducativo: req.body.educacion.nivelEducativo,
-            institucion: req.body.educacion.institucion,
-            fechaInicioEducacion: req.body.educacion.fechaInicioEducacion,
-            fechaFinEducacion: req.body.educacion.fechaFinEducacion,
-            descripcionEducacion: req.body.educacion.descripcionEducacion
-        },
+        experiencia: req.body.experiencia,
+        educacion: req.body.educacion,
         fotoPerfil: req.body.fotoPerfil,
         curriculum: req.body.curriculum,
     });

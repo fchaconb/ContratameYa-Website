@@ -127,25 +127,35 @@ async function crearCuentaUsuarioFinal(evento) {
 
     if (formularioValido === true) {
 
+        const experiencia = [
+            {
+                id: generateUniqueId(),
+                titulo: tituloEmpresa,
+                empresa: empresa,
+                fechaInicio: fechaInicioLaboral,
+                fechaFin: fechaFinalizacionLaboral,
+                descripcion: descripcionRol
+            }
+        ];
+        
+        const educacion = [
+            {
+                id: generateUniqueId(),
+                nivelEducativo: nivelEducativo,
+                institucion: centroEducativo,
+                fechaInicio: fechaInicioAcademica,
+                fechaFin: fechaFinalAcademica
+            }
+        ];
+        
         const usuarioFinal = {
             nombre: nombre,
             apellidos: apellidos,
             correo: correo,
             clave: clave,
             genero: genero,
-            experiencia: {
-                empresa: empresa,
-                titulo: tituloEmpresa,
-                fechaInicio: fechaInicioLaboral,
-                fechaFin: fechaFinalizacionLaboral,
-                descripcion: descripcionRol
-            },
-            educacion: {
-                nivelEducativo: nivelEducativo,
-                institucion: centroEducativo,
-                fechaInicioEducacion: fechaInicioAcademica,
-                fechaFinEducacion: fechaFinalAcademica,
-            },
+            experiencia: experiencia,
+            educacion: educacion,
             fotoPerfil: fotoPerfil,
             curriculum: cv,
         };
@@ -207,4 +217,9 @@ window.onload = function () {
         }
     });
 
+};
+
+generateUniqueId = () => {
+    const randomNumber = Math.floor(100000 + Math.random() * 900000); // Generates a random 6-digit number
+    return randomNumber.toString();
 }
