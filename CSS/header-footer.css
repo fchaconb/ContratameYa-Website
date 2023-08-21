@@ -91,6 +91,11 @@ a {
     border-color: #273469; 
 }
 
+.logout-nav {
+    width: 35px; 
+    height: 35px; 
+}
+
 .section-empleo-img {
     height: 30vh; 
     display: flex;

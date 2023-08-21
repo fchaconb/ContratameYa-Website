@@ -76,7 +76,7 @@
   border-style: solid;
   padding: 45px;
   max-width: 1110px;
-  height: 400px;
+  height: 450px;
   margin-bottom: 100px;
 }
 
@@ -187,15 +187,20 @@
 
 
 
-.cuadro2 button,
+.cuadro2 button {
+  grid-column: 1 / span 2;
+  margin-top: 5px;
+  margin-left: 385px;
+
+}
+
 .cuadro3 button {
   grid-column: 1 / span 2;
   margin-top: 80px;
-  margin-left: 400px;
-
-
+  margin-left: 380px;
 
 }
+
 
 .btn {
   grid-column: 1 / span 2;
@@ -269,8 +274,38 @@ button {
 
 }
 
+.form-dropdownfv {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  width: 325px;
+  height: 55px;
+  background: #FFFFFFFF;
+  /* white */
+  border-radius: 4px;
+  /* border-m */
+  border-width: 1px;
+  padding: 10px;
+
+  /* tertiary3-500 */
+  outline: none;
+  font-family: Sarabun;
+  font-size: 14px;
+  border-color: #E0E0E0;
+
+}
+
 
 .form-input {
+  width: 300px;
+  height: 32px;
+  font-family: Sarabun;
+  font-size: 14px;
+  border-color: #E0E0E0;
+  background-color: white;
+}
+
+.form-input4 {
+  margin-top: 20px;
   width: 300px;
   height: 32px;
   font-family: Sarabun;
@@ -300,9 +335,10 @@ button {
   padding: 10px 10px;
   width: 190px;
   height: 40px;
+  margin-left: 108px;
 
   box-shadow: 0px 5px 5px #1E2749FF, 0px 0px 1px #171a1f;
-  margin-right: 50px;
+
 }
 
 .button-color-2 {
@@ -322,6 +358,25 @@ button {
   box-shadow: 0px 5px 5px #1E2749FF, 0px 0px 1px #171a1f;
 }
 
+.button-colorv3 {
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 22px;
+  color: #FFFFFFFF;
+  background: #30343F;
+  margin-top: 1px;
+  opacity: 1;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 10px;
+  width: 190px;
+  height: 40px;
+  margin-left: 108px;
+
+  box-shadow: 0px 5px 5px #1E2749FF, 0px 0px 1px #171a1f;
+
+}
+
 
 
 .subcontenedorv2 {
@@ -330,7 +385,7 @@ button {
 }
 
 .subcontenedorv3 {
-  margin-top: 10px;
+  margin-top: 50px;
   margin-left: 90px;
 }
 
@@ -345,6 +400,15 @@ button {
 }
 
 .form-inputv3 {
+  width: 300px;
+  height: 32px;
+  font-family: Sarabun;
+  font-size: 14px;
+  border-color: #E0E0E0;
+  background-color: white;
+}
+
+.form-inputv {
   width: 300px;
   height: 32px;
   font-family: Sarabun;

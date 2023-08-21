@@ -45,6 +45,13 @@
               class="perfil-nav"
             />
           </a>
+          <a href="/HTML/login.html">
+            <img
+              src="/Media/Fotos/logout.png"
+              alt="Icono de cerrar sesión"
+              class="logout-nav"
+            />
+          </a>
         </div>
       </nav>
     </header>
@@ -144,12 +151,12 @@
           <div class="cuadro2">
             <form>
               <div class="subcontenedorv2">
-                <label for="buscarCorreo" class="texto-labels"
+                <label for="buscarCorreo" class="texto-labelsv2"
                   >Administrar usuario</label
                 >
                 <select
                   id="editarPerfilDropDown"
-                  class="form-dropdown"
+                  class="form-dropdownfv"
                   name="email"
                   required
                 >
@@ -157,12 +164,22 @@
                     Seleccionar usuario
                   </option>
                 </select>
+                <label for="rolActualEditar" class="texto-labelsv2"
+                  >Rol actual</label
+                >
+                <input
+                  type="text"
+                  class="form-input4"
+                  id="rolActualEditar"
+                  name="rolActualEditar"
+                  disabled
+                />
 
-                <label for="accion" class="texto-labels">Cambiar rol:</label>
+                <label for="accion" class="texto-labelsv2">Nuevo rol</label>
                 <select
                   id="editarRol"
                   name="accion"
-                  class="form-dropdown"
+                  class="form-dropdownfv"
                   required
                 >
                   <option value="opcion0" disabled selected>
@@ -172,7 +189,7 @@
                   <option value="Gerente">Gerente</option>
                 </select>
 
-                <button type="button" id="editarCambios" class="button-color">
+                <button type="button" id="editarCambios" class="button-colorv3">
                   Guardar Cambios
                 </button>
               </div>
