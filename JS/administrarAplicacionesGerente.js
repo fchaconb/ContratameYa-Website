@@ -1,8 +1,8 @@
 async function dropdownPuestos() {
-    const userName = localStorage.getItem("userName");
-    console.log(userName);
+    const empresa = localStorage.getItem("empresa");
+    console.log(empresa);
     try {
-        const respuestaPuestos = await fetch('http://localhost:3000/empleosAdmin?empresa=' + userName);
+        const respuestaPuestos = await fetch('http://localhost:3000/empleosAdmin?empresa=' + empresa);
         const puestos = await respuestaPuestos.json();
         console.log(puestos);
 
@@ -25,7 +25,7 @@ async function invitarUsuarioAPuesto(evento) {
     const correoInvitado = document.getElementById('correo').value;
     const nombreAdministrador = localStorage.getItem("userName");
     const correoAdministrador = localStorage.getItem("userEmail");
-    const empresa = localStorage.getItem("userName");
+    const empresa = localStorage.getItem("empresa");
 
     const data = {
         idPuesto,
@@ -62,12 +62,12 @@ async function invitarUsuarioAPuesto(evento) {
 };
 
 async function cargarAplicaciones() {
-    const userName = localStorage.getItem("userName");
+    const empresa = localStorage.getItem("empresa");
     const userEmail = localStorage.getItem("userEmail");
 
     try {
-        const respuestaPuestos = await fetch('http://localhost:3000/empleosAdmin?empresa=' + userName);
-        const respuestaAplicaciones = await fetch('http://localhost:3000/administrarAplicaciones?empresa=' + userName);
+        const respuestaPuestos = await fetch('http://localhost:3000/empleosAdmin?empresa=' + empresa);
+        const respuestaAplicaciones = await fetch('http://localhost:3000/administrarAplicaciones?empresa=' + empresa);
 
         const puestos = await respuestaPuestos.json();
         const aplicaciones = await respuestaAplicaciones.json();

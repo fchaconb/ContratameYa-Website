@@ -153,7 +153,7 @@
 }
 
 .select-info {
-    width: 292px; 
+    width: 140px; 
     height: 38px; 
     padding-left: 12px; 
     padding-right: 12px; 
@@ -167,27 +167,27 @@
     margin-bottom: 15px;
 }
 
-.boton-filtrar {
-    margin-top: 10px;
-    align-items: center;
-    margin-bottom: 100px;
-}
-
-.boton-filtrar input[type="submit"]{
+button{
     align-items: center; 
     justify-content: center; 
-    height: 44px;
-    width: 150px; 
+    height: 38px;
+    width: 140px; 
     padding: 0 8px; 
     display: flex; 
     font-family: Sarabun; 
-    font-size: 20px; 
-    line-height: 30px; 
+    font-size: 18px; 
     color: #FFFFFFFF; 
     background: #273469FF; 
     opacity: 1; 
     border: none; 
     border-radius: 4px; 
+}
+
+.div-estado {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
 }
 
 .seccion-aplicantes {

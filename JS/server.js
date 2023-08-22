@@ -1348,7 +1348,57 @@ app.delete("/educacion/:correo/:id", async function (req, res) {
     }
 });
   
-  
+app.put("/actualizarEstadoAplicacion/:id", async function (req, res) {
+    console.log("Atendiendo solicitud PUT /actualizarEstadoAplicacion");
+
+    const idSeleccionado = req.params.id; 
+    console.log("Id seleccionado:", idSeleccionado);
+
+    const estado = req.body.estadoAplicacion;
+    console.log("Estado:", estado);
+
+    try {
+        console.log("Actualizando estado de aplicacion en la base de datos");
+
+        const aplicacionActualizada = await Aplicaciones.findOneAndUpdate({_id: idSeleccionado}, { estadoAplicacion: estado }, { new: true });
+        console.log("Aplicacion actualizada:", aplicacionActualizada);
+        res.status(200).json(aplicacionActualizada);
+
+        const notificacionUsuarioFinal = {
+            correoRecipiente: aplicacionActualizada.correoAplicante,
+            titulo: "Estado de aplicación actualizado",
+            mensaje: "El estado de tu aplicación al puesto '" + aplicacionActualizada.nombrePuesto + "' ha sido actualizado a '" + estado + "'.",
+            };
+
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionUsuarioFinal),
+        });
+
+        const notificacionAdmin = {
+            correoRecipiente: req.body.correoAdmin,
+            titulo: "Estado de aplicación actualizado",
+            mensaje: "El estado de la aplicación de " + aplicacionActualizada.nombreAplicante + " al puesto '" + aplicacionActualizada.nombrePuesto + "' ha sido actualizado a '" + estado + "'.",
+            };
+
+        await fetch("http://localhost:3000/notificaciones", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificacionAdmin),
+        });
+
+    } catch (error) {
+        console.log("Error:", error);
+        res.status(500).json(error);
+    }
+});
+
+    
 
 // Iniciar servidor
 

@@ -85,9 +85,10 @@ async function empleosOverview(nombreEmpresa, rangoSalarialID) {
       empleosHTML.innerHTML += div;
 
       const botonAplicarEmpleosHTML = document.getElementById(`aplicar${i}`);
-
+      
       botonAplicarEmpleosHTML.addEventListener("click", function (evento) {
         botonAplicar(evento, infoEmpleoArray);
+        console.log("Boton aplicar");
       });
 
       i += 1;
