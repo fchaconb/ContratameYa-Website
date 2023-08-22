@@ -46,6 +46,7 @@ async function cargarCV() {
               console.error("Error uploading file:", error);
           } else if (result && result.event === "success") {
               localStorage.setItem("cv", result.info.secure_url);
+              localStorage.setItem("userCV", result.info.secure_url)
               console.log("Done! Here is the PDF info:", result.info);
               alert("El archivo se ha subido correctamente");
           }
