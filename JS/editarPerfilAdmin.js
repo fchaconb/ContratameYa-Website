@@ -1,46 +1,34 @@
-function validateImg(event) {
-  var fileInput = event.target;
-  var file = fileInput.files[0];
+async function cargarFoto() {
+  const buttonElement = document.getElementById("botonFoto");
+  const imgElement = document.getElementById("fotoUsuario");
 
-  if (file) {
-    var fileType = file.type;
-    var validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+  let myWidget = cloudinary.createUploadWidget(
+      {
+          cloudName: "dobj7jqwu",
+          uploadPreset: "preset.Rom",
+          clientAllowedFormats: ["jpg", "png", "jpeg"],
+          maxFileSize: 3000000,
+      },
+      (error, result) => {
 
-    if (!validExtensions.includes(fileType)) {
-      alert('Por favor usar un formato soportado para imagenes: JPG, JPEG, o PNG.');
-      fileInput.value = '';
-      return;
-    }
+          if (!error && result && result.event === "success") {
+              imgElement.src = result.info.secure_url;
+              localStorage.setItem("newfotoPerfil", imgElement.src);
+              console.log(imgElement.src);
+              console.log("Done! Here is the image info: ", result.info);
+          }
+      }
+  );
 
-    // Proceed with validating the file size
-    validateImgSize(file);
-  }
-}
+  buttonElement.addEventListener(
+      "click",
+      function () {
+          myWidget.open();
+      },
+      false
+  );
 
-function validateImgSize(file) {
-  var fileSize = file.size;
-  var maxSize = 3 * 1024 * 1024; // 3MB in bytes
-
-  if (fileSize > maxSize) {
-    alert('La imagen seleccionada tiene un peso mayor a 3MB.');
-    return;
-  }
-
-  // Proceed with previewing the image
-  previewImage(file);
-}
-
-function previewImage(file) {
-  var reader = new FileReader();
-
-  reader.onload = function (e) {
-    var imagePreview = document.getElementById('imagePreview');
-    imagePreview.src = e.target.result;
-    imagePreview.style.display = 'block';
-  };
-
-  reader.readAsDataURL(file);
-}
+};
 
 async function cargarDatosEmpresa() {
   const userEmail = localStorage.getItem('userEmail');
@@ -53,6 +41,7 @@ async function cargarDatosEmpresa() {
     document.getElementById("nombreEmpresa").value = datosPerfil.nombre;
     document.getElementById("correoEmpresa").value = datosPerfil.correo;
     document.getElementById("descripcion").value = datosPerfil.descripcion;
+    document.getElementById("fotoUsuario").src = datosPerfil.fotoPerfil;
   } catch (error) {
     console.error('Error al obtener los datos:', error);
   }
@@ -81,7 +70,8 @@ async function actualizarDatosEmpresa() {
       nombre: nombreEmpresa,
       correo: correoEmpresa,
       contrasena: contrasena,
-      descripcion: descripcion
+      descripcion: descripcion,
+      fotoPerfil: localStorage.getItem("newfotoPerfil"),
     };
 
     const confirmEdit = confirm("¿Estás seguro que deseas actualizar tus datos?");
@@ -111,6 +101,7 @@ async function actualizarDatosEmpresa() {
 
 // Ejecutar la función al cargar la página
 window.onload = function () {
+  cargarFoto();
   cargarDatosEmpresa();
   let form = document.getElementById('editarPerfilEmpresa');
   form.addEventListener('submit', actualizarDatosEmpresa);

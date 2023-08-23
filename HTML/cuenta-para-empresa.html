@@ -71,17 +71,17 @@
           </div>
           <div class="container-photo">
             <p class="color-texto-foto-perfil">Foto de perfil</p>
-            <div class="photo" id="photo-container"></div>
-            <div class="photo-input">
-              <input
-                type="file"
-                id="archivo"
-                name="archivo"
+            <div>
+              <img id="fotoUsuario" class="fotoUsuario" />
+              <button
+                type="button"
+                class="botonGuardar"
+                id="botonFoto"
                 required
-                onchange="validateImg(event)"
-              />
+              >
+                Seleccionar Imagen
+              </button>
             </div>
-            <p id="mensaje-error"></p>
           </div>
         </div>
 

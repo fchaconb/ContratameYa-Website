@@ -314,7 +314,8 @@ app.post("/registrarEmpresas", async function (req, res) {
         nombre: req.body.nombre,
         correo: req.body.correo,
         contrasena: req.body.contrasena,
-        descripcion: req.body.descripcion
+        descripcion: req.body.descripcion,
+        fotoPerfil: req.body.fotoPerfil,
     });
 
     try {
@@ -686,7 +687,7 @@ app.get('/datosPerfilEmpresa', async function (req, res) {
     try {
         const userEmail = req.query.correo;
         console.log('Consultando informacion de la empresa ' + userEmail + 'en la base de datos');
-        const empresas = await AdminsModel.findOne({ correo: userEmail }, { nombre: 1, correo: 1, descripcion: 1 });
+        const empresas = await AdminsModel.findOne({ correo: userEmail });
         console.log('Empresas:', empresas);
         res.status(200).send(empresas);
     } catch (error) {
@@ -707,7 +708,8 @@ app.put('/editarPerfilEmpresa', async function (req, res) {
         nombre: req.body.nombre,
         correo: req.body.correo,
         contrasena: req.body.contrasena,
-        descripcion: req.body.descripcion
+        descripcion: req.body.descripcion,
+        fotoPerfil: req.body.fotoPerfil,
     };
 
     try {

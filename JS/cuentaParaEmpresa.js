@@ -1,61 +1,35 @@
-function validateImgSize(file) {
-    var fileSize = file.size;
-    var maxSize = 3 * 1024 * 1024; // 3MB in bytes
-  
-    if (fileSize > maxSize) {
-      alert('La imagen seleccionada tiene un peso mayor a 3MB.');
-      return;
-    }
-  
-    // Proceed with previewing the image
-    mostrarFoto(file);
-}
-
-function validateImg(event) {
-    var fileInput = event.target;
-    var file = fileInput.files[0];
-  
-    if (file) {
-      var fileType = file.type;
-      var validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
-  
-      if (!validExtensions.includes(fileType)) {
-        alert('Por favor usar un formato soportado para imagenes: JPG, JPEG, o PNG.');
-        fileInput.value = '';
-        return;
-      }
-  
-      // Proceed with validating the file size
-      validateImgSize(file);
-    }
-}
+async function cargarFoto() {
+    const buttonElement = document.getElementById("botonFoto");
+    const imgElement = document.getElementById("fotoUsuario");
 
 
+    let myWidget = cloudinary.createUploadWidget(
+        {
+            cloudName: "dobj7jqwu",
+            uploadPreset: "preset.Rom",
+            clientAllowedFormats: ["jpg", "png", "jpeg"],
+            maxFileSize: 3000000,
+        },
+        (error, result) => {
 
-function mostrarFoto(file) {
-    var photoContainer = document.getElementById('photo-container');
+            if (!error && result && result.event === "success") {
+                imgElement.src = result.info.secure_url;
+                localStorage.setItem("fotoPerfil", imgElement.src);
+                console.log(imgElement.src);
+                console.log("Done! Here is the image info: ", result.info);
+            }
+        }
+    );
 
-    // This removes the existing photo if the user selects another one
-    var existingPhoto = photoContainer.querySelector('img');
-    if (existingPhoto) {
-        existingPhoto.remove();
-    }
+    buttonElement.addEventListener(
+        "click",
+        function () {
+            myWidget.open();
+        },
+        false
+    );
 
-    if (file) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            var img = document.createElement('img');
-            img.setAttribute('src', e.target.result);
-            img.style.display = 'initial';
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            photoContainer.appendChild(img);
-        };
-
-        reader.readAsDataURL(file);
-    }
-}
+};
 
 
 function redirigirCuentaEmpresa() {
@@ -69,6 +43,7 @@ async function registrarEmpresa(evento) {
     var correo = document.getElementById('email').value;
     var clave = document.getElementById('clave').value;
     var confirmarClave = document.getElementById('confirmarClave').value;
+    var fotoPerfil = localStorage.getItem("fotoPerfil");
     var formularioValido = true;
 
     if (clave !== confirmarClave) {
@@ -87,6 +62,7 @@ async function registrarEmpresa(evento) {
             nombre: nombre,
             correo: correo,
             contrasena: clave,
+            fotoPerfil: fotoPerfil,
         };
 
         try {
@@ -112,6 +88,8 @@ async function registrarEmpresa(evento) {
 }
 
 window.onload = function () {
+    cargarFoto();
+
     let formulario = document.getElementById('formularioDatosEmpresa');
     formulario.addEventListener('submit', registrarEmpresa);
 

@@ -20,6 +20,11 @@
     />
 
     <script src="/JS/editarPerfilAdmin.js"></script>
+
+    <script
+      src="https://widget.cloudinary.com/v2.0/global/all.js"
+      type="text/javascript"
+    ></script>
   </head>
   <body>
     <header>
@@ -79,21 +84,11 @@
           <div class="contenedor-foto-perfil">
             <div class="foto-perfil">
               <label for="fotoPerfil">Foto de Perfil</label>
-              <input
-                type="file"
-                name="fotoPerfil"
-                id="fotoPerfil"
-                accept="image/jpg, image/png, image/jpeg"
-                required
-                onchange="validateImg(event)"
-              />
+              <button type="button" id="botonFoto" required>
+                Seleccionar Imagen
+              </button>
               <div>
-                <img
-                  id="imagePreview"
-                  src="#"
-                  alt="Preview imagen foto de perfil"
-                  style="display: none"
-                />
+                <img id="fotoUsuario" class="fotoUsuario" />
               </div>
             </div>
           </div>
