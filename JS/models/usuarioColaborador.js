@@ -7,6 +7,7 @@ const usuarioColaboradorSchema = new mongoose.Schema({
     contrasena: { type: String, required: true },
     genero: { type: String, required: true },
     rol : { type: String, required: true },
+    fotoPerfil: { type: String, required: true },
 });
 
 const UsuarioColaboradorModel = mongoose.model("usuarioColaborador", usuarioColaboradorSchema);

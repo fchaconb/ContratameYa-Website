@@ -1,46 +1,34 @@
-function validateImg(event) {
-  var fileInput = event.target;
-  var file = fileInput.files[0];
+async function cargarFoto() {
+  const buttonElement = document.getElementById("botonFoto");
+  const imgElement = document.getElementById("fotoUsuario");
 
-  if (file) {
-    var fileType = file.type;
-    var validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+  let myWidget = cloudinary.createUploadWidget(
+      {
+          cloudName: "dobj7jqwu",
+          uploadPreset: "preset.Rom",
+          clientAllowedFormats: ["jpg", "png", "jpeg"],
+          maxFileSize: 3000000,
+      },
+      (error, result) => {
 
-    if (!validExtensions.includes(fileType)) {
-      alert('Por favor usar un formato soportado para imagenes: JPG, JPEG, o PNG.');
-      fileInput.value = '';
-      return;
-    }
+          if (!error && result && result.event === "success") {
+              imgElement.src = result.info.secure_url;
+              localStorage.setItem("newfotoPerfil", imgElement.src);
+              console.log(imgElement.src);
+              console.log("Done! Here is the image info: ", result.info);
+          }
+      }
+  );
 
-    // Proceed with validating the file size
-    validateImgSize(file);
-  }
-}
+  buttonElement.addEventListener(
+      "click",
+      function () {
+          myWidget.open();
+      },
+      false
+  );
 
-function validateImgSize(file) {
-  var fileSize = file.size;
-  var maxSize = 3 * 1024 * 1024; // 3MB in bytes
-
-  if (fileSize > maxSize) {
-    alert('La imagen seleccionada tiene un peso mayor a 3MB.');
-    return;
-  }
-
-  // Proceed with previewing the image
-  previewImage(file);
-}
-
-function previewImage(file) {
-  var reader = new FileReader();
-
-  reader.onload = function (e) {
-    var imagePreview = document.getElementById('imagePreview');
-    imagePreview.src = e.target.result;
-    imagePreview.style.display = 'block';
-  };
-
-  reader.readAsDataURL(file);
-}
+};
 
 async function cargarDatosColaborador() {
   const userEmail = localStorage.getItem('userEmail');
@@ -55,6 +43,7 @@ async function cargarDatosColaborador() {
     document.getElementById("correo").value = datosPerfil.correo;
     document.getElementById("genero").value = datosPerfil.genero;
     document.getElementById("rol").value = datosPerfil.rol;
+    document.getElementById("fotoUsuario").src = datosPerfil.fotoPerfil;
   } catch (error) {
     console.error('Error al obtener los datos:', error);
   }
@@ -70,6 +59,7 @@ async function editarPerfilColaborador(event) {
   const rol = document.getElementById("rol").value;
   const contrasena = document.getElementById("password1").value;
   const contrasena2 = document.getElementById("password2").value;
+  const fotoPerfil = localStorage.getItem("newfotoPerfil");
   var formularioValido = true;
 
   
@@ -91,6 +81,7 @@ async function editarPerfilColaborador(event) {
       genero: genero,
       rol: rol,
       contrasena: contrasena,
+      fotoPerfil: fotoPerfil,
     };
 
     const confirmEdit = confirm("¿Estás seguro que deseas actualizar tus datos?");
@@ -144,6 +135,7 @@ async function editarPerfilColaborador(event) {
 
 window.onload = function () {
   cargarDatosColaborador();
+  cargarFoto();
 
   let form = document.getElementById('editarPerfilColaborador');
   form.addEventListener('submit', editarPerfilColaborador);

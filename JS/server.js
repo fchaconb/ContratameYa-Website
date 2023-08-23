@@ -796,7 +796,7 @@ app.get('/datosPerfilColaborador', async function (req, res) {
     try {
         const userEmail = req.query.correo;
         console.log('Consultando informacion del colaborador ' + userEmail + 'en la base de datos');
-        const colaboradores = await UsuarioColaboradorModel.findOne({ correo: userEmail }, { nombre: 1, apellidos: 1, correo: 1, genero: 1, rol: 1 });
+        const colaboradores = await UsuarioColaboradorModel.findOne({ correo: userEmail });
         console.log('Colaboradores:', colaboradores);
         res.status(200).send(colaboradores);
     } catch (error) {
@@ -819,7 +819,8 @@ app.put('/editarPerfilColaborador', async function (req, res) {
         correo: req.body.correo,
         rol: req.body.rol,
         genero: req.body.genero,
-        contrasena: req.body.contrasena
+        contrasena: req.body.contrasena,
+        fotoPerfil: req.body.fotoPerfil,
     };
 
     try {
