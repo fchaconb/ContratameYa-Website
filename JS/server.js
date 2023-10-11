@@ -37,7 +37,7 @@ const transporter = nodemailer.createTransport({
 
 
 // Conexión a la base de datos
-mongoose.connect("mongodb+srv://admin:Q9lvp68kolzGS7dB@cluster0.pzmtrxf.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://admin:XXXXXXXXXXXXX@XXXXXXXX.mongodb.net/?retryWrites=true&w=majority");
 
 // Rutas
 app.get("/rangosSalariales", async function (req, res) {
