@@ -22,16 +22,16 @@ app.use(cors());
 const cloudinary = require('cloudinary').v2;
       
 cloudinary.config({ 
-  cloud_name: 'dobj7jqwu', 
-  api_key: '394851558792411', 
-  api_secret: 'ZK3jjb9PWQbckkUrgvKC3CZuMOQ' 
+  cloud_name: 'XXXXX', 
+  api_key: 'XXXXXXXXXXX', 
+  api_secret: 'XXXXXXXXXXXXX' 
 });
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'contratame.ya.trabajos@gmail.com',
-        pass: 'xdxearacnncfyfpb'
+        pass: 'XXXXXXXXXXXXXX'
     }
 });
 
